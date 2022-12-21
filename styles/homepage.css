@@ -1,0 +1,700 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Satoshi", sans-serif;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    background: #f9fbff;
+}
+
+:root {
+    --color-white: hsl(252, 30%, 100%);
+    --color-light: #F4F8FF;
+    --color-gray: #6c6e70;
+    --color-primary: #0c2acb;
+    --color-secondary: #ccdffb;
+    --color-success: rgba(249, 251, 255, 0.1);
+    --color-danger: hsl(0, 95%, 65%);
+    --color-dark: #01051b;
+    --color-black: #292d32;
+    --border-radius: 2rem;
+    --card-border-radius: 1rem;
+    --btn-padding: 0.6rem 2rem;
+    --search-padding: 0.6rem 1rem;
+    --card-padding: 1rem;
+    --sticky-top-left: 5.4rem;
+    --sticky-top-right: -18rem;
+}
+
+.header-top {
+    width: 100%;
+    background: #f1f7ff;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.7rem 4rem;
+    /* border: 2px solid red; */
+}
+
+.nav-left {
+    background: #f1f7ff;
+}
+
+.logo {
+    font-family: "Satoshi" sans-serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 36px;
+    /* line-height: 150%; */
+    /* identical to box height, or 54px */
+    letter-spacing: 0.02em;
+    background: #f1f7ff;
+}
+
+.logo span {
+    color: #0c2acb;
+    font-style: normal;
+    font-weight: 900;
+    background: #f1f7ff;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f1f7ff;
+}
+
+.profile .btn-primary {
+    display: inline-block;
+    padding: var(--btn-padding);
+    font-weight: 500;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 300ms ease;
+    font-size: 18px;
+}
+
+.profile .btn-secondary {
+    display: inline-block;
+    padding: var(--btn-padding);
+    font-weight: 500;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.profile .btn-primary:hover {
+    opacity: 0.8;
+}
+
+.profile .btn-primary {
+    background-color: #0c2acb;
+    color: white;
+    margin-left: 15px;
+}
+
+.profile .btn-primary button {
+    background-color: #0c2acb;
+    color: white;
+    text-align: center;
+}
+
+.profile .btn-secondary,
+.profile .btn-secondary button {
+    background: #ccdffb;
+    color: #05177b;
+}
+
+
+/* Signup page */
+
+.modal-header,
+.modal-header h1 {
+    background: #fff;
+}
+
+.modal-body {
+    background: #fff;
+    display: block;
+    border: none;
+    border-radius: 15px;
+    padding: 50px;
+}
+
+.modal-body h2 {
+    width: 400px;
+    height: 45px;
+    font-family: "Satoshi", sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 140%;
+    letter-spacing: 0.0015em;
+    color: #0c2acb;
+    background-color: #fff;
+}
+
+p {
+    width: 400px;
+    height: 44px;
+    font-family: "Satoshi", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 140%;
+    /* or 22px */
+    letter-spacing: 0.0015em;
+    color: #807878;
+    background-color: #fff;
+}
+
+h6 {
+    height: 20px;
+    font-family: "Satoshi";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 20px;
+    /* identical to box height, or 167% */
+    text-align: center;
+    /* Primary Color */
+    color: #0c2acb;
+}
+
+.bottom a {
+    height: 20px;
+    font-family: "Satoshi";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 20px;
+    /* identical to box height, or 167% */
+    text-align: center;
+    /* Primary Color */
+    color: #0c2acb;
+    text-decoration: none;
+}
+
+.modal-body button {
+    display: block;
+    margin: 1.5rem auto;
+    padding: 15px 9rem;
+    border-radius: 30px;
+    background: #0c2acb;
+}
+
+.modal-body button a {
+    text-decoration: none;
+    text-align: center;
+    background: #0c2acb;
+    color: #f1f7ff;
+}
+
+
+/* -------landing section 1-------- */
+
+.land1 {
+    background-color: #CCE1FF;
+    position: relative;
+    /* top: 10rem; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 800px;
+}
+
+.land1-left {
+    background: transparent;
+    margin-left: 6rem;
+}
+
+.land1-left h1 {
+    width: 500.75px;
+    height: 72px;
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 71.9999px;
+    line-height: 100%;
+    /* identical to box height, or 72px */
+    letter-spacing: -0.025em;
+    color: #0723B4;
+    background-color: transparent;
+}
+
+.land1-left p {
+    width: 334px;
+    height: 54px;
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 150%;
+    /* or 27px */
+    color: #0D2DA9;
+    background-color: transparent;
+}
+
+.land1-left button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 6.75px 0px;
+    width: 189px;
+    height: 59px;
+    background: #0C2ACB;
+    border-radius: 112.5px;
+    color: #fff;
+    margin-top: 5rem;
+}
+
+.land1-right {
+    width: 100%;
+}
+
+.land1-right img {
+    width: 100%;
+    background-color: #cce1ff;
+}
+
+
+/* land2 */
+
+.land2 {
+    position: absolute;
+    width: 1440px;
+    height: 1073.25px;
+    left: 0px;
+    background: #F0F6FF;
+}
+
+.land2 h2 {
+    position: absolute;
+    width: 695px;
+    height: 45px;
+    left: 349.88px;
+    top: 235.12px;
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 45px;
+    line-height: 100%;
+    /* identical to box height, or 45px */
+    letter-spacing: -0.015em;
+    color: #0723B4;
+    background: #F0F6FF;
+}
+
+.cards {
+    position: absolute;
+    left: 18rem;
+    top: 400px;
+    display: flex;
+    column-gap: 3rem;
+    width: 800px;
+    background: #F0F6FF;
+}
+
+.cards1 {
+    position: absolute;
+    left: 18rem;
+    top: 700px;
+    display: flex;
+    column-gap: 3rem;
+    width: 800px;
+    background: #F0F6FF;
+}
+
+.card {
+    width: 400px;
+    height: 240px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10.125px 2.25px rgba(0, 0, 0, 0.05);
+    border-radius: 15px;
+}
+
+.card-body {
+    background: #fff;
+}
+
+.card-body i {
+    font-size: 3rem;
+    color: #0723B4;
+    background: #CCDFFB;
+    border-radius: 30px;
+}
+
+.card-sub {
+    background: #fff;
+    text-align: left;
+    margin-top: 2rem;
+    height: 22px;
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15.75px;
+    line-height: 137.3%;
+    /* identical to box height, or 22px */
+    letter-spacing: 0.055em;
+    text-transform: uppercase;
+    color: #331B3B;
+}
+
+.card-body p {
+    width: 320px;
+    background: #fff;
+}
+
+
+/* land 3 */
+
+.land3 {
+    position: absolute;
+    width: 100%;
+    height: 675px;
+    left: 0;
+    top: 115rem;
+    background: #CCE1FF;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 7rem;
+}
+
+.land3-left {
+    width: 100%;
+    /* z-index: 1; */
+}
+
+.land3-left img {
+    width: 100%;
+    object-fit: cover;
+    background-color: #cce1ff;
+    /* opacity: 0.4; */
+}
+
+.land3-right,
+.land3-right h1,
+.land3-right p {
+    background: #CCE1FF;
+}
+
+.land3-right {
+    background: transparent;
+    margin-left: 8rem;
+}
+
+.land3-right h1 {
+    width: 500.75px;
+    height: 72px;
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 71.9999px;
+    line-height: 100%;
+    /* identical to box height, or 72px */
+    letter-spacing: -0.025em;
+    color: #0723B4;
+}
+
+.land3-right p {
+    width: 334px;
+    height: 54px;
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 150%;
+    /* or 27px */
+    color: #0D2DA9;
+    background-color: transparent;
+}
+
+.land3-right button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 6.75px 0px;
+    width: 189px;
+    height: 59px;
+    background: #0C2ACB;
+    border-radius: 112.5px;
+    color: #fff;
+    margin-top: 5rem;
+}
+
+
+/* land 4 */
+
+.land4 {
+    position: absolute;
+    width: 1440px;
+    height: 787.5px;
+    left: 0px;
+    top: 2500px;
+    background: #F0F6FF;
+}
+
+.land4 h2 {
+    position: absolute;
+    width: 232px;
+    height: 36px;
+    left: 550px;
+    top: 102.38px;
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 100%;
+    /* identical to box height, or 36px */
+    letter-spacing: -0.015em;
+    color: #0723B4;
+    background: #F0F6FF;
+}
+
+.display-card {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 180px;
+    left: 4rem;
+    background: #F0F6FF;
+}
+
+.display-card .card {
+    padding: 22.5px 22.5px 45px;
+    margin-right: 20px;
+    gap: 27px;
+    width: 400px;
+    height: 455px;
+    background: #FFFFFF;
+    border: 1.125px solid #ECECEC;
+    border-radius: 31.5px;
+}
+
+.display-card .card-body h5 {
+    background: #FFFFFF;
+}
+
+
+/* land5 */
+
+.land5 {
+    position: absolute;
+    width: 1440px;
+    height: 639px;
+    left: 0px;
+    top: 3280px;
+    background: #CCE1FF;
+}
+
+.land5 h5 {
+    position: absolute;
+    width: 684px;
+    height: 70px;
+    left: 377px;
+    top: 182.09px;
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 45px;
+    line-height: 155.02%;
+    /* identical to box height, or 70px */
+    text-align: center;
+    color: #0723B4;
+    background: #CCE1FF;
+}
+
+.land5 button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 6.75px 0px;
+    position: absolute;
+    width: 189px;
+    height: 59px;
+    left: 625.5px;
+    top: 269.84px;
+    background: #0C2ACB;
+    border-radius: 112.5px;
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    /* identical to box height, or 125% */
+    color: #FFFFFF;
+}
+
+.land5 img {
+    position: absolute;
+    left: 39.92%;
+    right: 39.92%;
+    top: 57.37%;
+    bottom: -30.14%;
+    background: #CCE1FF;
+}
+
+
+/* footer */
+
+footer {
+    position: absolute;
+    width: 1440px;
+    height: 540px;
+    left: 0px;
+    top: 3920px;
+    background: #F9F9FF;
+}
+
+.footer-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.footer-left h4,
+.footer-left span,
+.footer-left p {
+    background: #F9F9FF;
+}
+
+.footer-left h4 {
+    position: absolute;
+    width: 189px;
+    height: 61px;
+    left: 166.5px;
+    top: 85.5px;
+    font-family: 'Satoshi';
+    font-style: italic;
+    font-weight: 900;
+    font-size: 40.5px;
+    line-height: 150%;
+    /* identical to box height, or 61px */
+    letter-spacing: 0.02em;
+    /* Primary Color */
+    line-height: 4rem;
+}
+
+.footer-left h4 span {
+    color: #0C2ACB;
+    font-style: normal;
+}
+
+.footer-left p {
+    position: absolute;
+    width: 315px;
+    height: 54px;
+    left: 166.5px;
+    top: 155.25px;
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 150%;
+    /* or 27px */
+    letter-spacing: 0.02em;
+    /* text/grey */
+    color: #6C6E70;
+}
+
+.footer-middle h2 {
+    position: absolute;
+    width: 107px;
+    height: 27px;
+    left: 639px;
+    top: 97.88px;
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 23.625px;
+    line-height: 27px;
+    /* identical to box height, or 114% */
+    color: #181433;
+}
+
+.footer-right h2 {
+    position: absolute;
+    width: 113px;
+    height: 27px;
+    left: 830.25px;
+    top: 97.88px;
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 23.625px;
+    line-height: 27px;
+    /* identical to box height, or 114% */
+    color: #181433;
+}
+
+.footer-middle a {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    height: 40px;
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 35px;
+    color: #6C6E70;
+    position: relative;
+    top: 150px;
+    left: 65px;
+}
+
+.footer-right a {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    height: 40px;
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 35px;
+    color: #6C6E70;
+    position: relative;
+    top: 150px;
+    right: 100px;
+}
+
+.footer-bottom {
+    width: 500px;
+    height: 21px;
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13.5px;
+    line-height: 155.02%;
+    /* identical to box height, or 21px */
+    display: flex;
+    color: #000000;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    top: 300px;
+    left: 400px;
+}
+
+.footer-bottom a {
+    text-decoration: none;
+    color: #6C6E70;
+}
+
+/* vue added */
+.btn-connect{
+    background: #0C2ACB;
+        border-radius: 1rem;
+        border:1px solid #0C2ACB;
+}

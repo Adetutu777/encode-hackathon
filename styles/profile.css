@@ -1,0 +1,337 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Satoshi", sans-serif;
+    outline: none;
+    border: none;
+    text-decoration: none;
+}
+
+:root {
+    --color-white: hsl(252, 30%, 100%);
+    --color-light: #F4F8FF;
+    --color-gray: #6c6e70;
+    --color-primary: #0c2acb;
+    --color-secondary: #ccdffb;
+    --color-success: rgba(249, 251, 255, 0.1);
+    --color-danger: hsl(0, 95%, 65%);
+    --color-dark: #01051b;
+    --color-black: #292d32;
+    --border-radius: 2rem;
+    --card-border-radius: 1rem;
+    --btn-padding: 0.6rem 2rem;
+    --search-padding: 0.6rem 1rem;
+    --card-padding: 1rem;
+    --sticky-top-left: 5.4rem;
+    --sticky-top-right: -18rem;
+}
+
+body {
+    font-family: "Satoshi", sans-serif;
+    background: var(--color-light);
+}
+
+.homepage {
+    font-family: "Satoshi";
+    color: var(--color-dark);
+    background: var(--color-light);
+    overflow-x: hidden;
+}
+
+.navbar {
+    width: 100%;
+    margin: 0 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.profile-photo {
+    width: 3.2rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+.logo {
+    font-family: "Satoshi" sans-serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 36px;
+    /* line-height: 150%; */
+    /* identical to box height, or 54px */
+    letter-spacing: 0.02em;
+}
+
+.logo span {
+    color: #0c2acb;
+    font-style: normal;
+    font-weight: 900;
+}
+
+.btn {
+    display: inline-block;
+    padding: var(--btn-padding);
+    font-weight: 500;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 300ms ease;
+    font-size: 0.9rem;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+.btn-primary {
+    background: #0c2acb;
+    color: white;
+}
+
+.text-muted {
+    color: var(--color-gray);
+    font-size: 14px;
+}
+
+
+/* homepage navbar */
+
+header {
+    width: 100%;
+    background: var(--color-white);
+    position: sticky !important;
+    top: 0;
+    /* z-index: 10; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.7rem 4rem;
+}
+
+header .search-bar {
+    background: rgba(243, 246, 251, 1);
+    border-radius: var(--border-radius);
+    padding: var(--search-padding);
+}
+
+header .search-bar input[type="search"] {
+    background: transparent;
+    width: 40vw;
+    margin-left: 1rem;
+    font-size: 0.9rem;
+    color: var(--color-dark);
+}
+
+header .search-bar input[type="search"]::placeholder {
+    color: var(--color-gray);
+}
+
+
+
+.handle {
+    padding-left: 5px;
+}
+
+
+/*------hero section -------*/
+
+.hero {
+    /* position: relative;
+    top: 6.6rem; */
+}
+
+.hero .hero-container {
+    display: grid;
+    grid-template-columns: 18vh auto;
+    column-gap: 2rem;
+    position: relative;
+}
+
+
+/*---------hero left-------*/
+
+.hero-container .left {
+    height: max-content;
+    position: sticky;
+    top: var(--sticky-top-left);
+}
+
+
+/*---------sidebar--------*/
+
+.left .sidebar {
+    margin-top: 1.5rem;
+    margin-left: 2rem;
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    column-gap: 1rem;
+    width: 220px;
+    border: 1px solid #eee;
+    margin-bottom: 5rem;
+}
+
+.left .sidebar .menu-item {
+    display: flex;
+    align-items: center;
+    height: 4rem;
+    cursor: pointer;
+    transition: all 300ms ease;
+    position: relative;
+}
+
+.left .sidebar .menu-item:hover {
+    background: rgba(243, 246, 251, 1);
+}
+
+.left .sidebar i {
+    font-size: 1.4rem;
+    color: var(--color-gray);
+    margin-left: 2rem;
+    position: relative;
+}
+
+.left .sidebar h3 {
+    margin-left: 1.5rem;
+    font-size: 1rem;
+}
+
+.left .sidebar .active {
+    background: rgba(243, 246, 251, 1);
+}
+
+.left .sidebar .active i,
+.left .sidebar .active h3 {
+    color: var(--color-primary);
+}
+
+.left .btn {
+    margin-top: 1rem;
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+#post {
+    width: 150px;
+    display: block;
+    margin: 3rem auto;
+}
+
+
+/* ----------------middle bar----------------- */
+
+.middle {
+    margin-left: 8rem;
+    margin-top: 0.7rem;
+    margin-right: 4rem;
+}
+
+.new {
+    display: flex;
+    align-items: center;
+}
+
+
+/* -----------middle feeds----------------- */
+
+.middle .feeds {
+    /* background: rgba(243, 246, 251, 1); */
+    border-radius: 2rem 2rem 0 0;
+    padding: var(--card-padding);
+    margin: 1rem 0 0 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.middle .feeds .feed {
+    background: rgba(243, 246, 251, 1);
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.middle .feed .head {
+    display: flex;
+    justify-content: space-between;
+}
+
+.middle .feed .edit i {
+    color: var(--color-primary);
+    font-size: 1rem;
+}
+
+.middle .feed .edit {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.middle .feed .user {
+    display: flex;
+    gap: 0.7rem;
+}
+
+.middle .feed .info small {
+    color: var(--color-dark);
+    font-family: 'Satoshi';
+    font-size: 14px;
+}
+
+.middle .feed .info p {
+    color: var(--color-dark);
+    font-family: 'Satoshi';
+    padding-top: 5px;
+}
+
+.body-photo {
+    width: 6rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.middle .photo {
+    background-color: #fff;
+    /* height: 500px; */
+    border-radius: 0 0 2rem 2rem;
+}
+
+.middle .photo p {
+    font-size: 1.2rem;
+    text-align: center;
+    line-height: 5rem;
+}
+
+.details ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.details li {
+    float: left;
+    width: 100px;
+}
+
+.details li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 16px 0 0 5px;
+    text-decoration: none;
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.details .active {
+    color: var(--color-primary);
+    font-weight: 600;
+    border-bottom: 2px solid #0c2acb;
+}
