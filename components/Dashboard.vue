@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <nav class="nav-head">
+    <!-- <nav class="nav-head">
       <header class="navbar-header">
         <NuxtLink to="/">
           <img src="@/images/storytribe.svg" alt="image" />
@@ -13,10 +13,11 @@
 
         <profileId />
       </header>
-    </nav>
-    <div class="mt-3">
-      <div class="d-flex justify-content-between mx-auto homepage-view wrapper">
-        <!-- left -->
+    </nav> -->
+     <div class="row">
+  <div class="col-md-3">
+    <div class="card">
+      <div clss="card-body">
         <div class="sidebar">
           <div class="">
             <NuxtLink to="/blogs" class="dropdown d-block">
@@ -54,16 +55,78 @@
             </NuxtLink>
           </div>
         </div>
-        <!-- middle -->
-        <div class="middle-info w-100 mx-5 p-3">
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card ">
+      <div class="card-body">
+        <div class=" p-4">
           <slot name="middle"></slot>
         </div>
-        <!-- right -->
-        <div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card">
+      <div cass="card-body">
+      <div>
           <slot class="right-bar p-4" name="right"></slot>
         </div>
       </div>
     </div>
+  </div>
+</div> 
+    <!-- <div class="mt-3">
+      <div class="d-flex justify-content-between mx-auto homepage-view wrapper">
+
+        <div class="sidebar">
+          <div class="">
+            <NuxtLink to="/blogs" class="dropdown d-block">
+              <i class="icon-icons uil uil-estate"></i> <span>Home</span>
+            </NuxtLink>
+            <NuxtLink to="/help" class="dropdown d-block">
+              <i class="icon-icons uil uil-envelope-add"></i>
+              <span>Notifications</span>
+            </NuxtLink>
+            <NuxtLink to="/userSetting" class="dropdown d-block">
+              <i class="icon-icons uil uil-setting"></i> <span>Settings</span>
+            </NuxtLink>
+            <NuxtLink
+              :to="`/profile/${defaultProfile?.ownedBy}`"
+              class="dropdown d-block"
+            >
+              <i class="icon-icons uil uil-user-circle"></i>
+              <span>Profile</span>
+            </NuxtLink>
+            <NuxtLink to="/help" class="dropdown d-block">
+              <i class="icon-icons uil uil-question-circle"></i>
+              <span>Help</span>
+            </NuxtLink>
+            <NuxtLink to="/post/create" class="dropdown">
+              <button
+                class="mt-5 text-light btn-write mx-auto d-flex align-items-center"
+              >
+                <img
+                  class="write-icon d-inline-block"
+                  src="@/images/leaf.svg"
+                  alt="image"
+                />
+                Write
+              </button>
+            </NuxtLink>
+          </div>
+        </div>
+
+        <div class="middle-info w-100 mx-5 p-3">
+          <slot name="middle"></slot>
+        </div>
+
+        <div>
+          <slot class="right-bar p-4" name="right"></slot>
+        </div>
+      </div>
+    </div> -->
   </div>
 </template>
 
@@ -200,13 +263,11 @@ a.dropdown:hover {
   height: 1.3rem;
   margin-right: 0.5rem;
 }
-.top-icon {
-  text-decoration: none;
-}
-.name-icon {
-  color: #292d32;
-}
-.date-icon {
-  color: #6c6e70;
+
+
+
+.middle-info{
+border: 1px solid red;
+margin-bottom: 5rem;
 }
 </style>

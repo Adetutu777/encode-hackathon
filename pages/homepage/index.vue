@@ -3,7 +3,7 @@
     <!-- navbar -->
         <div class="nav-header px-4 py-4 d-flex justify-content-between">
       <div>
-      <h1 class="your-story">yourStory</h1>
+      <h1 class="your-story"> <i>myStory</i> </h1>
       <!-- <img src="@/images/storytribe.svg" alt="image" /> -->
       </div>
 
