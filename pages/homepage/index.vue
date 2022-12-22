@@ -32,7 +32,13 @@
     <div class="col-md-6 col-one">
       <h2>Lorem ipsum dolor sit amet <br> consectetur,  adipisicing elit. <br> Minima, enim.</h2>
       <p class="mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil <br> ipsum voluptatum reiciendis pariatur exercitationem laborum <br> architecto sunt consequuntur quia a?</p>
+
+    <div class="d-flex mt-5">
+    <button class="btn-one" >About</button>
+    <button class="btn-two" >Publish</button>
+</div>
     </div> 
+    <!-- col-two -->
     <div class="col-md-6 mt-5">
     <img class="bg-image" src="@/images/smile.jpg" alt="image">
     </div> 
@@ -137,4 +143,21 @@ export default {
 .bg-image{
   border-radius: 2rem;
 }
+.btn-one{
+  border:1px solid #66FCF1;
+  background: transparent;
+  color: #66FCF1;
+  padding: 0.5rem 2rem;
+  border-radius: 1.5rem;
+}
+.btn-two{
+  border:1px solid #66FCF1;
+  background: #45A29E;
+  color: white;
+  margin-left: 1rem;
+  padding: 0.5rem 2rem;
+  border-radius: 1.5rem;
+}
+
+
 </style>
