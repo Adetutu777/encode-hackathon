@@ -5,6 +5,7 @@ export const useModal = defineStore("modal", {
     return {
       count: 0,
       createModal: false,
+      createImgModal: false,
     };
   },
 
@@ -21,6 +22,9 @@ export const useModal = defineStore("modal", {
     },
     toggleCreateModal() {
       this.createModal = !this.createModal;
+    },
+    toggleCreateImgModal() {
+      this.createImgModal = !this.createImgModal;
     },
   },
 });

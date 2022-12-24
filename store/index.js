@@ -13,8 +13,6 @@ export const defaultProfile = reactive({
 export const showRegModal = ref(false);
 
 export const toggleRegModal = () => {
-  console.log("Toleee!!!");
   showRegModal.value = !showRegModal.value;
-  console.log(showRegModal.value, " !!!!!");
   return !showRegModal.value;
 };

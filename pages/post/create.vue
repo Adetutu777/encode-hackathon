@@ -2,6 +2,7 @@
   <div>
     <!---------------- NAVBAR ---------------->
 
+    <GenerateImg />
     <main>
       <form>
         <div class="d-flex justify-content-between container mt-4">
@@ -33,7 +34,7 @@
                 Error try again
               </div>
 
-                  <!-- <div class="">
+              <!-- <div class="">
                   <h3></h3>
                   </div> -->
               <div class="text-center">
@@ -63,6 +64,16 @@
             <span for="customFileInput"><i class="uil uil-scenery"></i></span>
             Add Cover
           </button>
+
+          <div class="my-4">
+            <button
+              type="button"
+              @click="toggleCreateImgModal"
+              class="btn btn-info"
+            >
+              Generate Image
+            </button>
+          </div>
 
           <label for="blog-title"
             ><input
@@ -103,6 +114,8 @@ import { wait } from "../../helpers";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import { LENS_HUB_CONTRACT_ADDRESS } from "../../config/constant";
+import { toggleCreateImgModal } from "../../store/modalRef";
+
 import "@/styles/create.css";
 
 export default {
@@ -114,6 +127,7 @@ export default {
     const signer = ref("");
     const errorPublishing = ref(false);
     const isPublishing = ref(false);
+    const showCreateImgModal = ref(false);
 
     const publishModal = ref(false);
     const togglePublishModal = () => {
@@ -235,6 +249,8 @@ export default {
       imageRef,
       isPublishing,
       errorPublishing,
+      toggleCreateImgModal,
+      showCreateImgModal,
     };
   },
 };

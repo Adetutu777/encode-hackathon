@@ -2,6 +2,7 @@
 
 export default defineNuxtConfig({
      app: {
+      
         head: {          
             title: 'nuxt',
             htmlAttrs: {
@@ -59,7 +60,6 @@ export default defineNuxtConfig({
  
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,  
-
   vite: {
     server: {
       hmr: {

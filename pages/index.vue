@@ -2,7 +2,6 @@
   <div>
     <div class="nav-header px-4 py-4 d-flex justify-content-between">
       <div><img src="@/images/storytribe.svg" alt="image" /></div>
-
       <div
         class="d-flex align-items-center"
         :class="{ 'connect-btn': !!!appStore.currentUser.id }"
@@ -12,7 +11,7 @@
           <ConnectWallet classes="login-btn" text="Login" />
         </div>
         <div>
-          <CreateAccountWallet classes ="create-btn" />
+          <CreateAccountWallet classes="create-btn" />
         </div>
       </div>
     </div>
