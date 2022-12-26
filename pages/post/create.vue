@@ -52,19 +52,6 @@
         </div>
 
         <div class="container first-class">
-          <button class="gallery">
-            <input
-              @change="uploadImage"
-              type="file"
-              class="opacity-0 absolute left-4000"
-              id="customFileInput"
-              aria-describedby="customFileInput"
-            />
-
-            <span for="customFileInput"><i class="uil uil-scenery"></i></span>
-            Add Cover
-          </button>
-
           <div class="my-4">
             <button
               type="button"
@@ -73,6 +60,37 @@
             >
               Generate Image
             </button>
+          </div>
+          <div class="my-0 custom-input">
+            <input @change="uploadImage" type="file" id="coverImage" />
+            <label
+              for="coverImage"
+              ref="coverImageLabel"
+              class="d-flex justify-content-center align-items-center custom-label absolute"
+              >Add Cover
+              <svg
+                class="ml-2"
+                stroke="currentColor"
+                fill="currentColor"
+                stroke-width="0"
+                viewBox="0 0 1024 1024"
+                height="1em"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M864 260H728l-32.4-90.8a32.07 32.07 0 0 0-30.2-21.2H358.6c-13.5 0-25.6 8.5-30.1 21.2L296 260H160c-44.2 0-80 35.8-80 80v456c0 44.2 35.8 80 80 80h704c44.2 0 80-35.8 80-80V340c0-44.2-35.8-80-80-80zM512 716c-88.4 0-160-71.6-160-160s71.6-160 160-160 160 71.6 160 160-71.6 160-160 160zm-96-160a96 96 0 1 0 192 0 96 96 0 1 0-192 0z"
+                ></path>
+              </svg>
+            </label>
+          </div>
+
+          <div class="my-4">
+            <img
+              class="img-fluid"
+              :src="store.currentCoverImage"
+              v-if="store.currentCoverImage"
+            />
           </div>
 
           <label for="blog-title"
@@ -115,12 +133,15 @@ import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import { LENS_HUB_CONTRACT_ADDRESS } from "../../config/constant";
 import { toggleCreateImgModal } from "../../store/modalRef";
+import { useAppStore } from "../../store/app";
+import { convertBase64 } from "~/util";
 
 import "@/styles/create.css";
 
 export default {
   layout: "no-sidebar",
   setup() {
+    const store = useAppStore();
     const showImg = ref("");
     const crudStatus = ref("");
     const imageRef = ref("");
@@ -128,6 +149,7 @@ export default {
     const errorPublishing = ref(false);
     const isPublishing = ref(false);
     const showCreateImgModal = ref(false);
+    const coverImageLabel = ref("");
 
     const publishModal = ref(false);
     const togglePublishModal = () => {
@@ -152,6 +174,22 @@ export default {
 
     const uploadImage = async (values) => {
       imageRef.value = values.target.files[0];
+      const base64 = await convertBase64(imageRef.value);
+      store.setCoverImage(base64);
+      coverImageLabel.value.innerHTML = `Change <svg
+                class="ml-2"
+                stroke="currentColor"
+                fill="currentColor"
+                stroke-width="0"
+                viewBox="0 0 1024 1024"
+                height="1em"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M864 260H728l-32.4-90.8a32.07 32.07 0 0 0-30.2-21.2H358.6c-13.5 0-25.6 8.5-30.1 21.2L296 260H160c-44.2 0-80 35.8-80 80v456c0 44.2 35.8 80 80 80h704c44.2 0 80-35.8 80-80V340c0-44.2-35.8-80-80-80zM512 716c-88.4 0-160-71.6-160-160s71.6-160 160-160 160 71.6 160 160-71.6 160-160 160zm-96-160a96 96 0 1 0 192 0 96 96 0 1 0-192 0z"
+                ></path>
+              </svg>`;
     };
 
     const postData = async () => {
@@ -251,6 +289,8 @@ export default {
       errorPublishing,
       toggleCreateImgModal,
       showCreateImgModal,
+      store,
+      coverImageLabel,
     };
   },
 };

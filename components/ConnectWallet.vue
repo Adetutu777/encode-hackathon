@@ -25,7 +25,7 @@ const connect = async () => {
   try {
     const { accessToken, user } = await login();
 
-    if (accessToken && props.redirect && user) {
+    if (accessToken && user) {
       router.push("/blogs");
     }
   } catch (error) {

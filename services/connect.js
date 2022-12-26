@@ -98,15 +98,19 @@ export const connect = async () => {
 };
 
 export async function getUserProfile(userAddress) {
-  const defaultId = await clientId.request(defaultProfileQuery, {
-    address: userAddress,
-  });
-  defaultProfile.data = defaultId.defaultProfile;
-  const strnData = JSON.stringify(defaultId.defaultProfile);
+  try {
+    const defaultId = await clientId.request(defaultProfileQuery, {
+      address: userAddress,
+    });
+    defaultProfile.data = defaultId.defaultProfile;
+    const strnData = JSON.stringify(defaultId.defaultProfile);
 
-  localStorage.setItem("storyDefaultProfile", strnData);
+    localStorage.setItem("storyDefaultProfile", strnData);
 
-  return defaultId.defaultProfile;
+    return defaultId.defaultProfile;
+  } catch (error) {
+    console.log("error >>.", error);
+  }
 }
 
 export async function login() {
@@ -143,15 +147,12 @@ export async function login() {
 
     localStorage.setItem("storybiteRefreshToken", accessToken);
     userAccessToken.value = accessToken;
-
-    if (!currentUser) {
-      modal?.toggleCreateModal?.();
-    } else {
-      appStore.currentUser = currentUser;
-      console.log(appStore);
-      // appStore.setUser(currentUser);
-    }
-
+    // if (!currentUser) {
+    //   modal?.toggleCreateModal?.();
+    // } else {
+    //   // appStore.setUser(currentUser);
+    // }
+    appStore.currentUser = currentUser;
     return {
       accessToken,
       user: currentUser,

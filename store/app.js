@@ -2,7 +2,12 @@ import { defineStore } from "pinia";
 
 export const useAppStore = defineStore("app", {
   state: () => {
-    return { count: 0, isConnected: false, currentUser: {} };
+    return {
+      count: 0,
+      isConnected: false,
+      currentUser: {},
+      currentCoverImage: "",
+    };
   },
 
   actions: {
@@ -14,6 +19,9 @@ export const useAppStore = defineStore("app", {
     },
     async setUser(user) {
       this.currentUser = user;
+    },
+    async setCoverImage(img) {
+      this.currentCoverImage = img;
     },
   },
 });

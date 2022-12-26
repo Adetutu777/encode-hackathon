@@ -28,7 +28,8 @@ export default defineNuxtConfig({
       css: [
         "bootstrap/dist/css/bootstrap.css",
         "bootstrap-vue-3/dist/bootstrap-vue-3.css",
-      '~/styles/main.css'
+      '~/styles/main.css',
+      
     ],
 
     

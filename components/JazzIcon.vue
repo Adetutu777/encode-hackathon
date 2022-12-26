@@ -18,8 +18,8 @@ onMounted(() => {
 
   const el = jazzicon(props.diameter, defaultProfile?.ownedBy ?? "0x000");
   el.address = defaultProfile?.ownedBy ?? "0x000";
-  el.style.display = "block";
-  el.diameter = 10;
+  // el.style.display = "block";
+  // el.diameter = 10;
   jazzRef.value.appendChild(el);
 });
 </script>

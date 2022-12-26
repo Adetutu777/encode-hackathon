@@ -1,9 +1,10 @@
 <template>
   <div class="">
     <div class="">
-      <b-button @click="createAccount" class="create-btn">
-        Create account</b-button
-      >
+      <b-button @click="createAccount" :class="` border-0  ${classes}`">
+        LogIn/SignUp
+      </b-button>
+
       <b-modal
         v-model="modal.createModal"
         id="modal-2"
@@ -40,10 +41,22 @@ const props = defineProps({
   show: {
     default: false,
   },
+  classes: {
+    type: String,
+    default: "btn-signup",
+  },
 });
+const router = useRouter();
+const createAccount = async () => {
+try {
+    const { accessToken, user } = await login();
 
-const createAccount = () => {
-  login?.();
+    if (accessToken && user) {
+      router.push("/blogs");
+    }
+  } catch (error) {
+    console.log("error connectons", error);
+  }
 };
 </script>
 
@@ -57,5 +70,13 @@ const createAccount = () => {
 
 .network {
   color: #0c2acb;
+}
+
+.btn-signup {
+  border: 1px solid #66fcf1;
+  background: transparent;
+  color: #66fcf1;
+  padding: 0.5rem 2rem;
+  border-radius: 1.5rem;
 }
 </style>

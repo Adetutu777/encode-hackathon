@@ -1,10 +1,10 @@
 <template>
   <div class="lens-story">
     <!-- navbar -->
-        <div class="nav-header px-4 py-4 d-flex justify-content-between">
+    <div class="nav-header px-4 py-4 d-flex justify-content-between">
       <div>
-      <h1 class="your-story"> <i>myStory</i> </h1>
-      <!-- <img src="@/images/storytribe.svg" alt="image" /> -->
+        <h1 class="your-story"><i>myStory</i></h1>
+        <!-- <img src="@/images/storytribe.svg" alt="image" /> -->
       </div>
 
       <!-- <div
@@ -21,28 +21,42 @@
       </div> -->
 
       <div class="">
-      <button class="btn-signup mt-2">LogIn/SignUp</button>
+        <CreateAccountWallet classes="btn-signup mt-2" />
+        <!-- <button class="btn-signup mt-2">LogIn/SignUp</button> -->
       </div>
     </div>
     <!-- navbar ends here -->
 
-<!-- body -->
+    <!-- body -->
     <div class="container">
-    <div class="row">
-    <div class="col-md-6 col-one">
-      <h2>Lorem ipsum dolor sit amet <br> consectetur,  adipisicing elit. <br> Minima, enim.</h2>
-      <p class="mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil <br> ipsum voluptatum reiciendis pariatur exercitationem laborum <br> architecto sunt consequuntur quia a?</p>
+      <div class="row">
+        <div class="col-md-6 col-one">
+          <h2>
+            Lorem ipsum dolor sit amet <br />
+            consectetur, adipisicing elit. <br />
+            Minima, enim.
+          </h2>
+          <p class="mt-4">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil
+            <br />
+            ipsum voluptatum reiciendis pariatur exercitationem laborum <br />
+            architecto sunt consequuntur quia a?
+          </p>
 
-    <div class="d-flex mt-5">
-    <button class="btn-one" >About</button>
-    <button class="btn-two" >Publish</button>
-</div>
-    </div> 
-    <!-- col-two -->
-    <div class="col-md-6 mt-5">
-    <img class="bg-image" src="@/images/smile.jpg" alt="image">
-    </div> 
-    </div>
+          <div class="d-flex mt-5">
+            <button class="btn-one">About</button>
+            <button class="btn-two">Publish</button>
+          </div>
+        </div>
+        <!-- col-two -->
+        <div class="col-md-6 mt-5">
+          <img
+            class="bg-image img-fluid"
+            src="@/images/smile.jpg"
+            alt="image"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -110,10 +124,9 @@ export default {
 };
 </script>
 
-
 <style>
-.lens-story{
-  background: #1F2833;
+.lens-story {
+  background: #1f2833;
   height: 100vh;
 }
 
@@ -122,42 +135,32 @@ export default {
   margin: auto;
 }
 
-.your-story{
-  color: #66FCF1;
+.your-story {
+  color: #66fcf1;
 }
 
-.btn-signup{
-  border:1px solid #66FCF1;
-  background: transparent;
-  color: #66FCF1;
-  padding: 0.5rem 2rem;
-  border-radius: 1.5rem;
-}
 
-.col-one{
+.col-one {
   margin-top: 7rem;
-  color: #C5C6C7;
-
+  color: #c5c6c7;
 }
 
-.bg-image{
+.bg-image {
   border-radius: 2rem;
 }
-.btn-one{
-  border:1px solid #66FCF1;
+.btn-one {
+  border: 1px solid #66fcf1;
   background: transparent;
-  color: #66FCF1;
+  color: #66fcf1;
   padding: 0.5rem 2rem;
   border-radius: 1.5rem;
 }
-.btn-two{
-  border:1px solid #66FCF1;
-  background: #45A29E;
+.btn-two {
+  border: 1px solid #66fcf1;
+  background: #45a29e;
   color: white;
   margin-left: 1rem;
   padding: 0.5rem 2rem;
   border-radius: 1.5rem;
 }
-
-
 </style>
