@@ -8,7 +8,7 @@
       <b-modal
         v-model="modal.createModal"
         id="modal-2"
-        title="Login or Signup to storytribe"
+        title="Login or Signup to myStory"
       >
         <div class="">
           <div class="">

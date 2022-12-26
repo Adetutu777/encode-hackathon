@@ -1,25 +1,35 @@
+
 <template>
-    <div class="mt-5">
-    <!-- Navbar -->
-    <div class="">
-    <Nnav />
-    </div>
-   <div class="container">
-   
-   <!-- 2 -->
-  
-   <Dashboard >
-   <template v-slot:middle>
+  <div class="">
+    <Dashboard>
+      <template v-slot:middle>
         <div class="middle-bar">
+          <div class="top-header" style="">
+            <div class="d-flex flex-row">
+              <div class="p-2">
+                <span><i class="uil uil-award-alt icon-icons"></i></span>
+                New
+              </div>
+              <div class="p-2">
+                <span><i class="uil uil-panel-add icon-icons"></i></span>
+                Top
+              </div>
+              <div class="p-2">
+                <span><i class="uil uil-clock icon-icons"></i></span>
+                History
+              </div>
+            </div>
+          </div>
 
           <div
-            clss="body-nav"
+            class="body-nav"
             v-for="item in publications.data"
             :key="item.id"
           >
             <div class="d-flex justify-content-between">
               <div class="d-flex align-items-center">
                 <div class="img-icon">
+                  <!-- <img src="@/images/Ellipse 44.png" alt="image"> -->
                   <img
                     class="img-top"
                     :src="
@@ -78,10 +88,9 @@
           </div>
         </div>
       </template>
-
-       <template v-slot:right>
+      <template v-slot:right>
         <div class="right-bar p-4">
-          <h4 class="pb-5">Trending</h4>
+          <h4 class="pb-5">Trending Topics</h4>
           <div class="right-side">
             <div class="">
               <div>
@@ -109,10 +118,8 @@
           </NuxtLink>
         </div>
       </template>
-   </Dashboard>
-   
-   </div>
-    </div>
+    </Dashboard>
+  </div>
 </template>
 
 <script>
@@ -200,6 +207,126 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style>
+.homepage-view {
+  max-width: 87rem;
+  background: #ffffff;
+  border: 1px solid #ececec;
+  border-radius: 20px;
+}
+.sidebar {
+  min-width: 15rem;
+  padding: 1rem;
+  padding-top: 0;
+  background: #ffffff;
+  border: 1px solid #ececec;
+  border-radius: 16px;
+}
 
+.middle-bar {
+  border-radius: 7px;
+  margin: 0 1rem;
+  transform: translateY(1rem);
+}
+.right-bar {
+  min-width: 18rem;
+  background: #ffffff;
+  border-radius: 12px;
+}
+
+.icon-icons {
+  font-size: 23px;
+  vertical-align: middle;
+  color: #292d32;
+}
+.icon-icons + span {
+  margin-left: 1rem;
+  color: #292d32;
+}
+.dropdown {
+  padding: 1rem 0;
+  text-decoration: none;
+}
+.btn-write {
+  background: #0c2acb;
+  text-decoration: none;
+}
+.dropdown-two {
+  text-decoration: none;
+}
+.btn-show {
+  background: #f4f8ff;
+  color: #0c2acb;
+}
+a.nuxt-link-active {
+  color: white;
+  background: #243b41;
+}
+a.nuxt-link-active.active:hover {
+  color: white;
+  background: #243b41;
+}
+.card-image {
+  max-width: 50rem;
+}
+.card-image img {
+  width: 100%;
+  height: auto;
+}
+.icon-footer {
+  font-size: 1.8rem;
+}
+
+.trending {
+  background: #f4f8ff;
+  border-radius: 10000px;
+  padding: 0.5rem;
+}
+
+.top-header {
+  padding: 1rem;
+  background: #ffffff;
+  border: 1px solid #ececec;
+  border-radius: 16px;
+  transform: translateY(-1rem);
+}
+
+.wrapper {
+  background: #f9fbff;
+}
+.body-nav {
+  background: #ffffff;
+  border: 1px solid #ececec;
+  border-radius: 20px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.img-icon {
+  margin-right: 1rem;
+}
+.nav-head {
+  background: #ffffff !important;
+  position: sticky !important;
+}
+
+.img-top {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+}
+.write-icon {
+  width: 1.3rem;
+  height: 1.3rem;
+  margin-right: 0.5rem;
+}
+.top-icon {
+  text-decoration: none;
+}
+.name-icon {
+  color: #292d32;
+}
+.date-icon {
+  color: #6c6e70;
+}
 </style>

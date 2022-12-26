@@ -17,7 +17,8 @@ export default defineNuxtConfig({
             link: [       
               
               { rel:"stylesheet", type:"text/css", href:'https://unicons.iconscout.com/release/v4.0.0/css/line.css' },
-              { rel:"stylesheet", type:"text/css", href:"https://api.fontshare.com/v2/css?f[]=satoshi@1,900,700,500,301,701,300,501,401,901,400&display=swap"}
+              { rel:"stylesheet", type:"text/css", href:"https://api.fontshare.com/v2/css?f[]=satoshi@1,900,700,500,301,701,300,501,401,901,400&display=swap"},
+              { rel:"stylesheet", type:"text/css", href:"path/to/font-awesome/css/font-awesome.min.css"},
               
             ]
           },
@@ -53,11 +54,13 @@ export default defineNuxtConfig({
       },
     ],
   ],
+  
 
   build: {
     // Need to transpile otherwise SSR fails.
     transpile: [/bootstrap-vue-3/ ],
   },
+  
  
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,  
