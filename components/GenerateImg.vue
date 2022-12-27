@@ -3,9 +3,11 @@
     <b-modal v-model="createImgModal" title="Generate a new Image">
       <form @submit.prevent="getImage">
         <div class="img-div">
-          <div class="img-place">
-            <img :src="imageUrl" class="img-fluid generated-img" />
-          </div>
+          <carousel
+            @selectedItem="selectCurrentItem"
+            @getCurrentItem="getCurrentItem"
+            :items="imageUrl"
+          />
           <div class="d-flex justify-content-center">
             <b-button
               @click="setImage"
@@ -53,24 +55,51 @@ import { useAppStore } from "../store/app";
 const prompt = ref("pen my thoughts down");
 const isLoading = ref(false);
 const isError = ref(false);
+const imageUrl = ref([
+  "/pen-thoughts-1.jpeg",
+  "/pen-thoughts-1.jpeg",
+  "/pen-thoughts-3.jpeg",
+  "/pen-thoughts-4.jpeg",
+  "/pen-thoughts-5.jpeg",
+]);
+const currentImgIndex = ref(0);
 
 const store = useAppStore();
 const setImage = () => {
-  store.setCoverImage(imageUrl.value);
+  const item = imageUrl.value[currentImgIndex.value];
+  store.setCoverImage(item);
   toggleCreateImgModal();
+};
+
+const getCurrentItem = (item) => {
+  currentImgIndex.value = item;
+};
+
+const selectCurrentItem = (item) => {
+  setImage();
+};
+
+const handlePrev = () => {
+  if (currentImgIndex.value <= 0) return;
+  currentImgIndex.value = currentImgIndex.value - 1;
+};
+const handleNext = () => {
+  if (currentImgIndex.value + 1 >= imageUrl.value.length) return;
+  currentImgIndex.value = currentImgIndex.value + 1;
 };
 const getImage = async () => {
   isLoading.value = true;
   try {
-    const res = await fetch(`/api/gen-img?prompt=${prompt.value}}`);
+    const res = await fetch(`/api/gen-img?prompt=${prompt.value}`);
     const info = await res.json();
+    console.log(info.data, "data>>>");
     imageUrl.value = info.data;
   } catch (error) {
     isError.value = true;
   }
   isLoading.value = false;
 };
-const imageUrl = ref("/pen-thoughts.jpeg");
+// const imageUrl = ref("/pen-thoughts.jpeg");
 </script>
 
 <style scoped>
@@ -97,6 +126,7 @@ const imageUrl = ref("/pen-thoughts.jpeg");
   left: 50%;
   top: 50%;
   background: #333;
+  z-index: 1;
   transform: translate(-50%, -50%);
 }
 </style>
