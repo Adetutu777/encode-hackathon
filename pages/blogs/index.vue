@@ -1,114 +1,111 @@
 <template>
-    <div class="mt-5">
+  <div class="mt-3">
     <!-- Navbar -->
-    
-   <div class="container">
-   
-   <!-- 2 -->
-  
-   <Dashboard >
-   <template v-slot:middle>
-        <div class="middle-bar">
 
-          <div
-            class="aa"
-            v-for="item in publications.data"
-            :key="item.id"
-          >
-            <div class="d-flex justify-content-between">
-              <div class="d-flex align-items-center">
-                <div class="img-icon">
-                  <img
-                    class="img-top"
-                    :src="
-                      item?.profile?.coverPicture?.original?.url ??
-                      'https://github.com/DrVickie8/Team-Lens-Developers/blob/main/Lens-folder/images/Frame%202.png?raw=true'
-                    "
-                  />
+    <div class="">
+      <Dashboard>
+        <template v-slot:middle>
+          <div class="middle-bar">
+            <div class="" v-for="item in publications.data" :key="item.id">
+              <div class="mb-4 p-3 border rounded bg-white">
+                <div class="d-flex justify-content-between">
+                  <div class="d-flex align-items-center">
+                    <div class="img-icon">
+                      <img
+                        class="img-top"
+                        :src="
+                          item?.profile?.coverPicture?.original?.url ??
+                          'https://github.com/DrVickie8/Team-Lens-Developers/blob/main/Lens-folder/images/Frame%202.png?raw=true'
+                        "
+                      />
+                    </div>
+
+                    <NuxtLink
+                      class="top-icon pb-2"
+                      :to="`/profile/${item?.profile?.ownedBy}`"
+                    >
+                      <div class="name-icon">
+                        {{ item?.profile?.name }}
+                      </div>
+
+                      <div class="date-icon">
+                        {{ item?.profile?.handle }} .
+                        {{ dateFormatter(item?.createdAt) }}
+                      </div>
+                    </NuxtLink>
+                  </div>
+
+                  <div class="">
+                    <i class="uil uil-book-open"></i> 2mins read
+                  </div>
                 </div>
 
-                <NuxtLink
-                  class="top-icon pb-2"
-                  :to="`/profile/${item?.profile?.ownedBy}`"
-                >
-                  <div class="name-icon">
-                    {{ item?.profile?.name }}
+                <h5 class="mt-3" v-if="item?.mainPost?.metadata?.description">
+                  {{ item?.mainPost?.metadata?.description?.slice(0, 70) }}...
+                </h5>
+                <div class="crd mx-auto" style="">
+                  <div class="card-image">
+                    <NuxtLink :to="'/post/' + item?.id">
+                      <img
+                        :src="
+                          item?.metadata?.[0]?.url ??
+                          'https://github.com/DrVickie8/Team-Lens-Developers/blob/main/Lens-folder/images/Frame%202.png?raw=true'
+                        "
+                        @error="replaceByDefault"
+                      />
+                    </NuxtLink>
                   </div>
+                </div>
 
-                  <div class="date-icon">
-                    {{ item?.profile?.handle }} .
-                    {{ dateFormatter(item?.createdAt) }}
+                <div class="d-flex justify-content-between pt-1">
+                  <div class="">
+                    <i class="uil uil-bookmark icon-footer"></i>
                   </div>
-                </NuxtLink>
-              </div>
-
-              <div class=""><i class="uil uil-book-open"></i> 2mins read</div>
-            </div>
-
-            <h5 class="mt-3" v-if="item?.mainPost?.metadata?.description">
-              {{ item?.mainPost?.metadata?.description?.slice(0, 70) }}...
-            </h5>
-            <div class="crd mx-auto" style="">
-              <div class="card-image">
-                <NuxtLink :to="'/post/' + item?.id">
-                  <img
-                    :src="
-                      item?.metadata?.[0]?.url ??
-                      'https://github.com/DrVickie8/Team-Lens-Developers/blob/main/Lens-folder/images/Frame%202.png?raw=true'
-                    "
-                    @error="replaceByDefault"
-                  />
-                </NuxtLink>
+                  <div class="d-flex align-items-center">
+                    <span><i class="uil uil-heart icon-footer"></i></span>
+                    <h5>{{ item?.stats?.totalUpvotes }}</h5>
+                  </div>
+                </div>
               </div>
             </div>
+          </div>
+        </template>
 
-            <div class="d-flex justify-content-between pt-1">
+        <template v-slot:right>
+          <div class="right-bar p-4">
+            <h4 class="pb-5">Trending</h4>
+            <div class="right-side">
               <div class="">
-                <i class="uil uil-bookmark icon-footer"></i>
-              </div>
-              <div class="d-flex align-items-center">
-                <span><i class="uil uil-heart icon-footer"></i></span>
-                <h5>{{ item?.stats?.totalUpvotes }}</h5>
-              </div>
-            </div>
-          </div>
-        </div>
-      </template>
+                <div>
+                  <div class="p-2 d-inline-block trending mb-4">
+                    Chivalry is dead
+                  </div>
+                </div>
 
-       <template v-slot:right>
-        <div class="right-bar p-4">
-          <h4 class="pb-5">Trending</h4>
-          <div class="right-side">
-            <div class="">
-              <div>
-                <div class="p-2 d-inline-block trending mb-4">
-                  Chivalry is dead
+                <div>
+                  <div class="p-2 d-inline-block trending mb-4">
+                    Rema’s concert
+                  </div>
+                </div>
+                <div>
+                  <div class="p-2 d-inline-block trending mb-4">World Cup</div>
+                </div>
+                <div>
+                  <div class="p-2 d-inline-block trending mb-4">
+                    Peter Obi's
+                  </div>
                 </div>
               </div>
-
-              <div>
-                <div class="p-2 d-inline-block trending mb-4">
-                  Rema’s concert
-                </div>
-              </div>
-              <div>
-                <div class="p-2 d-inline-block trending mb-4">World Cup</div>
-              </div>
-              <div>
-                <div class="p-2 d-inline-block trending mb-4">Peter Obi's</div>
-              </div>
             </div>
-          </div>
 
-          <NuxtLink to="/post/create" class="dropdown-two">
-            <button class="mt-5 btn-show mx-auto d-flex">Show more</button>
-          </NuxtLink>
-        </div>
-      </template>
-   </Dashboard>
-   
-   </div>
+            <NuxtLink to="/post/create" class="dropdown-two">
+              <button class="mt-5 btn-show mx-auto d-flex">Show more</button>
+            </NuxtLink>
+          </div>
+        </template>
+      </Dashboard>
     </div>
+  </div>
 </template>
 
 <script>
@@ -197,17 +194,15 @@ export default {
 </script>
 
 <style>
-
-.top-icon{
+.top-icon {
   text-decoration: none;
 }
-.name-icon, .date-icon{
-color: #2f2f30;
+.name-icon,
+.date-icon {
+  color: #2f2f30;
 }
 
-.aa{
+.aa {
   margin-bottom: 1rem;
-
-
 }
-</style> 
+</style>

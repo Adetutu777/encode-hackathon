@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="container">
     <!-- <nav class="nav-head">
       <header class="navbar-header">
         <NuxtLink to="/">
@@ -16,39 +16,43 @@
     </nav> -->
 
     <div class="">
-    <profileId />
+      <profileId />
     </div>
-     <div class="row">
-  <div class="col-md-3">
-    <div class="card">
-      <div clss="card-body">
-        <div class="sidebar">
-          <div class="">
-            <NuxtLink to="/blogs" class="dropdown d-block">
-              <i class="icon-icons uil uil-estate"></i> <span>Home</span>
-            </NuxtLink>
-            <NuxtLink to="/help" class="dropdown d-block">
-              <i class="icon-icons uil uil-envelope-add"></i>
-              <span>Notifications</span>
-            </NuxtLink>
-            <NuxtLink to="/userSetting" class="dropdown d-block">
-              <i class="icon-icons uil uil-setting"></i> <span>Settings</span>
-            </NuxtLink>
-            <NuxtLink
-              :to="`/profile/${defaultProfile?.ownedBy}`"
-              class="dropdown d-block"
-            >
-              <i class="icon-icons uil uil-user-circle"></i>
-              <span>Profile</span>
-            </NuxtLink>
-            <NuxtLink to="/help" class="dropdown d-block">
-              <i class="icon-icons uil uil-question-circle"></i>
-              <span>Help</span>
-            </NuxtLink>
-            <NuxtLink to="/post/create" class="write-dropdown d-block text-center text-light create-post mt-3">
-              <span class="">Create post</span>
-            </NuxtLink>
-            <!-- <NuxtLink to="/post/create" class="dropdown">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="">
+          <div class="card-ody">
+            <div class="sidebar">
+              <div class="">
+                <NuxtLink to="/blogs" class="dropdown d-block">
+                  <i class="icon-icons uil uil-estate"></i> <span>Home</span>
+                </NuxtLink>
+                <NuxtLink to="/help" class="dropdown d-block">
+                  <i class="icon-icons uil uil-envelope-add"></i>
+                  <span>Notifications</span>
+                </NuxtLink>
+                <NuxtLink to="/userSetting" class="dropdown d-block">
+                  <i class="icon-icons uil uil-setting"></i>
+                  <span>Settings</span>
+                </NuxtLink>
+                <NuxtLink
+                  :to="`/profile/${defaultProfile?.ownedBy}`"
+                  class="dropdown d-block"
+                >
+                  <i class="icon-icons uil uil-user-circle"></i>
+                  <span>Profile</span>
+                </NuxtLink>
+                <NuxtLink to="/help" class="dropdown d-block">
+                  <i class="icon-icons uil uil-question-circle"></i>
+                  <span>Help</span>
+                </NuxtLink>
+                <NuxtLink
+                  to="/post/create"
+                  class="write-dropdown d-block text-center text-light create-post mt-3"
+                >
+                  <span class="">Create post</span>
+                </NuxtLink>
+                <!-- <NuxtLink to="/post/create" class="dropdown">
               <button
                 class="mt-5 text-light btn-write mx-auto d-flex align-items-center"
               >
@@ -60,30 +64,30 @@
                 Write
               </button>
             </NuxtLink> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="">
+          <div class="card-body">
+            <div cass=" p-4">
+              <slot name="middle"></slot>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="">
+          <div class="card-ody">
+            <div>
+              <slot class="right-bar p-4" name="right"></slot>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-6">
-    <div class="card ">
-      <div class="card-body">
-        <div cass=" p-4">
-          <slot name="middle"></slot>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="card">
-      <div cass="card-body">
-      <div>
-          <slot class="right-bar p-4" name="right"></slot>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> 
     <!-- <div class="mt-3">
       <div class="d-flex justify-content-between mx-auto homepage-view wrapper">
 
@@ -163,7 +167,6 @@ export default {
   border-radius: 20px;
 }
 .sidebar {
-  min-width: 15rem;
   padding: 1rem;
   padding-top: 0;
   background: #ffffff;
@@ -177,7 +180,6 @@ export default {
   transform: translateY(1rem);
 }
 .right-bar {
-  min-width: 18rem;
   background: #ffffff;
   border-radius: 12px;
 }
@@ -191,12 +193,13 @@ export default {
   margin-left: 1rem;
   color: #292d32;
 }
-.dropdown, .write-dropdown {
+.dropdown,
+.write-dropdown {
   padding: 1rem 0;
   text-decoration: none;
 }
 a.dropdown:hover {
- background:#F3F6FB;;
+  background: #f3f6fb;
 }
 .btn-write {
   background: #0c2acb;
@@ -212,7 +215,7 @@ a.dropdown:hover {
 .router-link-active,
 .router-link-active i,
 .router-link-active span {
-  color: #0C2ACB !important;
+  color: #0c2acb !important;
   font-weight: bold;
 }
 
@@ -271,12 +274,12 @@ a.dropdown:hover {
   margin-right: 0.5rem;
 }
 
-.middle-info{
-border: 1px solid red;
-margin-bottom: 5rem;
+.middle-info {
+  border: 1px solid red;
+  margin-bottom: 5rem;
 }
 
-.create-post{
+.create-post {
   background: #45a29e;
   border-radius: 2rem;
 }
