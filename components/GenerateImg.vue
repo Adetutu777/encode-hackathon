@@ -65,6 +65,7 @@ const imageUrl = ref([
 const currentImgIndex = ref(0);
 
 const store = useAppStore();
+
 const setImage = () => {
   const item = imageUrl.value[currentImgIndex.value];
   store.setCoverImage(item);
@@ -75,18 +76,10 @@ const getCurrentItem = (item) => {
   currentImgIndex.value = item;
 };
 
-const selectCurrentItem = (item) => {
+const selectCurrentItem = () => {
   setImage();
 };
 
-const handlePrev = () => {
-  if (currentImgIndex.value <= 0) return;
-  currentImgIndex.value = currentImgIndex.value - 1;
-};
-const handleNext = () => {
-  if (currentImgIndex.value + 1 >= imageUrl.value.length) return;
-  currentImgIndex.value = currentImgIndex.value + 1;
-};
 const getImage = async () => {
   isLoading.value = true;
   try {
@@ -99,7 +92,6 @@ const getImage = async () => {
   }
   isLoading.value = false;
 };
-// const imageUrl = ref("/pen-thoughts.jpeg");
 </script>
 
 <style scoped>

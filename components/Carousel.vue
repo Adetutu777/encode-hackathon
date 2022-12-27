@@ -31,8 +31,8 @@ const currentSlide = () => {
   emits("selectedItem");
 };
 
-// const slide = ref(0);
 const sliding = ref(false);
+
 const onSlideStart = ({ to }) => {
   sliding.value = true; // prevent click event
   emits("getCurrentItem", to);
