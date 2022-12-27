@@ -45,7 +45,10 @@
               <i class="icon-icons uil uil-question-circle"></i>
               <span>Help</span>
             </NuxtLink>
-            <NuxtLink to="/post/create" class="dropdown">
+            <NuxtLink to="/post/create" class="write-dropdown d-block text-center text-light create-post mt-3">
+              <span class="">Create post</span>
+            </NuxtLink>
+            <!-- <NuxtLink to="/post/create" class="dropdown">
               <button
                 class="mt-5 text-light btn-write mx-auto d-flex align-items-center"
               >
@@ -56,7 +59,7 @@
                 />
                 Write
               </button>
-            </NuxtLink>
+            </NuxtLink> -->
           </div>
         </div>
       </div>
@@ -188,7 +191,7 @@ export default {
   margin-left: 1rem;
   color: #292d32;
 }
-.dropdown {
+.dropdown, .write-dropdown {
   padding: 1rem 0;
   text-decoration: none;
 }
@@ -268,10 +271,13 @@ a.dropdown:hover {
   margin-right: 0.5rem;
 }
 
-
-
 .middle-info{
 border: 1px solid red;
 margin-bottom: 5rem;
+}
+
+.create-post{
+  background: #45a29e;
+  border-radius: 2rem;
 }
 </style>
