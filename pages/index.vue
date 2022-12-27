@@ -50,8 +50,8 @@
         <!-- col-two -->
         <div class="col-md-6 mt-5">
           <img
-            class="bg-image img-fluid"
-            src="@/images/smile.jpg"
+            class="bg-image w-75"
+            src="@/images/man-smile.png"
             alt="image"
           />
         </div>

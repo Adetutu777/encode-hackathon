@@ -1,9 +1,7 @@
 <template>
     <div class="mt-5">
     <!-- Navbar -->
-    <div class="">
-    <Nnav />
-    </div>
+    
    <div class="container">
    
    <!-- 2 -->
@@ -199,8 +197,17 @@ export default {
 </script>
 
 <style>
-.aa{
 
- 
+.top-icon{
+  text-decoration: none;
+}
+.name-icon, .date-icon{
+color: #2f2f30;
+}
+
+.aa{
+  margin-bottom: 1rem;
+
+
 }
 </style> 

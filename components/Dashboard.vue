@@ -14,6 +14,10 @@
         <profileId />
       </header>
     </nav> -->
+
+    <div class="">
+    <profileId />
+    </div>
      <div class="row">
   <div class="col-md-3">
     <div class="card">
@@ -61,7 +65,7 @@
   <div class="col-md-6">
     <div class="card ">
       <div class="card-body">
-        <div class=" p-4">
+        <div cass=" p-4">
           <slot name="middle"></slot>
         </div>
       </div>
