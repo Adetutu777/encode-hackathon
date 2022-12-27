@@ -17,35 +17,5 @@ input[type="text"], textarea {
   display: none;
 }
 
-.custom-input {
- display: block;
- overflow: hidden;
- position: relative; 
- max-width: 8rem;
- padding: 0.3rem 1rem;
- 
-}
 
-
- .custom-label {
-   left:0;
-   font-weight: 500;
-   cursor: pointer;
-  top:0;
-  background-color: #fff;
-  min-width: 8rem;
-  border-radius: 10px;
-  height: 100%;
-  border:1px solid;
-  display: inline-flex;
-  padding: 0.5rem;
-  align-items: center;
-  max-width: 8rem;
-  text-align: center;
-}
-
-.custom-label svg{
-  margin-left: 0.5rem;
-  transform: scale(1.5);
-}
 

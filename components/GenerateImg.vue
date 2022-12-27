@@ -1,5 +1,10 @@
 <template>
   <div>
+    <div class="my-4">
+      <button type="button" @click="toggleCreateImgModal" class="btn btn-info">
+        Generate Image
+      </button>
+    </div>
     <b-modal v-model="createImgModal" title="Generate a new Image">
       <form @submit.prevent="getImage">
         <div class="img-div">
@@ -65,7 +70,6 @@ const imageUrl = ref([
 const currentImgIndex = ref(0);
 
 const store = useAppStore();
-
 const setImage = () => {
   const item = imageUrl.value[currentImgIndex.value];
   store.setCoverImage(item);
@@ -85,7 +89,7 @@ const getImage = async () => {
   try {
     const res = await fetch(`/api/gen-img?prompt=${prompt.value}`);
     const info = await res.json();
-    console.log(info.data, "data>>>");
+
     imageUrl.value = info.data;
   } catch (error) {
     isError.value = true;

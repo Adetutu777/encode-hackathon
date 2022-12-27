@@ -6,24 +6,38 @@
       <div class="row">
         <div class="col-md-2"></div>
         <div class="col-sm-8">
-          <button class="btn-one mb-3">Generate Image</button>
+          <GenerateImg />
+          <!-- <button class="btn-one mb-3">Generate Image</button> -->
+
           <div class="card pt-3">
             <div class="card-body">
-              <button class="btn-two">Add cover</button>
-              <!-- post title -->
+              <upload @change="uploadImage" />
               <div class="add-title mt-4">
                 <input
                   type="text"
                   placeholder="Add title"
                   class="w-100 border-0 text-title"
                 />
+                <div class="d-flex">
+                  <div v-for="(tag, index) in tags" :key="index">
+                    <button class="btn border rounded cancel-btn">
+                      {{ tag.value }}
+                      <span class="ml-2" @click="removeTag(tag.id)">x</span>
+                    </button>
+                  </div>
+                </div>
               </div>
-              <div class="add-tag mt-4">
+              <div class="add-tag mt-4 d-flex">
                 <input
+                  ref="tagInput"
                   type="text"
-                  placeholder="Add tags max. of 4"
+                  v-model="tag"
+                  placeholder="Add tags max. of 3"
                   class="w-100 p-2"
                 />
+                <b-button @click="enterTag" squared variant="primary"
+                  >Enter
+                </b-button>
               </div>
               <!-- write post -->
               <div class="mt-2">
@@ -48,15 +62,38 @@
   </div>
 </template>
 
-<script>
-export default {
-  setup() {
-    return {};
-  },
+<script setup>
+import { useAppStore } from "~/store/app";
+import { convertBase64 } from "~/util";
+const store = useAppStore();
+const tags = ref([]);
+const tag = ref("");
+const currentId = ref(0);
+
+const enterTag = () => {
+  tag.value = tag.value.trim();
+  if (tag.value.length > 0 && tags.value.length < 3) {
+    currentId.value = currentId.value + 1;
+    tags.value.push({ id: currentId.value, value: tag.value });
+    tag.value = "";
+  }
+};
+
+const removeTag = (id) => {
+  tags.value = tags.value.filter((item) => item.id !== id);
+};
+
+const uploadImage = async (e) => {
+  const file = e.target.files[0];
+  const base64 = await convertBase64(file);
+  store.setCoverImage(base64);
 };
 </script>
 
 <style scoped>
+.cancel-btn {
+  margin-left: 0.5rem;
+}
 .text-title {
   font-size: 2.5rem;
   font-weight: 500;

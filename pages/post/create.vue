@@ -2,7 +2,6 @@
   <div>
     <!---------------- NAVBAR ---------------->
 
-    <GenerateImg />
     <main>
       <form>
         <div class="d-flex justify-content-between container mt-4">
@@ -52,15 +51,7 @@
         </div>
 
         <div class="container first-class">
-          <div class="my-4">
-            <button
-              type="button"
-              @click="toggleCreateImgModal"
-              class="btn btn-info"
-            >
-              Generate Image
-            </button>
-          </div>
+          <GenerateImg />
           <upload @change="uploadImage" />
 
           <div class="my-4">
