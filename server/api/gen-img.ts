@@ -35,7 +35,7 @@ export default eventHandler(async(event) => {
       const buffer = Buffer.from(response)
     const bufIm =   await sharp(buffer)
       .resize(1000, 420)
-      .toFile(`${tempFileName+index}.jpeg`, (_:any, info:any) => {    
+      .toFile(`./static/${tempFileName+index}.jpeg`, (_:any, info:any) => {    
         return info
        })
        .toBuffer()  
