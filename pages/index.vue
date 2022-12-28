@@ -124,8 +124,14 @@ export default {
 </script>
 
 <style>
-.lens-story {
+.lens-stor {
   background: #1f2833;
+  height: 100vh;
+}
+.lens-story {
+background-color: #8BC6EC;
+background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+
   height: 100vh;
 }
 
