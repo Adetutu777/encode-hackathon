@@ -47,7 +47,7 @@
                   <span>Help</span>
                 </NuxtLink>
                 <NuxtLink
-                  to="/post/create"
+                  to="/post/createstory"
                   class="write-dropdown d-block text-center text-light create-post mt-3"
                 >
                   <span class="">Create post</span>

@@ -145,7 +145,7 @@ export async function login() {
       authenticate: { accessToken, refreshToken },
     } = authData;
 
-    localStorage.setItem("storybiteRefreshToken", accessToken);
+    localStorage.setItem("myStoryRefreshToken", accessToken);
     userAccessToken.value = accessToken;
     // if (!currentUser) {
     //   modal?.toggleCreateModal?.();

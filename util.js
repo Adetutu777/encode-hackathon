@@ -50,7 +50,7 @@ export function splitSignature(signature) {
   return utils.splitSignature(signature);
 }
 
-export const wait = (milliseconds) => {
+export const wait = (milliseconds = 6000) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
 

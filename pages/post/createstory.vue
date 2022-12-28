@@ -2,73 +2,116 @@
   <div>
     <profileId />
 
-    <div class="container">
-      <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-sm-8">
-          <GenerateImg />
-          <!-- <button class="btn-one mb-3">Generate Image</button> -->
-
-          <div class="card pt-3">
-            <div class="card-body">
-              <upload @change="uploadImage" />
-              <div class="add-title mt-4">
-                <input
-                  type="text"
-                  placeholder="Add title"
-                  class="w-100 border-0 text-title"
-                />
-                <div class="d-flex">
-                  <div v-for="(tag, index) in tags" :key="index">
-                    <button class="btn border rounded cancel-btn">
-                      {{ tag.value }}
-                      <span class="ml-2" @click="removeTag(tag.id)">x</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <div class="add-tag mt-4 d-flex">
-                <input
-                  ref="tagInput"
-                  type="text"
-                  v-model="tag"
-                  placeholder="Add tags max. of 3"
-                  class="w-100 p-2"
-                />
-                <b-button @click="enterTag" squared variant="primary"
-                  >Enter
-                </b-button>
-              </div>
-              <!-- write post -->
-              <div class="mt-2">
-                <b-form-textarea
-                  id="textarea"
-                  v-model="text"
-                  placeholder="Write your sweet post ..."
-                  rows="6"
-                  max-rows="10"
-                ></b-form-textarea>
-              </div>
-            </div>
-          </div>
-          <div class="d-flex mt-3">
-            <button class="btn-two">Publish</button>
-            <button class="btn-one">Save to drafts</button>
+    <b-modal v-model="isCreating" title="Creating Post ">
+      <div class="m-auto text-center">
+        <div v-if="creationError" class="text-center">
+          😥 {{ creatingStatus }}
+          <div>
+            <b-button class="my-2" variant="outline-secondary" @click="tryAgain"
+              >Try again</b-button
+            >
           </div>
         </div>
-        <div class="col-md-2"></div>
+
+        <div v-if="!creationError">
+          <div v-if="!isSuccess">
+            <loader />
+          </div>
+          <div v-if="isSuccess">Created Successfully</div>
+          <div class="mt-2">
+            {{ creatingStatus }}
+          </div>
+        </div>
       </div>
-    </div>
+    </b-modal>
+
+    <form @submit.prevent="postData">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-sm-8">
+            <GenerateImg />
+            <div class="card pt-3">
+              <div class="card-body">
+                <upload @change="uploadImage" />
+                <div class="add-title mt-4">
+                  <input
+                    type="text"
+                    v-model="title"
+                    placeholder="Add title"
+                    class="w-100 border-0 text-title"
+                  />
+                  <div class="d-flex">
+                    <div v-for="(tag, index) in tags" :key="index">
+                      <button class="btn border rounded cancel-btn">
+                        {{ tag.value }}
+                        <span class="ml-2" @click="removeTag(tag.id)">x</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="add-tag mt-4 d-flex">
+                  <input
+                    ref="tagInput"
+                    type="text"
+                    v-model="tag"
+                    placeholder="Add tags max. of 3"
+                    class="w-100 p-2"
+                  />
+                  <b-button
+                    type="button"
+                    @click="enterTag"
+                    squared
+                    variant="primary"
+                    >Enter
+                  </b-button>
+                </div>
+                <!-- write post -->
+                <div class="mt-2">
+                  <b-form-textarea
+                    id="textarea"
+                    v-model="text"
+                    placeholder="Write your sweet post ..."
+                    rows="6"
+                    max-rows="10"
+                  ></b-form-textarea>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex mt-3">
+              <b-button type="submit" class="mr-2 btn-publish">
+                Publish
+              </b-button>
+
+              <b-button type="button"> Save to drafts </b-button>
+            </div>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+      </div>
+    </form>
   </div>
 </template>
 
 <script setup>
 import { useAppStore } from "~/store/app";
-import { convertBase64 } from "~/util";
+import { convertBase64, wait } from "~/util";
+import { createPost, uploadContent, preparePost } from "~/services/api";
+import { storeNFT } from "~/upload";
+import axios from "axios";
+import { login } from "~/services/connect";
+
 const store = useAppStore();
 const tags = ref([]);
 const tag = ref("");
+const title = ref("");
+const text = ref("");
 const currentId = ref(0);
+const uploadIm = computed(() => store.currentCoverImage);
+const isCreating = ref(true);
+const creatingStatus = ref("Initializing");
+const creationError = ref(false);
+const isSuccess = ref(false);
 
 const enterTag = () => {
   tag.value = tag.value.trim();
@@ -88,9 +131,77 @@ const uploadImage = async (e) => {
   const base64 = await convertBase64(file);
   store.setCoverImage(base64);
 };
+
+const mockPost = async () => {
+  isCreating.value = true;
+};
+
+let fileCID;
+const postData = async () => {
+  isCreating.value = true;
+  creationError.value = false;
+  let img = uploadIm.value;
+
+  try {
+    if (img && !fileCID) {
+      // uploading image to IPFS
+      creatingStatus.value = "Uploading image to IPFS";
+      img = await storeNFT(img);
+    }
+    const tagFull = JSON.parse(JSON.stringify(tags.value));
+
+    const data = {
+      content: title.value, // main body of the post
+      tags: tagFull.map((item) => item.value),
+      description: text.value, // title of te post
+      imageUpload: img,
+    };
+
+    if (!fileCID) {
+      // uploading post to IPFS
+      creatingStatus.value = "Uploading post to IPFS";
+      const uploadedContent = await uploadContent(data);
+      fileCID = uploadedContent;
+    }
+
+    // preparing post
+    creatingStatus.value = "Preparing post";
+    const prepare = await preparePost(fileCID);
+
+    creatingStatus.value = "Almost done, Please wait";
+    await wait(10000);
+
+    const dataAvailable = await axios.get(`
+      https://ipfs.io/ipfs/${fileCID}`);
+    console.log("dataAvailable", dataAvailable);
+
+    creatingStatus.value = "Creating post";
+
+    const res = await createPost(prepare, fileCID);
+    isSuccess.value = true;
+    creatingStatus.value = "Hurray  Post created ";
+  } catch (err) {
+    creationError.value = true;
+    creatingStatus.value = err?.message ?? "Something went wrong";
+  } finally {
+  }
+};
+
+const tryAgain = async () => {
+  console.log("tryAgain");
+  if (creatingStatus.value.toLowerCase().includes("not authorized")) {
+    isCreating.value = false;
+    await login();
+    return postData();
+  }
+  postData();
+};
 </script>
 
 <style scoped>
+.btn-publish {
+  margin-right: 0.5rem;
+}
 .cancel-btn {
   margin-left: 0.5rem;
 }

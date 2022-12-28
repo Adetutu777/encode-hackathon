@@ -24,7 +24,6 @@ export default eventHandler(async(event) => {
         const tempFileName = crypto.randomBytes(16).toString("hex");
    
      const url =response.data.data[0].url as string
-    //  console.log(response.data.data)
      const images = response.data.data
 
      const res = await Promise.all(images.map(async(i:any, index:number)=>{

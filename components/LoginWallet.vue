@@ -92,7 +92,7 @@ export default {
         const {
           authenticate: { accessToken, refreshToken },
         } = authData;
-        // localStorage.setItem("storybiteRefreshToken", accessToken);
+        // localStorage.setItem("myStoryRefreshToken", accessToken);
 
         token.value = accessToken;
         userAccessToken.value = accessToken;

@@ -192,15 +192,18 @@ export default {
         };
 
         crudStatus.value = "uploading content...";
+        console.log("json data", jsonData);
         const file = await storeNFT(jsonData);
         crudStatus.value = "Almost done";
+        console.log(file, "file");
+        console.log(jsonData, "json data");
 
         const signerOrProvider = new ethers.providers.Web3Provider(
           window.ethereum
         );
         const signer = signerOrProvider?.getSigner();
 
-        const refreshToken = localStorage.getItem("storybiteRefreshToken");
+        const refreshToken = localStorage.getItem("myStoryRefreshToken");
         const { id, ownedBy, ...others } = JSON.parse(
           localStorage.getItem("storyDefaultProfile")
         );

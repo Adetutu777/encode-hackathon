@@ -71,8 +71,18 @@ const handleCancel = () => {
   display: block;
   overflow: hidden;
   position: relative;
-  max-width: 8rem;
+  max-width: 10rem;
   padding: 0.3rem 1rem;
+}
+
+.custom-input input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
 }
 
 .custom-label {
