@@ -1,35 +1,54 @@
 <template>
   <div class="">
-  <div class="container mt-4">
-  <profileId />
-  </div>
-       <div class="container mt-5">
-        <div class="row">
-        <div class="col-md-9">
-        <div class="row">
-        <div class="col-md-6 mt-5 ">
-        <h2 class="row-text">{{ viewBlog?.data?.metadata?.content }}</h2>
-        </div>
-        <div class="col-md-6">
-       <img
-                class="img-fluid img-class"
+    <Dashboard>
+      <template v-slot:middle>
+        <div class="feeds">
+          <div class="feed">
+            <div class="head">
+              <div class="user">
+                <div class="profile-photo">
+                  <JazzIcon />
+                  <!-- <img src="@/images/Ellipse 44.png" alt="" /> -->
+                </div>
+
+                <NuxtLink :to="`/profile/${viewBlog?.data?.profile?.ownedBy}`">
+                  <div class="details">
+                    <h5>{{ viewBlog?.data?.profile?.name }}</h5>
+                    <small
+                      >{{ viewBlog?.data?.profile?.handle }} .
+                      {{ dateFormatter(viewBlog?.data?.createdAt) }}</small
+                    >
+                  </div>
+                </NuxtLink>
+              </div>
+              <div class="info">
+                
+              </div>
+            </div>
+            <div class="title">
+              <h5 class="mb-4">{{ viewBlog?.data?.metadata?.content }}</h5>
+            </div>
+
+            <div class="photo">
+              <img
+                class="img-fluid"
                 :src="
                   viewBlog?.data?.blogUrl ??
                   'https://github.com/DrVickie8/Team-Lens-Developers/blob/main/Lens-folder/images/Frame%202.png?raw=true'
                 "
                 @error="replaceByDefault"
               />
+            </div>
+            <div class="blog">
+              <p>{{ viewBlog?.data?.metadata?.description }}</p>
+            </div>
+          </div>
+         
         </div>
+      </template>
 
-        <div class="content-area">
-         <p>{{ viewBlog?.data?.metadata?.description }}</p> 
-        </div>
-        </div>
-        </div>
-
-        <!-- right -->
-        <div class="col-md-3">
-         <div class="main-right">
+      <template v-slot:right>
+        <div class="main-right">
           <div class="right">
             <div class="content">
               <div class="first">
@@ -48,8 +67,8 @@
                   {{ viewBlog?.data?.profile?.bio }}
                 </p>
               </div>
-              <div class="third d-flex justify-content-between mt-4">
-                <div class="fig1">
+              <div class="third">
+                <div class="fig1 mr-3">
                   <h5>
                     {{ viewBlog?.data?.profile?.stats?.totalFollowers }}
                   </h5>
@@ -64,11 +83,9 @@
               </div>
             </div>
           </div>
-        </div> 
         </div>
-        </div>
-        </div>
-     
+      </template>
+    </Dashboard>
   </div>
 </template>
 
@@ -114,16 +131,4 @@ export default {
 };
 </script>
 
-<style>
-.row-text{
-    line-height: 1.4;
-}
-.content-area {
-    margin: 3rem 0;
-}
-
-.img-clss{
-  border: 1px solid red;
-  margin-right: -19rem;
-}
-</style>
+<style></style>

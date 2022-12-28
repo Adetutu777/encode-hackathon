@@ -35,6 +35,12 @@
                   <i class="icon-icons uil uil-setting"></i>
                   <span>Settings</span>
                 </NuxtLink>
+                
+                <NuxtLink to="/" class="dropdown d-block">
+                  <i class="icon-icons uil uil-question-circle"></i>
+                  <span>Draft</span>
+                </NuxtLink>
+
                 <NuxtLink
                   :to="`/profile/${defaultProfile?.ownedBy}`"
                   class="dropdown d-block"
@@ -42,10 +48,7 @@
                   <i class="icon-icons uil uil-user-circle"></i>
                   <span>Profile</span>
                 </NuxtLink>
-                <NuxtLink to="/help" class="dropdown d-block">
-                  <i class="icon-icons uil uil-question-circle"></i>
-                  <span>Help</span>
-                </NuxtLink>
+                
                 <NuxtLink
                   to="/post/createstory"
                   class="write-dropdown d-block text-center text-light create-post mt-3"

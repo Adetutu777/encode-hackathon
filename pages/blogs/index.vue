@@ -98,9 +98,9 @@
               </div>
             </div>
 
-            <NuxtLink to="/post/create" class="dropdown-two">
+            <!-- <NuxtLink to="/post/create" class="dropdown-two">
               <button class="mt-5 btn-show mx-auto d-flex">Show more</button>
-            </NuxtLink>
+            </NuxtLink> -->
           </div>
         </template>
       </Dashboard>
