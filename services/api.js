@@ -7,12 +7,15 @@ import { LENS_HUB_CONTRACT_ADDRESS } from "~/config/constant";
 
 export const preparePost = async (file) => {
   const refreshToken = localStorage.getItem("myStoryRefreshToken");
-  const { id } = JSON.parse(localStorage.getItem("storyDefaultProfile"));
+  const data = JSON.parse(localStorage.getItem("storyDefaultProfile"));
+  if (!data?.id) {
+    throw new Error("You must create an account to create post");
+  }
   try {
     const resp = await clientId.request(
       publishPost,
       {
-        id,
+        id: data.id,
         uri: `ipfs://${file}`,
       },
       {

@@ -147,11 +147,12 @@ export async function login() {
 
     localStorage.setItem("myStoryRefreshToken", accessToken);
     userAccessToken.value = accessToken;
-    // if (!currentUser) {
-    //   modal?.toggleCreateModal?.();
-    // } else {
-    //   // appStore.setUser(currentUser);
-    // }
+    const isPending = localStorage.getItem("profilePending");
+    if (!currentUser && !isPending) {
+      modal?.toggleCreateModal?.();
+    } else {
+      // appStore.setUser(currentUser);
+    }
     appStore.currentUser = currentUser;
     return {
       accessToken,

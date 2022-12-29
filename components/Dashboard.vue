@@ -27,10 +27,10 @@
                 <NuxtLink to="/blogs" class="dropdown d-block">
                   <i class="icon-icons uil uil-estate"></i> <span>Home</span>
                 </NuxtLink>
-                <NuxtLink to="/help" class="dropdown d-block">
+                <!-- <NuxtLink to="/help" class="dropdown d-block">
                   <i class="icon-icons uil uil-envelope-add"></i>
                   <span>Notifications</span>
-                </NuxtLink>
+                </NuxtLink> -->
                 <NuxtLink to="/userSetting" class="dropdown d-block">
                   <i class="icon-icons uil uil-setting"></i>
                   <span>Settings</span>
@@ -42,28 +42,22 @@
                   <i class="icon-icons uil uil-user-circle"></i>
                   <span>Profile</span>
                 </NuxtLink>
-                <NuxtLink to="/help" class="dropdown d-block">
+
+                <NuxtLink :to="`/draft`" class="dropdown d-block">
+                  <i class="icon-icons uil uil-user-circle"></i>
+                  <span>Draft</span>
+                </NuxtLink>
+
+                <!-- <NuxtLink to="/help" class="dropdown d-block">
                   <i class="icon-icons uil uil-question-circle"></i>
                   <span>Help</span>
-                </NuxtLink>
+                </NuxtLink> -->
                 <NuxtLink
                   to="/post/createstory"
                   class="write-dropdown d-block text-center text-light create-post mt-3"
                 >
                   <span class="">Create post</span>
                 </NuxtLink>
-                <!-- <NuxtLink to="/post/create" class="dropdown">
-              <button
-                class="mt-5 text-light btn-write mx-auto d-flex align-items-center"
-              >
-                <img
-                  class="write-icon d-inline-block"
-                  src="@/images/leaf.svg"
-                  alt="image"
-                />
-                Write
-              </button>
-            </NuxtLink> -->
               </div>
             </div>
           </div>

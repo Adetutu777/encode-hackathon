@@ -76,9 +76,6 @@ const handleCancel = () => {
 }
 
 .custom-input input {
-  position: absolute;
-  top: 0;
-  left: 0;
   opacity: 0;
   cursor: pointer;
   height: 100%;

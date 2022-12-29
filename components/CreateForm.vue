@@ -109,12 +109,14 @@ export default {
           "ipfs://QmbqbUQJkZqt8m1akGMKJBY3FZC94Ec2FMJKsLmp6szMNH",
         ];
 
-        console.log("data>>>", data);
         await wait(10000);
         const txn = await contract.proxyCreateProfile(data, {
           gasLimit: 500000,
         });
         const newTxn = await txn.wait();
+        if (newTxn.status == 1) {
+          localStorage.setItem("profilePending", true);
+        }
         sendingBtn.value = false;
         if (newTxn.status) {
           router.push("/blogs");

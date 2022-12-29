@@ -83,7 +83,9 @@
                 Publish
               </b-button>
 
-              <b-button type="button"> Save to drafts </b-button>
+              <b-button type="button" @click="saveDraft">
+                Save to drafts
+              </b-button>
             </div>
           </div>
           <div class="col-md-2"></div>
@@ -101,6 +103,7 @@ import { storeNFT } from "~/upload";
 import axios from "axios";
 import { login } from "~/services/connect";
 
+const router = useRouter();
 const store = useAppStore();
 const tags = ref([]);
 const tag = ref("");
@@ -108,11 +111,30 @@ const title = ref("");
 const text = ref("");
 const currentId = ref(0);
 const uploadIm = computed(() => store.currentCoverImage);
-const isCreating = ref(true);
+const isCreating = ref(false);
 const creatingStatus = ref("Initializing");
 const creationError = ref(false);
 const isSuccess = ref(false);
+const route = useRoute();
+const drafts = localStorage.getItem("drafts")
+  ? JSON.parse(localStorage.getItem("drafts"))
+  : [];
+let currentDraftId = localStorage.getItem("currentDraftId") || 0;
 
+const editId = computed(() => route.query.id);
+const isPending = computed(
+  () => localStorage.getItem("profilePending") || false
+);
+
+onMounted(() => {
+  if (editId.value) {
+    const draft = drafts.find((item) => item.id == editId.value);
+    title.value = draft.title;
+    tags.value = draft.tags;
+    text.value = draft.text;
+    uploadIm.value = draft.image;
+  }
+});
 const enterTag = () => {
   tag.value = tag.value.trim();
   if (tag.value.length > 0 && tags.value.length < 3) {
@@ -132,8 +154,28 @@ const uploadImage = async (e) => {
   store.setCoverImage(base64);
 };
 
-const mockPost = async () => {
-  isCreating.value = true;
+const saveDraft = () => {
+  const findDraft = drafts.find((item) => item.id == editId.value);
+  // edit draft if exist
+
+  const userDraft = {
+    id: currentDraftId,
+    title: title.value,
+    tags: tags.value,
+    text: text.value,
+    image: uploadIm.value,
+  };
+
+  if (!editId?.value) {
+    drafts.push(userDraft);
+    localStorage.setItem("currentDraftId", +currentDraftId + 1);
+  } else {
+    const draftIndex = drafts.findIndex((item) => item.id == editId.value);
+    drafts[draftIndex] = userDraft;
+  }
+
+  localStorage.setItem("drafts", JSON.stringify(drafts));
+  router.push("/draft");
 };
 
 let fileCID;
@@ -180,15 +222,28 @@ const postData = async () => {
     const res = await createPost(prepare, fileCID);
     isSuccess.value = true;
     creatingStatus.value = "Hurray  Post created ";
+    if (!editId?.value) {
+      const draftIndex = drafts.findIndex((item) => item.id == editId.value);
+      drafts.splice(draftIndex, 1);
+      localStorage.setItem("drafts", JSON.stringify(drafts));
+    }
   } catch (err) {
     creationError.value = true;
     creatingStatus.value = err?.message ?? "Something went wrong";
+    if (isPending) {
+      creatingStatus.value = "Please Wait, Your Account is still Pending";
+    }
   } finally {
   }
 };
 
 const tryAgain = async () => {
-  console.log("tryAgain");
+  if (creatingStatus.value.toLowerCase().includes("account to create post")) {
+    isCreating.value = false;
+    // await login();
+    return;
+    // return postData();
+  }
   if (creatingStatus.value.toLowerCase().includes("not authorized")) {
     isCreating.value = false;
     await login();
