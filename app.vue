@@ -1,24 +1,15 @@
 <template>
   <ClientOnly>
     <!-- top banner -->
-    <div
-      v-if="isPending"
-      class="d-flex justify-content-center w-full p-2 py-3 mx-auto top-banner"
-    >
-      <div class="glass">
-        <topbanner />
-      </div>
-      <div class="">Profile Creation Pending</div>
-    </div>
+
     <NuxtPage />
   </ClientOnly>
 </template>
 
 <script setup>
-let isPending = ref(false);
-onMounted(() => {
-  isPending = localStorage.getItem("profilePending");
-});
+const isPending = computed(() =>
+  localStorage.getItem("profilePending" ?? false)
+);
 </script>
 
 <style lang="scss">

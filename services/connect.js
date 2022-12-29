@@ -151,9 +151,10 @@ export async function login() {
     if (!currentUser && !isPending) {
       modal?.toggleCreateModal?.();
     } else {
+      localStorage.setItem("profilePending", false);
+      appStore.currentUser = currentUser;
       // appStore.setUser(currentUser);
     }
-    appStore.currentUser = currentUser;
     return {
       accessToken,
       user: currentUser,
