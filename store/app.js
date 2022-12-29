@@ -7,7 +7,7 @@ export const useAppStore = defineStore("app", {
       isConnected: false,
       currentUser: {},
       currentCoverImage: "",
-      isPending: true,
+      isPending: false,
     };
   },
 

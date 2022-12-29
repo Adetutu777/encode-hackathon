@@ -148,7 +148,8 @@ export async function login() {
     localStorage.setItem("myStoryRefreshToken", accessToken);
     userAccessToken.value = accessToken;
     const isPending = localStorage.getItem("profilePending");
-    if (!currentUser && !isPending) {
+
+    if (!currentUser && !!isPending == false) {
       modal?.toggleCreateModal?.();
     } else {
       localStorage.setItem("profilePending", false);
