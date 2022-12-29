@@ -7,6 +7,7 @@ export const useAppStore = defineStore("app", {
       isConnected: false,
       currentUser: {},
       currentCoverImage: "",
+      isPending: true,
     };
   },
 
@@ -22,6 +23,10 @@ export const useAppStore = defineStore("app", {
     },
     async setCoverImage(img) {
       this.currentCoverImage = img;
+    },
+
+    async setPending(isPending) {
+      this.isPending = isPending;
     },
   },
 });

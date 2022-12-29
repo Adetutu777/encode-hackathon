@@ -57,6 +57,7 @@ import { ethers } from "ethers";
 import { userAddress } from "../store";
 import { storeNFT } from "../upload.js";
 import { wait } from "../helpers";
+import { useAppStore } from "../store/app";
 export default {
   setup() {
     const signer = ref("");
@@ -90,6 +91,7 @@ export default {
       uploaded.value = true;
     };
 
+    const appStore = useAppStore();
     const onSubmit = async () => {
       sendingBtn.value = true;
       try {
@@ -115,6 +117,7 @@ export default {
         });
         const newTxn = await txn.wait();
         if (newTxn.status == 1) {
+          appStore.isPending = true;
           localStorage.setItem("profilePending", true);
         }
         sendingBtn.value = false;

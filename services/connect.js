@@ -153,7 +153,8 @@ export async function login() {
     } else {
       localStorage.setItem("profilePending", false);
       appStore.currentUser = currentUser;
-      // appStore.setUser(currentUser);
+      appStore.isConnected = true;
+      appStore.setPending(false);
     }
     return {
       accessToken,
