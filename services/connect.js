@@ -148,13 +148,10 @@ export async function login() {
     appStore.userAddress = address;
     localStorage.setItem("myStoryRefreshToken", accessToken);
     userAccessToken.value = accessToken;
-    console.log("accessToken", store);
-    // const user = store.value.profilePending.find((acc) => acc.address === address);
-    // console.log("user", accounts);
+
     let user = { isPending: false };
     const isPending = user?.isPending ?? false;
-    // const tst = true;
-    // !currentUser && !!isPending == false
+
     if (!currentUser && !!isPending == false) {
       await modal?.toggleCreateModal?.();
     } else {
