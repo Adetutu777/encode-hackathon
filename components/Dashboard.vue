@@ -221,7 +221,7 @@ export default {
   text-decoration: none;
 }
 a.dropdown:hover {
-  background: #f3f6fb;
+  background: #F2F9FF;
 }
 .btn-write {
   background: #0c2acb;
@@ -237,7 +237,7 @@ a.dropdown:hover {
 .router-link-active,
 .router-link-active i,
 .router-link-active span {
-  color: #0c2acb !important;
+  color: #2C74B3 !important;
   font-weight: bold;
 }
 
@@ -302,7 +302,7 @@ a.dropdown:hover {
 }
 
 .create-post {
-  background: #45a29e;
+  background: #2C74B3;
   border-radius: 2rem;
 }
 

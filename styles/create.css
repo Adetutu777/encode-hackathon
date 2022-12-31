@@ -49,7 +49,7 @@ nav {
 }
 
 .logo {
-    font-family: "Satoshi" sans-serif;
+    font-family: 'Euclid Circular A', sans-serif;
     font-style: italic;
     font-weight: 500;
     font-size: 36px;
@@ -109,7 +109,7 @@ nav {
     gap: 10px;
     text-align: center;
     border: none;
-    font-family: "Satoshi";
+    font-family: 'Euclid Circular A', sans-serif;
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
@@ -229,7 +229,7 @@ main .gallery i {
 .first-class .tell input[type="text"]::placeholder {
     /* width: 141px; */
     height: 27px;
-    font-family: "Satoshi";
+    font-family: 'Euclid Circular A', sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 22.5px;

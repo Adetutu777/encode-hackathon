@@ -3,33 +3,20 @@
     <!-- navbar -->
     <div class="nav-header px-4 py-4 d-flex justify-content-between">
       <div>
-        <h1 class="your-story"><i>myStory</i></h1>
+        <img src="@/images/Chain-write.svg" alt="image">
       </div>
-
-      <!-- <div
-        class="d-flex align-items-center"
-        :class="{ 'connect-btn': !!!appStore.currentUser.id }"
-        v-if="!!!appStore.currentUser.id"
-      >
-        <div>
-          <ConnectWallet classes="login-btn" text="Login" />
-        </div>
-        <div>
-          <CreateAccountWallet classes ="create-btn" />
-        </div>
-      </div> -->
 
       <div class="">
         <CreateAccountWallet classes="btn-signup mt-2" />
-        <!-- <button class="btn-signup mt-2">LogIn/SignUp</button> -->
       </div>
     </div>
     <!-- navbar ends here -->
 
     <!-- body -->
     <div class="container">
-      <div class="row">
-        <div class="col-md-6 col-one">
+  <div class="row algn-items-start">
+      <div class="col-md-1"></div>
+        <div class="col-md-5 col-one">
           <h2>
             Lorem ipsum dolor sit amet <br />
             consectetur, adipisicing elit. <br />
@@ -43,20 +30,22 @@
           </p>
 
           <div class="d-flex mt-5">
-            <button class="btn-one">About</button>
-            <button class="btn-two">Publish</button>
+            <button class="btn-one">Get started</button>
+            <!-- <button class="btn-two">Publish</button> -->
           </div>
         </div>
         <!-- col-two -->
         <div class="col-md-6 mt-5">
           <img
-            class="bg-image w-75"
-            src="@/images/man-smile.png"
+            class="bg-image img-fluid"
+            src="@/images/chainwrite svg.svg"
             alt="image"
           />
         </div>
       </div>
     </div>
+
+
   </div>
 </template>
 
@@ -124,16 +113,16 @@ export default {
 </script>
 
 <style>
-.lens-story {
+.lens-stor {
   background: #1f2833;
   height: 100vh;
 }
-.lens-stor {
-background-color: #8BC6EC;
-background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
-
+.lens-story {
+  backgroun: linear-gradient(166.23deg, #2C74B3 1.51%, #329FFE 99.65%);
+  background: linear-gradient(160.1deg, #2C74B3 0.01%, #65B7FF 95.54%);
   height: 100vh;
 }
+
 
 .nav-header {
   max-width: 80rem;
@@ -146,25 +135,25 @@ background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
 
 .col-one {
   margin-top: 7rem;
-  color: #c5c6c7;
+  color: #FFFFFF;
 }
 
 .bg-image {
   border-radius: 2rem;
 }
 .btn-one {
-  border: 1px solid #66fcf1;
-  background: transparent;
-  color: #66fcf1;
-  padding: 0.5rem 2rem;
-  border-radius: 1.5rem;
-}
-.btn-two {
-  border: 1px solid #66fcf1;
-  background: #45a29e;
-  color: white;
+ border: 1px solid #FFFFFF;
+ background: #FFFFFF;
+  color: #2C74B3;
   margin-left: 1rem;
   padding: 0.5rem 2rem;
-  border-radius: 1.5rem;
+  border-radius: 13px;
+}
+btn-two {
+  border: 1px solid #FFFFFF;
+ background: #FFFFFF;
+  color: #FF00FF;
+  margin-left: 1rem;
+  padding: 0.5rem 2rem;
 }
 </style>
