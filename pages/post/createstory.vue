@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container mt-4 ">
     <profileId />
 
     <b-modal v-model="isCreating" title="Creating Post ">
@@ -7,9 +7,8 @@
         <div v-if="creationError" class="text-center">
           😥 {{ creatingStatus }}
           <div>
-            <b-button class="my-2" variant="outline-secondary" @click="tryAgain"
-              >Try again</b-button
-            >
+            <button class="my-2 btn-general mt-4"  @click="tryAgain"
+              >Try again</button>
           </div>
         </div>
 
@@ -59,9 +58,10 @@
                   />
                   <b-button
                     type="button"
+                    class="btn-general"
                     @click="enterTag"
                     squared
-                    variant="primary"
+                    
                     >Enter
                   </b-button>
                 </div>
@@ -70,21 +70,21 @@
                   <b-form-textarea
                     id="textarea"
                     v-model="text"
-                    placeholder="Write your sweet post ..."
+                    placeholder="Write your sweet post here ..."
                     rows="6"
                     max-rows="10"
                   ></b-form-textarea>
                 </div>
               </div>
             </div>
-            <div class="d-flex mt-3">
-              <b-button type="submit" class="mr-2 btn-publish">
+            <div class="d-flex mt-3 pb-4">
+              <button type="submit" class="mr-2 btn-publish btn-general">
                 Publish
-              </b-button>
+              </button>
 
-              <b-button type="button" @click="saveDraft">
+              <button type="button" @click="saveDraft" class="btn-draft">
                 Save to drafts
-              </b-button>
+              </button>
             </div>
           </div>
           <div class="col-md-2"></div>

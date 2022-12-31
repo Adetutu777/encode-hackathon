@@ -2,7 +2,7 @@
   <div>
 <div class="d-flex">
   <div class="container icon-input mb-3 d-flex">
-<h5>mS</h5>
+<img class="img-logos" src="@/images/chainwriteblue.png" alt="">
 <div class="inp-div aa">
   <input class=" icon-input__text-field px-5 py-1 input-text" type="text">
   </div>
@@ -75,5 +75,7 @@ margin-left: 0.5rem;
 .input-text{
   margin-left: 0.8rem;
 }
-
+.img-logos{
+  width: 2.7vw;
+}
 </style>

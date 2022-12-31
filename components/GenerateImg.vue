@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <div class="my-4">
-      <button type="button" @click="toggleCreateImgModal" class="btn btn-info">
+  <div class="">
+    <div class="my-4 ">
+      <button type="button" @click="toggleCreateImgModal" class="btn-general">
         Generate Image
       </button>
     </div>
@@ -14,14 +14,14 @@
             :items="imageUrl"
           />
           <div class="d-flex justify-content-center">
-            <b-button
+            <button
               @click="setImage"
               class="pick-btn"
               type="button"
               :disabled="isLoading"
             >
               pick
-            </b-button>
+            </button>
           </div>
 
           <div class="d-flex my-3">
@@ -29,14 +29,14 @@
               class="cus-input"
               v-model="prompt"
               :disabled="isLoading"
-              placeholder="Describe Your Imae"
+              placeholder="Describe Your Image"
             ></b-form-input>
 
-            <b-button
+            <button
               type="button"
               :disabled="isLoading"
               @click="getImage"
-              variant="success"
+              class="btn-generate"
               squared
             >
               {{ isLoading ? "" : "Generate" }}
@@ -46,7 +46,7 @@
                 v-if="isLoading"
                 label="Loading..."
               ></b-spinner>
-            </b-button>
+            </button>
           </div>
         </div>
       </form>
@@ -109,7 +109,7 @@ const getImage = async () => {
   content: "";
   width: 100%;
   height: 100%;
-  background: green;
+  background: red;
   opacity: 0.2;
 }
 .img-div {
@@ -121,12 +121,21 @@ const getImage = async () => {
   border-top-left-radius: 5px;
   left: 50%;
   top: 50%;
-  background: #333;
   z-index: 1;
+  background: #2C74B3;
+  color: #FFFFFF;
+  border: 1px solid #2C74B3;
+  padding: 0.3rem 1.3rem;
   transform: translate(-50%, -50%);
 }
+
+.btn-generate{
+  background: #2C74B3;
+  color: #FFFFFF;
+  border: 1px solid #2C74B3;
+  padding: 0.5rem 1.5rem;
+}
+
+
 </style>
 
-style for darken background color when hover on image .img-place:hover::before {
-position: absolute; content: ""; width: 100%; height: 100%; background: green;
-opacity: 0.2; }
