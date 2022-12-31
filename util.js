@@ -67,3 +67,7 @@ export const wait = (milliseconds = 6000) => {
 //     console.log(error);
 //   }
 // }
+
+export const deepCopy = (obj = {}) => {
+  return JSON.parse(JSON.stringify(obj));
+};

@@ -1,6 +1,11 @@
 import { ethers } from "ethers";
 import { v4 as uuidv4 } from "uuid";
-import { publishPost, clientId } from "~/api.js";
+import {
+  publishPost,
+  addReactionMutation,
+  clientId,
+  whoReactedQuery,
+} from "~/api.js";
 import LENSHUB from "~/config/lens.json";
 import { storeNFT } from "~/upload";
 import { LENS_HUB_CONTRACT_ADDRESS } from "~/config/constant";
@@ -88,5 +93,33 @@ export const createPost = async (typedData, file) => {
       throw new Error(res.reason);
     }
     throw new Error("Something went wrong");
+  }
+};
+
+export const interactWithPost = async (data) => {
+  // const reaction = clientId.
+  const refreshToken = localStorage.getItem("myStoryRefreshToken");
+
+  try {
+    const addReaction = await clientId.request(addReactionMutation, data, {
+      ["x-access-token"]: refreshToken,
+    });
+    return addReaction;
+  } catch (e) {}
+};
+
+export const whoReactedPub = async (publications = []) => {
+  try {
+    const postIds = Promise.all(
+      publications.map(async (i) => {
+        const whoReacted = await clientId.request(whoReactedQuery, {
+          publicationId: i,
+        });
+        return whoReacted;
+      })
+    );
+    return postIds;
+  } catch (e) {
+    console.log("error", e);
   }
 };

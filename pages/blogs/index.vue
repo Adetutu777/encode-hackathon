@@ -61,10 +61,46 @@
                   <div class="">
                     <i class="uil uil-bookmark icon-footer"></i>
                   </div>
-                  <div class="d-flex align-items-center">
-                    <span><i class="uil uil-heart icon-footer"></i></span>
-                    <h5>{{ item?.stats?.totalUpvotes }}</h5>
+                  <div class="d-flex justify-content-between pt-1">
+                    <div class="reactions-btn mr-3 d-flex align-items-center">
+                      <div
+                        :class="`${addActiveClass(item?.stats?.upvotes)}`"
+                        @click="
+                          () =>
+                            reactToPost('UPVOTE', item?.stats?.upvotes, item.id)
+                        "
+                      >
+                        up
+                      </div>
+                      <div class="reactions-num">
+                        {{ item?.stats?.upvotes.length }}
+                      </div>
+                    </div>
+                    <div class="reactions-btn mr-3 d-flex align-items-center">
+                      <div
+                        :class="`${addActiveClass(item.stats.downvotes)}`"
+                        @click="
+                          () =>
+                            reactToPost(
+                              'DOWNVOTE',
+                              item?.stats?.downvotes,
+                              item.id
+                            )
+                        "
+                      >
+                        down
+                      </div>
+                      <div class="reactions-num">
+                        {{ item?.stats?.downvotes?.length }}
+                      </div>
+                    </div>
                   </div>
+                  <!-- <div class="d-flex align-items-center">
+                    <span @click="() => reactToPost(item.id)">
+                      <i class="uil uil-heart icon-footer"></i
+                    ></span>
+                    <h5>{{ item?.stats?.totalUpvotes }}</h5>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -110,8 +146,10 @@
 
 <script>
 import { recommendProfiles, clientId, publicationsQuery } from "../../api";
-import { formatIpfdImg, dateFormatter } from "@/util";
+import { formatIpfdImg, dateFormatter, deepCopy } from "@/util";
 import { defaultProfile } from "../../store";
+import { useAppStore } from "~/store/app";
+import { interactWithPost, whoReactedPub } from "~/services/api";
 
 export default {
   layout: "no-sidebar",
@@ -127,26 +165,39 @@ export default {
     const publications = reactive({
       data: {},
     });
+    const store = useAppStore();
+    const userProfile = store.currentUser?.id;
+    const addActiveClass = (array = []) => {
+      const isIncluded = array.map((i) => i.profile?.id).includes(userProfile);
+      return isIncluded ? "active-post" : "";
+    };
 
     onMounted(() => {
       signerOrProvider.value = window.ethereum;
       userQuery();
     });
 
-    // function to connect to MetaMask
-    const onClickConnect = async () => {
-      try {
-        // Will open the MetaMask UI
-        const account = await signerOrProvider.value.send(
-          "eth_requestAccounts",
-          []
-        );
-        isConnected.value = true;
-        userAddress.value = account[0];
-      } catch (error) {
-        console.error(error);
-        console.log(error.message);
-      }
+    const reactToPost = async (publicationId) => {
+      const data = {
+        profileId: store.currentUser?.id,
+        publicationId,
+        reaction: "DOWNVOTE",
+      };
+
+      const post = await interactWithPost(data);
+      const mappedData = publications.data.map((i) => {
+        if (i.id == publicationId) {
+          return {
+            ...i,
+            stats: {
+              ...i.stats,
+              totalUpvotes: i.stats.totalUpvotes + 1,
+            },
+          };
+        }
+        return i;
+      });
+      publications.data = mappedData;
     };
 
     const userQuery = async () => {
@@ -168,7 +219,26 @@ export default {
             };
           });
         publications.data = mappedData ?? publications.data;
-        // console.log('hello', pu)
+        const mappedArr = mappedData.map((i) => i.id);
+        const reactionData = await whoReactedPub(mappedArr);
+        publications.data = publications.data.map((i, index) => {
+          return {
+            ...i,
+            stats: {
+              ...i.stats,
+              upvotes: reactionData[
+                index
+              ]?.whoReactedPublication?.items?.filter(
+                (i) => i.reaction == "UPVOTE"
+              ),
+              downvotes: reactionData[
+                index
+              ]?.whoReactedPublication?.items?.filter(
+                (i) => i.reaction == "DOWNVOTE"
+              ),
+            },
+          };
+        });
       } catch (error) {
         console.log("error", error);
       }
@@ -181,13 +251,14 @@ export default {
     return {
       loading,
       getProfiles,
-      onClickConnect,
       isConnected,
       userAddress,
       publications,
       replaceByDefault,
       dateFormatter,
       defaultProfile,
+      reactToPost,
+      addActiveClass,
     };
   },
 };
@@ -204,5 +275,18 @@ export default {
 
 .aa {
   margin-bottom: 1rem;
+}
+
+.reactions-btn {
+  margin-left: 0.5rem;
+}
+
+.reactions-num {
+  margin: 0rem 0.5rem;
+}
+
+.active-post {
+  background-color: #f2f2f2;
+  border: 1px solid #f2f2f2;
 }
 </style>
