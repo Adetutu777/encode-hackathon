@@ -38,7 +38,7 @@
         <div class="col-md-6 mt-5">
           <img
             class="bg-image img-fluid"
-            src="@/images/chainwrite svg.svg"
+            src="@/images/chainwritesmile.svg"
             alt="image"
           />
         </div>
