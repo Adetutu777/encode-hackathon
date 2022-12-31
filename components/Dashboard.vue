@@ -168,12 +168,14 @@ export default {
       }
     });
 
-    const isPending = computed(() => appStore.isPending);
-    const increment = () => {
-      console.log("increment");
-      appStore.increment();
-      //
-    };
+    const pendingArray = computed(() => appStore.isPending);
+    const userAddress = computed(() => appStore.userAddress);
+    const isPending = computed(() => {
+      const currentUser = pendingArray.value.find(
+        (user) => user.address === userAddress.value
+      );
+      return currentUser?.isPending;
+    });
 
     return { defaultProfile, isPending };
   },

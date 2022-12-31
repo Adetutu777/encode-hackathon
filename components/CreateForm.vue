@@ -54,7 +54,7 @@
 import { createProfileAddress } from "../config/constant";
 import profileAbi from "../config/createProfileAbi.json";
 import { ethers } from "ethers";
-import { userAddress } from "../store";
+// import { userAddress } from "../store";
 import { storeNFT } from "../upload.js";
 import { wait } from "../helpers";
 import { useAppStore } from "../store/app";
@@ -63,6 +63,8 @@ export default {
     const signer = ref("");
     const sendingBtn = ref(false);
     const router = useRouter();
+    const appStore = useAppStore();
+    const userAddress = computed(() => appStore.userAddress);
     const getDetails = reactive({
       data: {
         // walletAddress: '',
@@ -91,7 +93,6 @@ export default {
       uploaded.value = true;
     };
 
-    const appStore = useAppStore();
     const onSubmit = async () => {
       sendingBtn.value = true;
       try {
@@ -101,7 +102,6 @@ export default {
         }
 
         const contract = getContract();
-
         const data = [
           userAddress.value,
           getDetails.data.handleName,
@@ -117,11 +117,13 @@ export default {
         });
         const newTxn = await txn.wait();
         if (newTxn.status == 1) {
-          appStore.isPending = true;
-          localStorage.setItem("profilePending", true);
+          appStore.setAccountStatus({
+            status: true,
+            address: userAddress.value,
+          });
         }
         sendingBtn.value = false;
-        if (newTxn.status) {
+        if (newTxn.status == 1) {
           router.push("/blogs");
         }
       } catch (error) {

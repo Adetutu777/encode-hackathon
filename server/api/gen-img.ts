@@ -12,8 +12,7 @@ const configuration = new Configuration({
 
 
 export default eventHandler(async(event) => {
-    const prompts = getQuery(event).prompt as string;
-   
+    const prompts = getQuery(event).prompt as string; 
 
     const response = await openai.createImage({
         prompt:prompts,
@@ -21,9 +20,8 @@ export default eventHandler(async(event) => {
         // size: "1024x1024",
         size: "512x512",
       });
-        const tempFileName = crypto.randomBytes(16).toString("hex");
-   
-     const url =response.data.data[0].url as string
+     const tempFileName = crypto.randomBytes(16).toString("hex");
+
      const images = response.data.data
 
      const res = await Promise.all(images.map(async(i:any, index:number)=>{
@@ -42,28 +40,10 @@ export default eventHandler(async(event) => {
       return`data:image/jpeg;base64,${coverted}`
      }))
 
-         const im = Buffer.from(
-  (
-    await axios.get(url, {
-    responseType: "arraybuffer",
-  })
-).data,
-"utf-8"
-)
 
-const r = await sharp(im)
-  .resize(1000, 420)
-  .toFile(`./static/${tempFileName}.jpeg`, (_:any, info:any) => {    
-    return info
-   })
-   .toBuffer()
-
-   const rBufferToBase64 = Buffer.from(r).toString('base64')
 
    return ({
-        // data:`data:image/jpeg;base64,${rBufferToBase64}`,  
-        raw:`data:image/jpeg;base64,${im}`,
-        compressBuffer:r.toString(),
+      statusCode: 200,
         data:res
      
     })

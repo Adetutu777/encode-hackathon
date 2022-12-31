@@ -17,6 +17,7 @@
     "@nuxt/types": "^2.15.8",
     "@pinia/nuxt": "^0.4.6",
     "@types/sharp": "^0.31.0",
+    "@vueuse/core": "^9.9.0",
     "@web3-onboard/coinbase": "^2.2.0",
     "@web3-onboard/gnosis": "^2.1.5",
     "@web3-onboard/injected-wallets": "2.0.0",
@@ -28,14 +29,15 @@
     "bootstrap": "github:xvaara/bootstrap",
     "bootstrap-vue": "^2.22.0",
     "bootstrap-vue-3": "^0.4.13",
+    "cloudinary": "^1.33.0",
     "ethers": "^5.7.2",
     "graphql": "16.6.0",
     "graphql-request": "5.0.0",
     "jquery": "^3.6.1",
+    "mongoose": "^6.8.2",
     "openai": "^3.1.0",
     "pinia": "^2.0.28",
     "sharp": "^0.31.3",
-    "vue3-carousel": "^0.2.9",
     "yarn": "^1.22.19"
   }
 }

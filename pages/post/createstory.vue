@@ -24,7 +24,6 @@
         </div>
       </div>
     </b-modal>
-
     <form @submit.prevent="postData">
       <div class="container">
         <div class="row">
@@ -116,23 +115,23 @@ const creatingStatus = ref("Initializing");
 const creationError = ref(false);
 const isSuccess = ref(false);
 const route = useRoute();
-const drafts = localStorage.getItem("drafts")
-  ? JSON.parse(localStorage.getItem("drafts"))
-  : [];
-let currentDraftId = localStorage.getItem("currentDraftId") || 0;
-
+const drafts = computed(() => store.drafts);
 const editId = computed(() => route.query.id);
-const isPending = computed(
-  () => localStorage.getItem("profilePending") || false
-);
+const currentStoreId = computed(() => store.currentDraftId);
+
+let currentDraftId = editId.value ? +editId.value : +currentStoreId.value + 1;
+
+const isPending = computed(() => store.isPending || false);
 
 onMounted(() => {
   if (editId.value) {
-    const draft = drafts.find((item) => item.id == editId.value);
-    title.value = draft.title;
-    tags.value = draft.tags;
-    text.value = draft.text;
-    uploadIm.value = draft.image;
+    const draft = drafts.value.find((item) => item.id == editId.value);
+    title.value = draft?.title;
+    tags.value = draft?.tags ?? [];
+    text.value = draft?.text;
+    uploadIm.value = draft?.image;
+  } else {
+    router.push(`/post/createstory?id=${currentDraftId}`);
   }
 });
 const enterTag = () => {
@@ -154,10 +153,8 @@ const uploadImage = async (e) => {
   store.setCoverImage(base64);
 };
 
-const saveDraft = () => {
-  const findDraft = drafts.find((item) => item.id == editId.value);
-  // edit draft if exist
-
+const saveDraft = async () => {
+  const findDraft = drafts.value.find((item) => item.id == editId.value);
   const userDraft = {
     id: currentDraftId,
     title: title.value,
@@ -166,15 +163,8 @@ const saveDraft = () => {
     image: uploadIm.value,
   };
 
-  if (!editId?.value) {
-    drafts.push(userDraft);
-    localStorage.setItem("currentDraftId", +currentDraftId + 1);
-  } else {
-    const draftIndex = drafts.findIndex((item) => item.id == editId.value);
-    drafts[draftIndex] = userDraft;
-  }
-
-  localStorage.setItem("drafts", JSON.stringify(drafts));
+  await store.setCurrentDraftId(currentDraftId);
+  await store.saveDraft(userDraft);
   router.push("/draft");
 };
 
@@ -222,11 +212,7 @@ const postData = async () => {
     const res = await createPost(prepare, fileCID);
     isSuccess.value = true;
     creatingStatus.value = "Hurray  Post created ";
-    if (!editId?.value) {
-      const draftIndex = drafts.findIndex((item) => item.id == editId.value);
-      drafts.splice(draftIndex, 1);
-      localStorage.setItem("drafts", JSON.stringify(drafts));
-    }
+    store.deleteDraft(currentDraftId.value);
   } catch (err) {
     creationError.value = true;
     creatingStatus.value = err?.message ?? "Something went wrong";

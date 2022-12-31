@@ -38,6 +38,7 @@
 <script>
 import Dashboard from "~~/components/Dashboard.vue";
 import { computed, onMounted, ref } from "vue";
+import { useAppStore } from "~/store/app";
 
 export default {
   components: {
@@ -45,16 +46,14 @@ export default {
   },
   layout: "no-sidebar",
   setup() {
-    const draftsStore = computed(() =>
-      JSON.parse(localStorage.getItem("drafts") ?? [])
-    );
-    const drafts = ref(draftsStore.value);
+    const store = useAppStore();
+    const drafts = computed(() => store.drafts);
+    console.log(drafts.value, "draftss");
 
     const deleteDraft = (id) => {
-      const newDrafts = drafts.value.filter((draft) => draft.id !== id);
-      drafts.value = newDrafts;
-      localStorage.setItem("drafts", JSON.stringify(newDrafts));
+      store.deleteDraft(id);
     };
+
     return {
       deleteDraft,
       drafts,

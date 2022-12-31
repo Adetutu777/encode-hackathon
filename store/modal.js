@@ -20,10 +20,10 @@ export const useModal = defineStore("modal", {
     increment() {
       this.count++;
     },
-    toggleCreateModal() {
+    async toggleCreateModal() {
       this.createModal = !this.createModal;
     },
-    toggleCreateImgModal() {
+    async toggleCreateImgModal() {
       this.createImgModal = !this.createImgModal;
     },
   },

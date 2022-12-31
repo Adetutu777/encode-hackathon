@@ -96,7 +96,7 @@ export default {
 
         token.value = accessToken;
         userAccessToken.value = accessToken;
-        console.log(router, "routersss");
+        console.log("accessToken +plus", accessToken);
         if (accessToken && props.redirect) {
           router.push("/blogs");
         }

@@ -24,6 +24,8 @@ const router = useRouter();
 const connect = async () => {
   try {
     const { accessToken, user } = await login();
+    console.log("accessToken", accessToken);
+    console.log("user", user);
 
     if (accessToken && user) {
       router.push("/blogs");

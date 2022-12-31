@@ -40,6 +40,12 @@ export default defineNuxtConfig({
     "~/plugins/bootstrap.client.ts",
   
   ],
+  runtimeConfig: {
+    mongoUrl: process.env.DB_CREDENTIALS,
+  },
+  nitro: {
+    plugins: ["~/server/index.ts"],
+  },
   modules: [
     // ...
     [

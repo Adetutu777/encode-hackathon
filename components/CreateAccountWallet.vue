@@ -4,7 +4,6 @@
       <b-button @click="createAccount" :class="` border-0  ${classes}`">
         LogIn/SignUp
       </b-button>
-
       <b-modal
         v-model="modal.createModal"
         id="modal-2"
@@ -25,17 +24,12 @@
 </template>
 
 <script setup>
-import { userAddress, isConnected, userAccessToken } from "../store";
+import { userAddress } from "../store";
 import { truncateEthAddress } from "../util";
-import { toggleRegModal } from "../store";
 import { login } from "../services/connect";
 import { useModal } from "../store/modal";
 
-const showModal = ref(false);
 const modal = useModal();
-const toggleModal = () => {
-  showModal.value = !showModal.value;
-};
 
 const props = defineProps({
   show: {
@@ -48,14 +42,15 @@ const props = defineProps({
 });
 const router = useRouter();
 const createAccount = async () => {
-try {
+  try {
     const { accessToken, user } = await login();
-
+    console.log("accessToken inner", accessToken, user);
+    // await login();
     if (accessToken && user) {
       router.push("/blogs");
     }
   } catch (error) {
-    console.log("error connectons", error);
+    console.log("error connections", error);
   }
 };
 </script>

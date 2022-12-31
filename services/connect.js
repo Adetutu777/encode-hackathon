@@ -7,6 +7,7 @@ import storyTribe from "../images/storytribe.svg";
 import polygonIcon from "../images/polygon.svg";
 import { useModal } from "../store/modal";
 import { ethers } from "ethers";
+import axios from "axios";
 
 import {
   clientId,
@@ -34,6 +35,7 @@ const portisConnect = portisModule({
 });
 
 const appStore = useAppStore();
+const store = computed(() => appStore);
 
 const infuraKey = "ba80361523fe423bb149026a490266f0";
 const rpcUrl = `https://mainnet.infura.io/v3/${infuraKey}`;
@@ -90,10 +92,9 @@ export const connect = async () => {
   try {
     const con = await connectWallet();
     appStore.isConnected = true;
-    // const account = await window.ethereum.send("eth_requestAccounts");
     return con;
   } catch (error) {
-    console.log("error connectons", error);
+    console.log("error connections", error);
   }
 };
 
@@ -144,18 +145,25 @@ export async function login() {
     const {
       authenticate: { accessToken, refreshToken },
     } = authData;
-
+    appStore.userAddress = address;
     localStorage.setItem("myStoryRefreshToken", accessToken);
     userAccessToken.value = accessToken;
-    const isPending = localStorage.getItem("profilePending");
-
+    console.log("accessToken", store);
+    // const user = store.value.profilePending.find((acc) => acc.address === address);
+    // console.log("user", accounts);
+    let user = { isPending: false };
+    const isPending = user?.isPending ?? false;
+    // const tst = true;
+    // !currentUser && !!isPending == false
     if (!currentUser && !!isPending == false) {
-      modal?.toggleCreateModal?.();
+      await modal?.toggleCreateModal?.();
     } else {
-      localStorage.setItem("profilePending", false);
+      appStore.setAccountStatus({
+        isPending: false,
+        address,
+      });
       appStore.currentUser = currentUser;
       appStore.isConnected = true;
-      appStore.setPending(false);
     }
     return {
       accessToken,
