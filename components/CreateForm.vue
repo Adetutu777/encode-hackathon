@@ -151,6 +151,6 @@ export default {
 
 <style>
 .submit-btn {
-  background: #0c2acb;
+  background: #2C74B3;
 }
 </style>

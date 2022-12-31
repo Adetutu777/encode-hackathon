@@ -1,13 +1,13 @@
 <template>
   <div class="">
     <div class="">
-      <b-button @click="createAccount" :class="` border-0  ${classes}`">
+      <button @click="createAccount" :class="`  ${classes} aa`">
         LogIn/SignUp
-      </b-button>
+      </button>
       <b-modal
         v-model="modal.createModal"
         id="modal-2"
-        title="Login or Signup to myStory"
+        title="Login or Signup to chainWrite"
       >
         <div class="">
           <div class="">
@@ -68,10 +68,14 @@ const createAccount = async () => {
 }
 
 .btn-signup {
-  border: 1px solid #66fcf1;
+  border: 1px solid #FFFFFF;
   background: transparent;
-  color: #66fcf1;
+  color: #FFFFFF;
   padding: 0.5rem 2rem;
-  border-radius: 1.5rem;
+  border-radius: 13px;
+  font-weight: bold;
+}
+aa {
+  color: #FFFFFF;
 }
 </style>

@@ -2,7 +2,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Satoshi", sans-serif;
+  font-family: 'Euclid Circular A', sans-serif;
   outline: none;
   border: none;
   text-decoration: none;
@@ -28,13 +28,13 @@
 }
 
 body {
-  font-family: "Satoshi", sans-serif;
+  font-family: 'Euclid Circular A', sans-serif;
   background: #f9fbff;
 }
 /* Read-a-blog */
 
 .read {
-  font-family: "Satoshi";
+  font-family: 'Euclid Circular A', sans-serif;
   color: var(--color-dark);
   background: #f9fbff;
   overflow-x: hidden;
@@ -72,7 +72,7 @@ img {
 }
 
 .logo {
-  font-family: "Satoshi" sans-serif;
+  font-family: 'Euclid Circular A', sans-serif;
   font-style: italic;
   font-weight: 500;
   font-size: 36px;
@@ -285,7 +285,7 @@ nav .search-bar input[type="search"]::placeholder {
 
 .middle .feed .details small {
   color: var(--color-dark);
-  font-family: "Satoshi";
+  font-family: 'Euclid Circular A', sans-serif;
   font-size: 14px;
 }
 
@@ -333,7 +333,7 @@ nav .search-bar input[type="search"]::placeholder {
 }
 
 .middle .blog p {
-  font-family: "Satoshi";
+  font-family: 'Euclid Circular A', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 20px;
