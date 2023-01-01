@@ -2,7 +2,9 @@
   <div>
 <div class="d-flex">
   <div class="container icon-input mb-3 d-flex">
+  <NuxtLink to="/blogs">
 <img class="img-logos" src="@/images/chainwriteblue.png" alt="">
+  </NuxtLink>
 <div class="inp-div aa">
   <input class=" icon-input__text-field px-5 py-1 input-text" type="text">
   </div>

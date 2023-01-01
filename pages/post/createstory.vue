@@ -211,7 +211,7 @@ const postData = async () => {
 
     const res = await createPost(prepare, fileCID);
     isSuccess.value = true;
-    creatingStatus.value = "Hurray  Post created ";
+    creatingStatus.value = "Hurray  Post created 🤗";
     store.deleteDraft(currentDraftId.value);
   } catch (err) {
     creationError.value = true;

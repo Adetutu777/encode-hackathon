@@ -2,7 +2,7 @@
   <div class="">
     <div class="">
       <button @click="createAccount" :class="`  ${classes} aa`">
-        LogIn/SignUp
+        Sign in / Sign Up
       </button>
       <b-modal
         v-model="modal.createModal"
