@@ -24,10 +24,10 @@ const router = useRouter();
 const connect = async () => {
   try {
     const { accessToken, user } = await login();
-    console.log("accessToken", accessToken);
-    console.log("user", user);
+    // console.log("accessToken", accessToken);
+    // console.log("user", user);
 
-    if (accessToken && user) {
+    if (accessToken) {
       router.push("/blogs");
     }
   } catch (error) {

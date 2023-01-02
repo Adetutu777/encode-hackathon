@@ -150,8 +150,6 @@ export async function login() {
     localStorage.setItem("myStoryRefreshToken", accessToken);
     userAccessToken.value = accessToken;
     const isPending = appStore.isPendingStatus();
-    
-    console.log(isPending, "isPendin>>>>", currentUser);
 
     if (!currentUser && !!isPending == false) {
       await modal?.toggleCreateModal?.();
@@ -170,6 +168,6 @@ export async function login() {
   } catch (err) {
     console.log("Error signing in: ", err);
   } finally {
-    // isConnecting.value = false;
+    isConnecting.value = false;
   }
 }

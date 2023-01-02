@@ -2,7 +2,7 @@
   <div>
     <div
       v-if="isPending"
-      class="d-flex justify-content-center w-full p-2 py-3 mx-auto top-banner"
+      class="d-flex justify-content-center w-full p-2 my-0 py-3 mx-auto top-banner"
     >
       <div class="glass">
         <topbanner />
@@ -11,25 +11,10 @@
     </div>
 
     <div class="container">
-      <!-- <nav class="nav-head">
-      <header class="navbar-header">
-        <NuxtLink to="/">
-          <img src="@/images/storytribe.svg" alt="image" />
-        </NuxtLink>
-
-        <div class="search-bar">
-          <i class="uil uil-search"></i>
-          <input type="search" placeholder="Find your favourite blogs" />
-        </div>
-
-        <profileId />
-      </header>
-    </nav> -->
-
       <div class="">
         <profileId />
       </div>
-      <div class="row">
+      <div class="row mt-3">
         <div class="col-md-3">
           <div class="">
             <div class="card-ody">
@@ -42,10 +27,10 @@
                     <i class="icon-icons uil uil-envelope-add"></i>
                     <span>Notifications</span>
                   </NuxtLink>
-                  <NuxtLink to="/userSetting" class="dropdown d-block">
+                  <!-- <NuxtLink to="/userSetting" class="dropdown d-block">
                     <i class="icon-icons uil uil-setting"></i>
                     <span>Settings</span>
-                  </NuxtLink>
+                  </NuxtLink> -->
                   <NuxtLink
                     :to="`/profile/${defaultProfile?.ownedBy}`"
                     class="dropdown d-block"
@@ -59,22 +44,10 @@
                   </NuxtLink>
                   <NuxtLink
                     to="/post/createstory"
-                    class="write-dropdown d-block text-center text-light create-post mt-3"
+                    class="write-dropdown d-block text-center text-light create-post mt-5"
                   >
                     <span class="">Create post</span>
                   </NuxtLink>
-                  <!-- <NuxtLink to="/post/create" class="dropdown">
-              <button
-                class="mt-5 text-light btn-write mx-auto d-flex align-items-center"
-              >
-                <img
-                  class="write-icon d-inline-block"
-                  src="@/images/leaf.svg"
-                  alt="image"
-                />
-                Write
-              </button>
-            </NuxtLink> -->
                 </div>
               </div>
             </div>
@@ -99,56 +72,6 @@
           </div>
         </div>
       </div>
-      <!-- <div class="mt-3">
-      <div class="d-flex justify-content-between mx-auto homepage-view wrapper">
-
-        <div class="sidebar">
-          <div class="">
-            <NuxtLink to="/blogs" class="dropdown d-block">
-              <i class="icon-icons uil uil-estate"></i> <span>Home</span>
-            </NuxtLink>
-            <NuxtLink to="/help" class="dropdown d-block">
-              <i class="icon-icons uil uil-envelope-add"></i>
-              <span>Notifications</span>
-            </NuxtLink>
-            <NuxtLink to="/userSetting" class="dropdown d-block">
-              <i class="icon-icons uil uil-setting"></i> <span>Settings</span>
-            </NuxtLink>
-            <NuxtLink
-              :to="`/profile/${defaultProfile?.ownedBy}`"
-              class="dropdown d-block"
-            >
-              <i class="icon-icons uil uil-user-circle"></i>
-              <span>Profile</span>
-            </NuxtLink>
-            <NuxtLink to="/help" class="dropdown d-block">
-              <i class="icon-icons uil uil-question-circle"></i>
-              <span>Help</span>
-            </NuxtLink>
-            <NuxtLink to="/post/create" class="dropdown">
-              <button
-                class="mt-5 text-light btn-write mx-auto d-flex align-items-center"
-              >
-                <img
-                  class="write-icon d-inline-block"
-                  src="@/images/leaf.svg"
-                  alt="image"
-                />
-                Write
-              </button>
-            </NuxtLink>
-          </div>
-        </div>
-
-        <div class="middle-info w-100 mx-5 p-3">
-          <slot name="middle"></slot>
-        </div>
-
-        <div>
-          <slot class="right-bar p-4" name="right"></slot>
-        </div>
-      </div>
-    </div> -->
     </div>
   </div>
 </template>
@@ -183,7 +106,7 @@ export default {
 }
 .sidebar {
   padding: 1rem;
-  padding-top: 0;
+  padding-bottom: 4rem;
   background: #ffffff;
   border: 1px solid #ececec;
   border-radius: 16px;
@@ -213,20 +136,15 @@ export default {
   padding: 1rem 0;
   text-decoration: none;
 }
+
+.write-dropdown:hover {
+  background: #66a7df;
+}
 a.dropdown:hover {
   background: #f2f9ff;
+  border-radius: 15px;
 }
-.btn-write {
-  background: #0c2acb;
-  text-decoration: none;
-}
-.dropdown-two {
-  text-decoration: none;
-}
-.btn-show {
-  background: #f4f8ff;
-  color: #0c2acb;
-}
+
 .router-link-active,
 .router-link-active i,
 .router-link-active span {

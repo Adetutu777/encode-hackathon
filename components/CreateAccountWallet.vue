@@ -2,7 +2,7 @@
   <div class="">
     <div class="">
       <button @click="createAccount" :class="`  ${classes} aa`">
-        LogIn/SignUp
+        Sign in / Sign Up
       </button>
       <b-modal
         v-model="modal.createModal"
@@ -44,9 +44,9 @@ const router = useRouter();
 const createAccount = async () => {
   try {
     const { accessToken, user } = await login();
-    console.log("accessToken inner", accessToken, user);
+    // console.log("accessToken inner", accessToken, user);
     // await login();
-    if (accessToken && user) {
+    if (accessToken) {
       router.push("/blogs");
     }
   } catch (error) {
