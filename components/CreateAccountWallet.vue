@@ -68,14 +68,14 @@ const createAccount = async () => {
 }
 
 .btn-signup {
-  border: 1px solid #FFFFFF;
+  border: 1px solid #ffffff;
   background: transparent;
-  color: #FFFFFF;
+  color: #ffffff;
   padding: 0.5rem 2rem;
   border-radius: 13px;
   font-weight: bold;
 }
 aa {
-  color: #FFFFFF;
+  color: #ffffff;
 }
 </style>

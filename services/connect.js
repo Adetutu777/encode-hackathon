@@ -124,6 +124,7 @@ export async function login() {
     }
     const address = wallets.value?.[0]?.accounts[0]?.address;
     const currentUser = await getUserProfile(address);
+    console.log(currentUser, "current user!!!");
     userAddress.value = address;
     isConnected.value = true;
 
@@ -148,9 +149,9 @@ export async function login() {
     appStore.userAddress = address;
     localStorage.setItem("myStoryRefreshToken", accessToken);
     userAccessToken.value = accessToken;
-
-    let user = { isPending: false };
-    const isPending = user?.isPending ?? false;
+    const isPending = appStore.isPendingStatus();
+    
+    console.log(isPending, "isPendin>>>>", currentUser);
 
     if (!currentUser && !!isPending == false) {
       await modal?.toggleCreateModal?.();

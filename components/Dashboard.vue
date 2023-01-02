@@ -168,15 +168,8 @@ export default {
       }
     });
 
-    const pendingArray = computed(() => appStore.isPending);
-    const userAddress = computed(() => appStore.userAddress);
-    const isPending = computed(() => {
-      const currentUser = pendingArray.value.find(
-        (user) => user.address === userAddress.value
-      );
-      return currentUser?.isPending;
-    });
-
+    const isPending = computed(() => appStore?.isPendingStatus?.() ?? false);
+    console.log("usPendinf", isPending);
     return { defaultProfile, isPending };
   },
 };
@@ -221,7 +214,7 @@ export default {
   text-decoration: none;
 }
 a.dropdown:hover {
-  background: #F2F9FF;
+  background: #f2f9ff;
 }
 .btn-write {
   background: #0c2acb;
@@ -237,7 +230,7 @@ a.dropdown:hover {
 .router-link-active,
 .router-link-active i,
 .router-link-active span {
-  color: #2C74B3 !important;
+  color: #2c74b3 !important;
   font-weight: bold;
 }
 
@@ -302,7 +295,7 @@ a.dropdown:hover {
 }
 
 .create-post {
-  background: #2C74B3;
+  background: #2c74b3;
   border-radius: 2rem;
 }
 

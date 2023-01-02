@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { useStorage } from "@vueuse/core";
+import { deepCopy } from "~~/util";
 
 export const useAppStore = defineStore("app", {
   state: () => {
@@ -12,6 +13,7 @@ export const useAppStore = defineStore("app", {
       isPending: useStorage("profilePendingNew", []),
       drafts: useStorage("draftPosts", []),
       currentDraftId: useStorage("currentDraftId", 0),
+      currentUserStatus: useStorage("currentUserStatus", false),
     };
   },
 
@@ -56,16 +58,46 @@ export const useAppStore = defineStore("app", {
         isPending: false,
       }
     ) {
-      const currentUsers = [...JSON.parse(JSON.stringify(this.isPending))];
-      const findIndex = currentUsers.findIndex(
-        (item) => (item.address = status.address)
+      const rawData = localStorage.getItem("profilePendingNew");
+      const currentUsers = JSON.parse(rawData);
+      const tobeAdded = {
+        isPending: status?.isPending ?? status?.status,
+        address: status.address,
+      };
+
+      const findIndex = currentUsers.find(
+        (item) => item.address == status.address
       );
-      if (findIndex === -1) {
-        this.isPending = [...currentUsers, status];
+
+      if (!!!findIndex?.address) {
+        const tempArr = currentUsers;
+        tempArr.push({
+          isPending: status?.status ?? true,
+          address: status.address,
+        });
+
+        this.isPending = tempArr;
+        localStorage.setItem("profilePendingNew", JSON.stringify(tempArr));
       } else {
-        currentUsers[findIndex] = status;
-        this.isPending = currentUsers;
+        const mapped = currentUsers.map((i) => {
+          const addition = i.address == tobeAdded.address ? tobeAdded : i;
+          return {
+            ...i,
+            addition,
+          };
+        });
+        localStorage.setItem("profilePendingNew", JSON.stringify(mapped));
+        this.isPending = mapped;
       }
+    },
+
+    isPendingStatus() {
+      const userAddress = this.userAddress;
+      const rawData = localStorage.getItem("profilePendingNew");
+      const isPending = JSON.parse(rawData);
+      const currentUser = isPending.find((i) => i.address == userAddress);
+      this.currentUserStatus = currentUser?.isPending ?? false;
+      return currentUser?.isPending ?? false;
     },
   },
 });

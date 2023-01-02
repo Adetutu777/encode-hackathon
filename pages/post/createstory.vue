@@ -121,7 +121,9 @@ const currentStoreId = computed(() => store.currentDraftId);
 
 let currentDraftId = editId.value ? +editId.value : +currentStoreId.value + 1;
 
-const isPending = computed(() => store.isPending || false);
+const isPending = computed(() =>
+  store.isPending.find((i) => (i.address = store.userAddress))
+);
 
 onMounted(() => {
   if (editId.value) {
@@ -216,7 +218,7 @@ const postData = async () => {
   } catch (err) {
     creationError.value = true;
     creatingStatus.value = err?.message ?? "Something went wrong";
-    if (isPending) {
+    if (isPending.value.isPending) {
       creatingStatus.value = "Please Wait, Your Account is still Pending";
     }
   } finally {

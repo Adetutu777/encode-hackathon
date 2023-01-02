@@ -71,3 +71,12 @@ export const wait = (milliseconds = 6000) => {
 export const deepCopy = (obj = {}) => {
   return JSON.parse(JSON.stringify(obj));
 };
+
+export const checkUseStatus=(address)=>{
+  const rawData = localStorage.getItem("profilePendingNew");
+  const isPending = JSON.parse(rawData);
+  const currentUser = isPending.find((i) => i.address == address);
+  // return curr
+
+ 
+}

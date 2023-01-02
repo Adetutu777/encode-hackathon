@@ -119,9 +119,15 @@ export default {
         if (newTxn.status == 1) {
           appStore.setAccountStatus({
             status: true,
+            isPending: true,
             address: userAddress.value,
           });
         }
+
+        appStore.setAccountStatus({
+          status: true,
+          address: userAddress.value,
+        });
         sendingBtn.value = false;
         if (newTxn.status == 1) {
           router.push("/blogs");
@@ -151,6 +157,6 @@ export default {
 
 <style>
 .submit-btn {
-  background: #2C74B3;
+  background: #2c74b3;
 }
 </style>
