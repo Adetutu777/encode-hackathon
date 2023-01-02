@@ -83,7 +83,7 @@ export const useAppStore = defineStore("app", {
           const addition = i.address == tobeAdded.address ? tobeAdded : i;
           return {
             ...i,
-            addition,
+            ...addition,
           };
         });
         localStorage.setItem("profilePendingNew", JSON.stringify(mapped));
@@ -97,6 +97,7 @@ export const useAppStore = defineStore("app", {
       const isPending = JSON.parse(rawData);
       const currentUser = isPending.find((i) => i.address == userAddress);
       this.currentUserStatus = currentUser?.isPending ?? false;
+      console.log(currentUser, "current suser");
       return currentUser?.isPending ?? false;
     },
   },

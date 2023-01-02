@@ -165,6 +165,13 @@ export default {
     const publications = reactive({
       data: {},
     });
+    const dataStatus = reactive({
+      data: {
+        loading: true,
+        error: false,
+        errorMsg: "",
+      },
+    });
     const store = useAppStore();
     const userProfile = store.currentUser?.id;
     const addActiveClass = (array = []) => {
