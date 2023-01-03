@@ -79,11 +79,15 @@
 <script>
 import { login } from "../services/connect";
 import { useAppStore } from "../store/app";
+import { checkUseStatus } from "~/util";
+import { computed } from "vue";
 export default {
   setup() {
     const data = localStorage.storyDefaultProfile;
     const defaultProfile = JSON.parse(data);
     const appStore = useAppStore();
+    const statusUser = appStore.currentUserStatus;
+    const isPending = statusUser == 1;
 
     onMounted(() => {
       if (!appStore.isConnected) {
@@ -91,8 +95,6 @@ export default {
       }
     });
 
-    const isPending = computed(() => appStore?.isPendingStatus?.() ?? false);
-    console.log("usPendinf", isPending);
     return { defaultProfile, isPending };
   },
 };
@@ -219,7 +221,7 @@ a.dropdown:hover {
 
 .top-banner {
   font-weight: 700;
-  background: #d2122e;
+  background: #66a7df;
   color: #fff;
 }
 .glass {

@@ -72,11 +72,10 @@ export const deepCopy = (obj = {}) => {
   return JSON.parse(JSON.stringify(obj));
 };
 
-export const checkUseStatus=(address)=>{
+export const checkUseStatus = (address) => {
+  if (!address) return;
   const rawData = localStorage.getItem("profilePendingNew");
   const isPending = JSON.parse(rawData);
   const currentUser = isPending.find((i) => i.address == address);
-  // return curr
-
- 
-}
+  return currentUser?.isPending ?? false;
+};

@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import { useStorage } from "@vueuse/core";
-import { deepCopy } from "~~/util";
 
 export const useAppStore = defineStore("app", {
   state: () => {
@@ -10,10 +9,11 @@ export const useAppStore = defineStore("app", {
       currentUser: useStorage("currentUser", {}),
       currentCoverImage: "",
       userAddress: useStorage("userAddress", ""),
-      isPending: useStorage("profilePendingNew", []),
+      isPending: useStorage("profilePending0.1", []),
       drafts: useStorage("draftPosts", []),
       currentDraftId: useStorage("currentDraftId", 0),
-      currentUserStatus: useStorage("currentUserStatus", false),
+      currentUserStatus: useStorage("currentUserStatus", 0),
+      currentUserPending: useStorage("currentUserPending", false),
     };
   },
 
@@ -69,7 +69,17 @@ export const useAppStore = defineStore("app", {
         (item) => item.address == status.address
       );
 
-      if (!!!findIndex?.address) {
+      if (!!findIndex?.address) {
+        const mapped = currentUsers.map((i) => {
+          const addition = i.address == tobeAdded.address ? tobeAdded : i;
+          return {
+            ...i,
+            ...addition,
+          };
+        });
+        localStorage.setItem("profilePendingNew", JSON.stringify(mapped));
+        this.isPending = mapped;
+      } else {
         const tempArr = currentUsers;
         tempArr.push({
           isPending: status?.status ?? true,
@@ -78,16 +88,6 @@ export const useAppStore = defineStore("app", {
 
         this.isPending = tempArr;
         localStorage.setItem("profilePendingNew", JSON.stringify(tempArr));
-      } else {
-        const mapped = currentUsers.map((i) => {
-          const addition = i.address == tobeAdded.address ? tobeAdded : i;
-          return {
-            ...i,
-            addition,
-          };
-        });
-        localStorage.setItem("profilePendingNew", JSON.stringify(mapped));
-        this.isPending = mapped;
       }
     },
 
@@ -96,8 +96,13 @@ export const useAppStore = defineStore("app", {
       const rawData = localStorage.getItem("profilePendingNew");
       const isPending = JSON.parse(rawData);
       const currentUser = isPending.find((i) => i.address == userAddress);
+      console.log(currentUser, "user current!!!");
       this.currentUserStatus = currentUser?.isPending ?? false;
       return currentUser?.isPending ?? false;
+    },
+
+    async setStatus(currentState) {
+      this.currentUserStatus = currentState;
     },
   },
 });
