@@ -8,7 +8,8 @@ import {
 } from "~/api.js";
 import LENSHUB from "~/config/lens.json";
 import { storeNFT } from "~/upload";
-import { LENS_HUB_CONTRACT_ADDRESS } from "~/config/constant";
+import { LENS_HUB_CONTRACT_ADDRESS, baseUrl } from "~/config/constant";
+import axios from "axios";
 
 export const preparePost = async (file) => {
   const refreshToken = localStorage.getItem("myStoryRefreshToken");
@@ -121,5 +122,16 @@ export const whoReactedPub = async (publications = []) => {
     return postIds;
   } catch (e) {
     console.log("error", e);
+  }
+};
+
+export const userApi = async (address, method = "GET") => {
+  console.log(address, "address");
+  const url = `${baseUrl}user/${address}`;
+  try {
+    const response = await axios({ method, url });
+    return response?.data?.status;
+  } catch (e) {
+    console.log(e, "error!!!");
   }
 };

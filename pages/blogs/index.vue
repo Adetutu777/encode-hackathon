@@ -6,104 +6,141 @@
       <Dashboard>
         <template v-slot:middle>
           <div class="middle-bar">
-            <div class="" v-for="item in publications.data" :key="item.id">
-              <div class="mb-4 p-3 border rounded bg-white">
-                <div class="d-flex justify-content-between">
-                  <div class="d-flex align-items-center">
-                    <div class="img-icon">
-                      <img
-                        class="img-top"
-                        :src="
-                          item?.profile?.coverPicture?.original?.url ??
-                          'https://github.com/DrVickie8/Team-Lens-Developers/blob/main/Lens-folder/images/Frame%202.png?raw=true'
-                        "
-                      />
+            <b-skeleton-wrapper :loading="dataStatus.data.loading">
+              <template #loading>
+                <div v-for="item in [1, 2, 3, 4, 5]">
+                  <b-card class="mb-4">
+                    <div class="d-flex justify-content-between">
+                      <div class="d-flex">
+                        <div class="mr-4 pr-2 skeleton-avatar">
+                          <b-skeleton type="avatar"></b-skeleton>
+                        </div>
+                        <div>
+                          <b-skeleton width="2rem"></b-skeleton>
+                          <b-skeleton width="4rem"></b-skeleton>
+                        </div>
+                      </div>
+                      <b-skeleton width="30%"></b-skeleton>
+                    </div>
+                    <div class="mt-2">
+                      <b-skeleton width="100%" height="10rem"></b-skeleton>
+                    </div>
+                    <div class="d-flex mt-2 justify-content-between">
+                      <b-skeleton width="2rem"></b-skeleton>
+                      <b-skeleton width="6rem"></b-skeleton>
+                    </div>
+                  </b-card>
+                </div>
+              </template>
+
+              <div class="" v-for="item in publications.data" :key="item.id">
+                <div class="mb-4 p-3 border rounded bg-white">
+                  <div class="d-flex justify-content-between">
+                    <div class="d-flex align-items-center">
+                      <div class="img-icon">
+                        <img
+                          class="img-top"
+                          :src="
+                            item?.profile?.coverPicture?.original?.url ??
+                            'https://github.com/DrVickie8/Team-Lens-Developers/blob/main/Lens-folder/images/Frame%202.png?raw=true'
+                          "
+                        />
+                      </div>
+
+                      <NuxtLink
+                        class="top-icon pb-2"
+                        :to="`/profile/${item?.profile?.ownedBy}`"
+                      >
+                        <div class="name-icon">
+                          {{ item?.profile?.name }}
+                        </div>
+
+                        <div class="date-icon">
+                          {{ item?.profile?.handle }} .
+                          {{ dateFormatter(item?.createdAt) }}
+                        </div>
+                      </NuxtLink>
                     </div>
 
-                    <NuxtLink
-                      class="top-icon pb-2"
-                      :to="`/profile/${item?.profile?.ownedBy}`"
-                    >
-                      <div class="name-icon">
-                        {{ item?.profile?.name }}
-                      </div>
-
-                      <div class="date-icon">
-                        {{ item?.profile?.handle }} .
-                        {{ dateFormatter(item?.createdAt) }}
-                      </div>
-                    </NuxtLink>
+                    <div class="">
+                      <i class="uil uil-book-open"></i> 2mins read
+                    </div>
                   </div>
 
-                  <div class="">
-                    <i class="uil uil-book-open"></i> 2mins read
+                  <h5 class="mt-3" v-if="item?.mainPost?.metadata?.description">
+                    {{ item?.mainPost?.metadata?.description?.slice(0, 70) }}...
+                  </h5>
+                  <div class="crd mx-auto" style="">
+                    <div class="card-image">
+                      <NuxtLink :to="'/post/' + item?.id">
+                        <img
+                          :src="
+                            item?.metadata?.[0]?.url ??
+                            'https://github.com/DrVickie8/Team-Lens-Developers/blob/main/Lens-folder/images/Frame%202.png?raw=true'
+                          "
+                          @error="replaceByDefault"
+                        />
+                      </NuxtLink>
+                    </div>
                   </div>
-                </div>
 
-                <h5 class="mt-3" v-if="item?.mainPost?.metadata?.description">
-                  {{ item?.mainPost?.metadata?.description?.slice(0, 70) }}...
-                </h5>
-                <div class="crd mx-auto" style="">
-                  <div class="card-image">
-                    <NuxtLink :to="'/post/' + item?.id">
-                      <img
-                        :src="
-                          item?.metadata?.[0]?.url ??
-                          'https://github.com/DrVickie8/Team-Lens-Developers/blob/main/Lens-folder/images/Frame%202.png?raw=true'
-                        "
-                        @error="replaceByDefault"
-                      />
-                    </NuxtLink>
-                  </div>
-                </div>
-
-                <div class="d-flex justify-content-between pt-1">
-                  <div class="">
-                    <i class="uil uil-bookmark icon-footer"></i>
-                  </div>
                   <div class="d-flex justify-content-between pt-1">
-                    <div class="reactions-btn mr-3 d-flex align-items-center">
-                      <div
-                        :class="`${addActiveClass(item?.stats?.upvotes)}`"
-                        @click="
-                          () =>
-                            reactToPost('UPVOTE', item?.stats?.upvotes, item.id)
-                        "
-                      >
-                        up
+                    <div class="">
+                      <i class="uil uil-bookmark icon-footer"></i>
+                    </div>
+                    <div class="d-flex justify-content-between pt-1">
+                      <div class="reactions-btn mr-3 d-flex align-items-center">
+                        <div
+                          :class="`${addActiveClass(item?.stats?.upvotes)}`"
+                          @click="
+                            () =>
+                              reactToPost(
+                                'UPVOTE',
+                                item?.stats?.upvotes,
+                                item.id
+                              )
+                          "
+                        >
+                          <img src="@/images/arrow-up.svg" alt="like-btn" />
+                        </div>
+                        <div class="reactions-num">
+                          {{ item?.stats?.upvotes.length }}
+                        </div>
                       </div>
-                      <div class="reactions-num">
-                        {{ item?.stats?.upvotes.length }}
+                      <div
+                        class="reactions-btn mr-3 d-flex align-items-center dislike-btn"
+                      >
+                        <div
+                          :class="`${addActiveClass(item.stats.downvotes)}`"
+                          @click="
+                            () =>
+                              reactToPost(
+                                'DOWNVOTE',
+                                item?.stats?.downvotes,
+                                item.id
+                              )
+                          "
+                        >
+                          <img
+                            src="@/images/arrow-down.svg"
+                            alt="dislike-btn"
+                          />
+                        </div>
+                        <div class="reactions-num">
+                          {{ item?.stats?.downvotes?.length }}
+                        </div>
                       </div>
                     </div>
-                    <div class="reactions-btn mr-3 d-flex align-items-center">
-                      <div
-                        :class="`${addActiveClass(item.stats.downvotes)}`"
-                        @click="
-                          () =>
-                            reactToPost(
-                              'DOWNVOTE',
-                              item?.stats?.downvotes,
-                              item.id
-                            )
-                        "
-                      >
-                        down
-                      </div>
-                      <div class="reactions-num">
-                        {{ item?.stats?.downvotes?.length }}
-                      </div>
-                    </div>
-                  </div>
-                  <!-- <div class="d-flex align-items-center">
+                    <!-- <div class="d-flex align-items-center">
                     <span @click="() => reactToPost(item.id)">
                       <i class="uil uil-heart icon-footer"></i
                     ></span>
                     <h5>{{ item?.stats?.totalUpvotes }}</h5>
                   </div> -->
+                  </div>
                 </div>
               </div>
-            </div>
+            </b-skeleton-wrapper>
           </div>
         </template>
 
@@ -246,6 +283,7 @@ export default {
             },
           };
         });
+        dataStatus.data.loading = false;
       } catch (error) {
         console.log("error", error);
       }
@@ -266,6 +304,7 @@ export default {
       defaultProfile,
       reactToPost,
       addActiveClass,
+      dataStatus,
     };
   },
 };
@@ -284,16 +323,24 @@ export default {
   margin-bottom: 1rem;
 }
 
+.dislike-btn {
+  margin-left: 1rem !important;
+}
+
 .reactions-btn {
-  margin-left: 0.5rem;
+  margin-left: 0.2rem;
 }
 
 .reactions-num {
-  margin: 0rem 0.5rem;
+  margin: 0 0.3rem;
 }
 
 .active-post {
   background-color: #f2f2f2;
   border: 1px solid #f2f2f2;
+}
+
+.skeleton-avatar {
+  padding-right: 1rem;
 }
 </style>

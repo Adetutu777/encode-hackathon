@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-4 ">
+  <div class="container mt-4">
     <profileId />
 
     <b-modal v-model="isCreating" title="Creating Post ">
@@ -7,8 +7,9 @@
         <div v-if="creationError" class="text-center">
           😥 {{ creatingStatus }}
           <div>
-            <button class="my-2 btn-general mt-4"  @click="tryAgain"
-              >Try again</button>
+            <button class="my-2 btn-general mt-4" @click="tryAgain">
+              Try again
+            </button>
           </div>
         </div>
 
@@ -61,7 +62,6 @@
                     class="btn-general"
                     @click="enterTag"
                     squared
-                    
                     >Enter
                   </b-button>
                 </div>
@@ -177,6 +177,19 @@ const postData = async () => {
   let img = uploadIm.value;
 
   try {
+    const statusUser = appStore.currentUserStatus;
+    if (statusUser == 1) {
+      creationError.value = true;
+      creatingStatus.value = "Please Wait, Your Account is still Pending";
+      return;
+    }
+
+    if (statusUser == 0) {
+      creationError.value = true;
+      creatingStatus.value = "You need to create an account to post";
+      return;
+    }
+
     if (img && !fileCID) {
       // uploading image to IPFS
       creatingStatus.value = "Uploading image to IPFS";
@@ -218,7 +231,7 @@ const postData = async () => {
   } catch (err) {
     creationError.value = true;
     creatingStatus.value = err?.message ?? "Something went wrong";
-    if (isPending.value.isPending) {
+    if (store.isPending) {
       creatingStatus.value = "Please Wait, Your Account is still Pending";
     }
   } finally {

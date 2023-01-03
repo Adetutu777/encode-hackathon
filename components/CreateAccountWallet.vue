@@ -25,6 +25,8 @@
 
 <script setup>
 import { userAddress } from "../store";
+import { checkUseStatus } from "~/util";
+import { useAppStore } from "~/store/app";
 import { truncateEthAddress } from "../util";
 import { login } from "../services/connect";
 import { useModal } from "../store/modal";
@@ -41,12 +43,21 @@ const props = defineProps({
   },
 });
 const router = useRouter();
+const appStore = useAppStore();
+const currentUserAdd = appStore.userAddress;
+
 const createAccount = async () => {
   try {
     const { accessToken, user } = await login();
     // console.log("accessToken inner", accessToken, user);
     // await login();
-    if (accessToken) {
+    const isPending = checkUseStatus(currentUserAdd);
+
+    if (accessToken && user) {
+      router.push("/blogs");
+    }
+
+    if (isPending && currentUserAdd) {
       router.push("/blogs");
     }
   } catch (error) {

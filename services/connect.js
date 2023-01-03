@@ -4,10 +4,8 @@ import coinbaseModule from "@web3-onboard/coinbase";
 import gnosisModule from "@web3-onboard/gnosis";
 import portisModule from "@web3-onboard/portis";
 import storyTribe from "../images/Chain-write.svg";
-import polygonIcon from "../images/polygon.svg";
 import { useModal } from "../store/modal";
 import { ethers } from "ethers";
-import axios from "axios";
 
 import {
   clientId,
@@ -25,6 +23,7 @@ import {
   ethereumObj,
 } from "../store";
 import { useAppStore } from "../store/app";
+import { userApi } from "./api";
 
 const modal = useModal();
 const injected = injectedModule();
@@ -41,7 +40,7 @@ const infuraKey = "ba80361523fe423bb149026a490266f0";
 const rpcUrl = `https://mainnet.infura.io/v3/${infuraKey}`;
 init({
   appMetadata: {
-    name: "StoryTribe",
+    name: "chainWrite",
     icon: storyTribe,
     logo: storyTribe,
     description: "Bringing Communication to web3",
@@ -149,18 +148,21 @@ export async function login() {
     appStore.userAddress = address;
     localStorage.setItem("myStoryRefreshToken", accessToken);
     userAccessToken.value = accessToken;
-    const isPending = appStore.isPendingStatus();
+    const checkUserStatus = await userApi(address);
 
-    if (!currentUser && !!isPending == false) {
+    await appStore.setStatus(checkUserStatus ?? 0);
+
+    if (!currentUser && checkUserStatus == 0) {
       await modal?.toggleCreateModal?.();
-    } else {
-      appStore.setAccountStatus({
-        isPending: false,
-        address,
-      });
-      appStore.currentUser = currentUser;
-      appStore.isConnected = true;
+      return;
     }
+
+    if (currentUser && checkUserStatus == 1) {
+      const updateUser = await userApi(address, "PUT");
+      await appStore.setStatus(updateUser);
+      // appStore.currentUserStatus = updateUser;
+    }
+
     return {
       accessToken,
       user: currentUser,

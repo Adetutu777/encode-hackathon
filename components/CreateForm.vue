@@ -58,6 +58,7 @@ import { ethers } from "ethers";
 import { storeNFT } from "../upload.js";
 import { wait } from "../helpers";
 import { useAppStore } from "../store/app";
+import { userApi } from "~/services/api";
 export default {
   setup() {
     const signer = ref("");
@@ -116,20 +117,11 @@ export default {
           gasLimit: 500000,
         });
         const newTxn = await txn.wait();
-        if (newTxn.status == 1) {
-          appStore.setAccountStatus({
-            status: true,
-            isPending: true,
-            address: userAddress.value,
-          });
-        }
 
-        appStore.setAccountStatus({
-          status: true,
-          address: userAddress.value,
-        });
         sendingBtn.value = false;
         if (newTxn.status == 1) {
+          const createUser = await userApi(userAddress.value, "POST");
+          appStore.currentUserStatus = createUser;
           router.push("/blogs");
         }
       } catch (error) {
