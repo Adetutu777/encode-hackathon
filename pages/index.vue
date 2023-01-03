@@ -30,7 +30,7 @@
           </p>
 
           <div class="d-flex mt-5">
-            <button class="btn-one">Get started</button>
+            <button class="btn-one"> <b>Get started</b></button>
             <!-- <button class="btn-two">Publish</button> -->
           </div>
         </div>
@@ -149,11 +149,8 @@ export default {
   padding: 0.5rem 2rem;
   border-radius: 13px;
 }
-btn-two {
-  border: 1px solid #FFFFFF;
- background: #FFFFFF;
-  color: #FF00FF;
-  margin-left: 1rem;
-  padding: 0.5rem 2rem;
+.btn-one:hover {
+  background: transparent;
+  color: #FFFFFF  ;
 }
 </style>

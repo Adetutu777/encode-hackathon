@@ -114,13 +114,13 @@
               <div class="">
                 <div>
                   <div class="p-2 d-inline-block trending mb-4">
-                    Chivalry is dead
+                    Blockchain
                   </div>
                 </div>
 
                 <div>
                   <div class="p-2 d-inline-block trending mb-4">
-                    Rema’s concert
+                    USDC token
                   </div>
                 </div>
                 <div>
@@ -128,7 +128,7 @@
                 </div>
                 <div>
                   <div class="p-2 d-inline-block trending mb-4">
-                    Peter Obi's
+                    NFTs
                   </div>
                 </div>
               </div>

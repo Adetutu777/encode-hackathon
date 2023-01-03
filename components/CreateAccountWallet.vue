@@ -56,16 +56,6 @@ const createAccount = async () => {
 </script>
 
 <style>
-.create-btn {
-  border-radius: 20px;
-  color: white;
-  background: #0c2acb;
-  margin-left: 1rem;
-}
-
-.network {
-  color: #0c2acb;
-}
 
 .btn-signup {
   border: 1px solid #ffffff;
@@ -75,7 +65,8 @@ const createAccount = async () => {
   border-radius: 13px;
   font-weight: bold;
 }
-aa {
+.aa:hover {
+  background: #2C74B3 ;
   color: #ffffff;
 }
 </style>
