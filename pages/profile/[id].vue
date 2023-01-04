@@ -9,14 +9,10 @@
               <div class="head">
                 <div class="user">
                   <JazzIcon :diameter="100" />
-                  <!-- <div class="body-photo">
-                    <img src="images/Ellipse 43.png" />
-                  </div> -->
                   <div class="info">
                     <h3 class="mt-3">
                       {{ userData.data.handle }}
                     </h3>
-                    <!-- <small>@nkem_asake</small> -->
                     <p class="mb-2">
                       {{ userData?.data.stats?.totalFollowers ?? 0 }}
                       followers
@@ -25,13 +21,29 @@
                 </div>
               </div>
 
-              <div>
+              <!-- <div>
                 <b-tabs content-clss="mt-3">
                   <b-tab @click="getValue(0)" title="Post" active></b-tab>
                   <b-tab @click="getValue(1)" title="Following"></b-tab>
                   <b-tab @click="getValue(2)" title="About"></b-tab>
                 </b-tabs>
-              </div>
+              </div> -->
+
+               <b-tabs 
+    active-nav-item-class="font-weight-bold"
+    style=""
+    content-class="mt-3"
+    align="center"
+    fill
+    v-model="userTab">
+
+     <b-tab @click="getValue(0)" title="Post" active></b-tab>
+                  <b-tab @click="getValue(1)" title="Following"></b-tab>
+                  <b-tab @click="getValue(2)" title="About"></b-tab>
+   
+    
+     
+  </b-tabs>
             </div>
           </div>
 
