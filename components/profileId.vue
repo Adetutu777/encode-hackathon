@@ -1,21 +1,9 @@
 <template>
   <div>
-<<<<<<< HEAD
-<div class="d-flex">
-  <div class="container icon-input mb-3 d-flex">
-  <NuxtLink to="/blogs">
-<img class="img-logos" src="@/images/chainwriteblueSvg.svg" alt="">
-  </NuxtLink>
-<div class="inp-div aa">
-  <input class=" icon-input__text-field px-5 py-1 input-text" type="text">
-  </div>
-  <i class="uil uil-search-alt search-icon mt-1"></i>
-</div>
-=======
     <div class="d-flex py-3">
       <div class="container icon-input mb-3 d-flex">
         <NuxtLink to="/blogs">
-          <img class="img-logos" src="@/images/chainwriteblue.png" alt="" />
+          <img class="img-logos" src="@/images/chainWriteLogo.svg" alt="image" />
         </NuxtLink>
         <div class="inp-div aa">
           <input
@@ -25,7 +13,6 @@
         </div>
         <i class="uil uil-search-alt search-icon mt-1"></i>
       </div>
->>>>>>> cca1b0ff4969c329bba4c31c478891bb4a4864fc
 
       <!-- <NuxtLink to="/post/create" class="dropdown">
               <button
