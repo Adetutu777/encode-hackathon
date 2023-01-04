@@ -3,7 +3,7 @@
     <div class="d-flex py-3">
       <div class="container icon-input mb-3 d-flex">
         <NuxtLink to="/blogs">
-          <img class="img-logos" src="@/images/chainwriteblue.png" alt="" />
+          <img class="img-logos" src="@/images/chainWriteLogo.svg" alt="image" />
         </NuxtLink>
         <div class="inp-div aa">
           <input

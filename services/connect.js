@@ -3,7 +3,7 @@ import injectedModule from "@web3-onboard/injected-wallets";
 import coinbaseModule from "@web3-onboard/coinbase";
 import gnosisModule from "@web3-onboard/gnosis";
 import portisModule from "@web3-onboard/portis";
-import storyTribe from "../images/Chain-write.svg";
+import storyTribe from "../images/GroupWrite.svg";
 import { useModal } from "../store/modal";
 import { ethers } from "ethers";
 

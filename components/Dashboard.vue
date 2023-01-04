@@ -23,10 +23,10 @@
                   <NuxtLink to="/blogs" class="dropdown d-block">
                     <i class="icon-icons uil uil-estate"></i> <span>Home</span>
                   </NuxtLink>
-                  <NuxtLink to="/help" class="dropdown d-block">
+                  <!-- <NuxtLink to="/help" class="dropdown d-block">
                     <i class="icon-icons uil uil-envelope-add"></i>
                     <span>Notifications</span>
-                  </NuxtLink>
+                  </NuxtLink> -->
                   <!-- <NuxtLink to="/userSetting" class="dropdown d-block">
                     <i class="icon-icons uil uil-setting"></i>
                     <span>Settings</span>
