@@ -1,6 +1,12 @@
 <template>
-  <div class="container mt-4">
+  <div class="container mt-3">
     <profileId />
+
+    <div class="container">
+     <button class="block-btn"  style='border:none' @click.prevent="$router.back()">
+      <span class="img-resize">&#128281;</span>    
+         </button>
+    </div>
 
     <b-modal v-model="isCreating" title="Creating Post ">
       <div class="m-auto text-center">
@@ -285,5 +291,15 @@ const tryAgain = async () => {
 .add-title input {
   border: none;
   padding: 1rem 0.5rem;
+}
+
+.img-resize{
+  font-size: 1.5rem;
+}
+
+.block-btn{
+  border: none;
+  background: #1b2431;
+  color: white;
 }
 </style>

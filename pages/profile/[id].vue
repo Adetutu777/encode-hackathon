@@ -57,6 +57,10 @@
           </div>
         </div>
       </template>
+
+      <template v-slot:right>
+      <p>remove me</p>
+      </template>
     </Dashboard>
   </div>
 </template>

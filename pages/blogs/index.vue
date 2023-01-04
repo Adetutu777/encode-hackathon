@@ -8,7 +8,7 @@
           <div class="middle-bar">
             <b-skeleton-wrapper :loading="dataStatus.data.loading">
               <template #loading>
-                <div v-for="item in [1, 2, 3, 4, 5]">
+                <div v-for="item in [1, 2, 3, 4, 5]" >
                   <b-card class="mb-4">
                     <div class="d-flex justify-content-between">
                       <div class="d-flex">
@@ -364,14 +364,6 @@ export default {
 </script>
 
 <style>
-.top-icon {
-  text-decoration: none;
-}
-.name-icon,
-.date-icon {
-  color: #2f2f30;
-}
-
 .aa {
   margin-bottom: 1rem;
 }

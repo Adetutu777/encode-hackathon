@@ -39,5 +39,16 @@ background: #66a7df;
   color: white;
 }
 
+.top-icon {
+  text-decoration: none;
+}
+
+.name-icon,
+.date-icon {
+  color: #2f2f30;
+}
+
+
+
 
 
