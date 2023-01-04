@@ -157,9 +157,13 @@ export async function login() {
       return;
     }
 
+    if (currentUser) {
+      appStore.currentUser = currentUser;
+    }
     if (currentUser && checkUserStatus == 1) {
       const updateUser = await userApi(address, "PUT");
       await appStore.setStatus(updateUser);
+      console.log(currentUser);
       // appStore.currentUserStatus = updateUser;
     }
 

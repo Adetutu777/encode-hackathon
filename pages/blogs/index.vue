@@ -96,8 +96,9 @@
                             () =>
                               reactToPost(
                                 'UPVOTE',
+                                item.id,
                                 item?.stats?.upvotes,
-                                item.id
+                                item?.stats?.downvotes
                               )
                           "
                         >
@@ -116,8 +117,9 @@
                             () =>
                               reactToPost(
                                 'DOWNVOTE',
-                                item?.stats?.downvotes,
-                                item.id
+                                item.id,
+                                item?.stats?.upvotes,
+                                item?.stats?.downvotes
                               )
                           "
                         >
@@ -127,7 +129,7 @@
                           />
                         </div>
                         <div class="reactions-num">
-                          {{ item?.stats?.downvotes?.length }}
+                          {{ item?.stats?.downvotes.length }}
                         </div>
                       </div>
                     </div>
@@ -150,23 +152,17 @@
             <div class="right-side">
               <div class="">
                 <div>
-                  <div class="p-2 d-inline-block trending mb-4">
-                    Blockchain
-                  </div>
+                  <div class="p-2 d-inline-block trending mb-4">Blockchain</div>
                 </div>
 
                 <div>
-                  <div class="p-2 d-inline-block trending mb-4">
-                    USDC token
-                  </div>
+                  <div class="p-2 d-inline-block trending mb-4">USDC token</div>
                 </div>
                 <div>
                   <div class="p-2 d-inline-block trending mb-4">World Cup</div>
                 </div>
                 <div>
-                  <div class="p-2 d-inline-block trending mb-4">
-                    NFTs
-                  </div>
+                  <div class="p-2 d-inline-block trending mb-4">NFTs</div>
                 </div>
               </div>
             </div>
@@ -212,7 +208,7 @@ export default {
     const store = useAppStore();
     const userProfile = store.currentUser?.id;
     const addActiveClass = (array = []) => {
-      const isIncluded = array.map((i) => i.profile?.id).includes(userProfile);
+      const isIncluded = array.some((i) => i.profile.id == userProfile);
       return isIncluded ? "active-post" : "";
     };
 
@@ -221,27 +217,83 @@ export default {
       userQuery();
     });
 
-    const reactToPost = async (publicationId) => {
+    const reactToPost = async (
+      typeOfReaction,
+      publicationId,
+      upVotesReactions,
+      downVotesReactions
+    ) => {
       const data = {
         profileId: store.currentUser?.id,
         publicationId,
-        reaction: "DOWNVOTE",
+        reaction: typeOfReaction,
       };
 
+      const upVotes = deepCopy(upVotesReactions);
+      const downVotes = deepCopy(downVotesReactions);
+
+      const upVotesIncluded = upVotes.some(
+        (i) => i?.profile?.id == userProfile
+      );
+
       const post = await interactWithPost(data);
-      const mappedData = publications.data.map((i) => {
-        if (i.id == publicationId) {
-          return {
-            ...i,
-            stats: {
-              ...i.stats,
-              totalUpvotes: i.stats.totalUpvotes + 1,
-            },
-          };
-        }
-        return i;
-      });
-      publications.data = mappedData;
+
+      const downVotesIncluded = downVotes.some(
+        (i) => i?.profile?.id == userProfile
+      );
+
+      if (typeOfReaction === "UPVOTE") {
+        const mappedData = publications.data.map((i) => {
+          if (i.id == publicationId) {
+            let currentUpVotes = i.stats.totalUpvotes;
+            let currentDownVotes = i.stats.totalDownvotes;
+            return {
+              ...i,
+              stats: {
+                ...i.stats,
+                upvotes: upVotesIncluded
+                  ? i.stats.upvotes
+                  : [...i.stats.upvotes, { profile: store.currentUser }],
+                downvotes: downVotesIncluded
+                  ? i.stats.downvotes.filter((i) => {
+                      return i.profile.id == userProfile;
+                    })
+                  : i.stats.downvotes,
+              },
+            };
+          }
+          return i;
+        });
+
+        publications.data = mappedData;
+      }
+
+      if (typeOfReaction === "DOWNVOTE") {
+        const mappedData = publications.data.map((i) => {
+          if (i.id == publicationId) {
+            let currentUpVotes = i.stats.totalUpvotes;
+            let currentDownVotes = i.stats.totalDownvotes;
+            return {
+              ...i,
+              stats: {
+                ...i.stats,
+                upvotes: upVotesIncluded
+                  ? i.stats.upvotes.filter((i) => {
+                      return i.profile.id == userProfile;
+                    })
+                  : i.stats.upvotes,
+
+                downvotes: downVotesIncluded
+                  ? i.stats.downvotes
+                  : [...i.stats.downvotes, { profile: store.currentUser }],
+              },
+            };
+          }
+          return i;
+        });
+
+        publications.data = mappedData;
+      }
     };
 
     const userQuery = async () => {
@@ -283,6 +335,7 @@ export default {
             },
           };
         });
+
         dataStatus.data.loading = false;
       } catch (error) {
         console.log("error", error);
@@ -336,6 +389,7 @@ export default {
 }
 
 .active-post {
+  pointer-events: none;
   background-color: #f2f2f2;
   border: 1px solid #f2f2f2;
 }

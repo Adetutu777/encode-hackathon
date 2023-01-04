@@ -126,7 +126,6 @@ export const whoReactedPub = async (publications = []) => {
 };
 
 export const userApi = async (address, method = "GET") => {
-  console.log(address, "address");
   const url = `${baseUrl}user/${address}`;
   try {
     const response = await axios({ method, url });
