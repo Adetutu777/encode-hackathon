@@ -101,7 +101,6 @@ import { createPost, uploadContent, preparePost } from "~/services/api";
 import { storeNFT } from "~/upload";
 import axios from "axios";
 import { login } from "~/services/connect";
-
 const router = useRouter();
 const store = useAppStore();
 const tags = ref([]);
@@ -151,8 +150,17 @@ const removeTag = (id) => {
 
 const uploadImage = async (e) => {
   const file = e.target.files[0];
-  const base64 = await convertBase64(file);
+  const base64 = await convertBase64(file); // const uploaded = await storeNFT(base64);
+  // console.log(uploaded, "ypliaded");
+  // const dataAvailable = await axios.get(`
+  //     https://ipfs.io/ipfs/${uploaded}`);
+  // console.log("dataAvailable", dataAvailable);
+
   store.setCoverImage(base64);
+};
+
+const mockData = async () => {
+  // await storeFiles(uploadIm.value);
 };
 
 const saveDraft = async () => {
@@ -171,13 +179,17 @@ const saveDraft = async () => {
 };
 
 let fileCID;
+
 const postData = async () => {
   isCreating.value = true;
   creationError.value = false;
   let img = uploadIm.value;
 
   try {
-    const statusUser = appStore.currentUserStatus;
+    creationError.value = false;
+    creatingStatus.value = "Initializing";
+    const statusUser = store.currentUserStatus;
+
     if (statusUser == 1) {
       creationError.value = true;
       creatingStatus.value = "Please Wait, Your Account is still Pending";
@@ -186,7 +198,7 @@ const postData = async () => {
 
     if (statusUser == 0) {
       creationError.value = true;
-      creatingStatus.value = "You need to create an account to post";
+      creatingStatus.value = "You need to create an account";
       return;
     }
 
@@ -231,9 +243,10 @@ const postData = async () => {
   } catch (err) {
     creationError.value = true;
     creatingStatus.value = err?.message ?? "Something went wrong";
-    if (store.isPending) {
-      creatingStatus.value = "Please Wait, Your Account is still Pending";
-    }
+    console.log(err, "error ");
+    // if (store.isPending) {
+    //   creatingStatus.value = "Please Wait, Your Account is still Pending";
+    // }
   } finally {
   }
 };

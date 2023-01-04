@@ -31,18 +31,17 @@ export default defineNuxtConfig({
         "bootstrap/dist/css/bootstrap.css",
         "bootstrap-vue-3/dist/bootstrap-vue-3.css",     
         '~/styles/main.css',      
-    ],
-
-    
+    ],   
 
         // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    "~/plugins/bootstrap.client.ts",
-  
+    "~/plugins/bootstrap.client.ts",  
   ],
-  // runtimeConfig: {
-  //   mongoUrl: process.env.DB_CREDENTIALS,
-  // },
+  runtimeConfig: {
+    public: {
+      web3StorageKey: process.env.WEB3_STORAGE_KEY,     
+    }
+  },
   // nitro: {
   //   plugins: ["~/server/index.ts"],
   // },

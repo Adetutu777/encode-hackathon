@@ -1,15 +1,14 @@
 import axios from "axios";
-
-const NFT_STORAGE_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDAwYkJGNzgyMjE0YTJiNzY0MkYzNzMzNThiNTI1NkU0YjlBQ0NDQmUiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY2OTk5MDA5MDU4MywibmFtZSI6ImxlbnMtYXBpLWtleSJ9.oxmZJQfNBnu_Weg1hLTxQpI9SbuPBN9-if92WJq_FCU";
+import { useRuntimeConfig } from "#app";
 
 export async function storeNFT(image) {
-  const nftImage = await axios.post("https://api.nft.storage/upload", image, {
+  const key = useRuntimeConfig();
+  const nftImage = await axios.post("https://api.web3.storage/upload", image, {
     headers: {
-      Authorization: `Bearer ${NFT_STORAGE_KEY}`,
+      Authorization: `Bearer ${key.public.web3StorageKey}`,
       Accept: "application/json",
     },
   });
 
-  return nftImage.data.value.cid;
+  return nftImage.data.cid;
 }

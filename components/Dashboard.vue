@@ -88,7 +88,6 @@ export default {
     const appStore = useAppStore();
     const statusUser = appStore.currentUserStatus;
     const isPending = statusUser == 1;
-
     onMounted(() => {
       if (!appStore.isConnected) {
         login();
