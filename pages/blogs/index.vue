@@ -80,13 +80,20 @@
                           "
                           @error="replaceByDefault"
                         />
+                        <!-- <img
+                          :src="
+                            item?.metadata?.[0]?.url ??
+                            'https://github.com/DrVickie8/Team-Lens-Developers/blob/main/Lens-folder/images/Frame%202.png?raw=true'
+                          "
+                          @error="replaceByDefault"
+                        /> -->
                       </NuxtLink>
                     </div>
                   </div>
 
                   <div class="d-flex justify-content-between pt-1">
                     <div class="">
-                      <i class="uil uil-bookmark icon-footer"></i>
+                      <!-- <i class="uil uil-bookmark icon-footer"></i> -->
                     </div>
                     <div class="d-flex justify-content-between pt-1">
                       <div class="reactions-btn mr-3 d-flex align-items-center">

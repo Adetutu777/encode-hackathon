@@ -19,7 +19,7 @@
           <div class="">
             <div class="card-ody">
               <div class="sidebar sidebar-left">
-                <div class="">
+                <div class="sidebar-inner">
                   <NuxtLink to="/blogs" class="dropdown d-block">
                     <i class="icon-icons uil uil-estate"></i> <span>Home</span>
                   </NuxtLink>
@@ -106,13 +106,15 @@ export default {
   border-radius: 20px;
 }
 .sidebar, .right-bar {
-  padding: 1rem;
   padding-bottom: 4rem;
    backgrond: #F9FBFF;
   background: #fffcfc;
   border: 1px solid #ececec;
   border-radius: 16px;
+  
 }
+
+
 
 .middle-bar {
   border-radius: 7px;
