@@ -2,12 +2,6 @@
   <div class="container mt-3">
     <profileId />
 
-    <div class="container">
-     <button class="block-btn"  style='border:none' @click.prevent="$router.back()">
-      <span class="img-resize">&#128281;</span>    
-         </button>
-    </div>
-
     <b-modal v-model="isCreating" title="Creating Post ">
       <div class="m-auto text-center">
         <div v-if="creationError" class="text-center">
@@ -35,6 +29,11 @@
         <div class="row">
           <div class="col-md-2"></div>
           <div class="col-sm-8">
+        <div cass="container">
+     <button class="block-btn"  style='border:none' @click.prevent="$router.push('/blogs')">
+      <span class="img-resize">&#128281;</span>    
+         </button>
+    </div>
             <GenerateImg />
             <div class="card pt-3">
               <div class="card-body">
@@ -299,7 +298,7 @@ const tryAgain = async () => {
 
 .block-btn{
   border: none;
-  background: #1b2431;
+  background: #ffffff;
   color: white;
 }
 </style>
