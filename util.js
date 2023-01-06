@@ -31,6 +31,11 @@ export const truncateEthAddress = (address) => {
 };
 
 export const convertBase64 = (blob) => {
+  console.log(blob, "blov!!!!");
+  if (typeof blob == "string") {
+    return blob;
+  }
+  if (!blob) return;
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onerror = reject;

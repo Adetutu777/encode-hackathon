@@ -150,13 +150,7 @@ const removeTag = (id) => {
 
 const uploadImage = async (e) => {
   const file = e.target.files[0];
-  const base64 = await convertBase64(file); // const uploaded = await storeNFT(base64);
-  // console.log(uploaded, "ypliaded");
-  // const dataAvailable = await axios.get(`
-  //     https://ipfs.io/ipfs/${uploaded}`);
-  // console.log("dataAvailable", dataAvailable);
-
-  store.setCoverImage(base64);
+  store.setCoverImage(file);
 };
 
 const mockData = async () => {
@@ -196,11 +190,11 @@ const postData = async () => {
       return;
     }
 
-    if (statusUser == 0) {
-      creationError.value = true;
-      creatingStatus.value = "You need to create an account";
-      return;
-    }
+    // if (statusUser == 0) {
+    //   creationError.value = true;
+    //   creatingStatus.value = "You need to create an account";
+    //   return;
+    // }
 
     if (img && !fileCID) {
       // uploading image to IPFS
@@ -230,9 +224,15 @@ const postData = async () => {
     creatingStatus.value = "Almost done, Please wait";
     await wait(10000);
 
-    const dataAvailable = await axios.get(`
-      https://ipfs.io/ipfs/${fileCID}`);
-    console.log("dataAvailable", dataAvailable);
+    // const dataAvailable = await axios.get(`
+    //   https://ipfs.io/ipfs/${fileCID}`);
+    const [p1, p2] = await Promise.all([
+      axios.get(`
+      https://ipfs.io/ipfs/${fileCID}`),
+      // axios.get(`
+      // https://ipfs.io/ipfs/${img}`),
+    ]);
+    // console.log("dataAvailable", p1, p2);
 
     creatingStatus.value = "Creating post";
 

@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div class="my-4 ">
+    <div class="my-4">
       <button type="button" @click="toggleCreateImgModal" class="btn-general">
         Generate Image
       </button>
@@ -48,6 +48,9 @@
               ></b-spinner>
             </button>
           </div>
+          <small v-if="isLoading" class="text-center mx-auto">
+            You can close this modal and come back to it later
+          </small>
         </div>
       </form>
     </b-modal>
@@ -62,7 +65,7 @@ const isLoading = ref(false);
 const isError = ref(false);
 const imageUrl = ref([
   "/pen-thoughts-1.jpeg",
-  "/pen-thoughts-1.jpeg",
+  "/pen-thoughts-2.jpeg",
   "/pen-thoughts-3.jpeg",
   "/pen-thoughts-4.jpeg",
   "/pen-thoughts-5.jpeg",
@@ -70,9 +73,12 @@ const imageUrl = ref([
 const currentImgIndex = ref(0);
 
 const store = useAppStore();
-const setImage = () => {
+const setImage = async () => {
   const item = imageUrl.value[currentImgIndex.value];
-  store.setCoverImage(item);
+  const response = await fetch(item);
+  const blob = await response.blob();
+  const file = new File([blob], "file.png", { type: "image/png" });
+  store.setCoverImage(file);
   toggleCreateImgModal();
 };
 
@@ -120,22 +126,19 @@ const getImage = async () => {
   position: absolute;
   border-top-left-radius: 5px;
   left: 50%;
-  top: 50%;
+  top: 40%;
   z-index: 1;
-  background: #2C74B3;
-  color: #FFFFFF;
-  border: 1px solid #2C74B3;
+  background: #2c74b3;
+  color: #ffffff;
+  border: 1px solid #2c74b3;
   padding: 0.3rem 1.3rem;
   transform: translate(-50%, -50%);
 }
 
-.btn-generate{
-  background: #2C74B3;
-  color: #FFFFFF;
-  border: 1px solid #2C74B3;
+.btn-generate {
+  background: #2c74b3;
+  color: #ffffff;
+  border: 1px solid #2c74b3;
   padding: 0.5rem 1.5rem;
 }
-
-
 </style>
-

@@ -163,8 +163,6 @@ export async function login() {
     if (currentUser && checkUserStatus == 1) {
       const updateUser = await userApi(address, "PUT");
       await appStore.setStatus(updateUser);
-      console.log(currentUser);
-      // appStore.currentUserStatus = updateUser;
     }
 
     return {
@@ -173,6 +171,7 @@ export async function login() {
     };
   } catch (err) {
     console.log("Error signing in: ", err);
+    throw err;
   } finally {
     isConnecting.value = false;
   }

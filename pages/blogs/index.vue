@@ -68,6 +68,7 @@
                   </div>
 
                   <h5 class="mt-3" v-if="item?.mainPost?.metadata?.description">
+                    {{ item?.mainPost }}
                     {{ item?.mainPost?.metadata?.description?.slice(0, 70) }}...
                   </h5>
                   <div class="crd mx-auto" style="">
@@ -85,13 +86,13 @@
                   </div>
 
                   <div class="d-flex justify-content-between pt-1">
-                    <div class="">
-                      <i class="uil uil-bookmark icon-footer"></i>
+                    <div class="" @click="() => savePost(item?.id)">
+                      <!-- <i class="uil uil-bookmark icon-footer"></i> -->
+                      <BookMark :selected="item.isSaved" />
                     </div>
                     <div class="d-flex justify-content-between pt-1">
                       <div class="reactions-btn mr-3 d-flex align-items-center">
                         <div
-                          :class="`${addActiveClass(item?.stats?.upvotes)}`"
                           @click="
                             () =>
                               reactToPost(
@@ -102,7 +103,7 @@
                               )
                           "
                         >
-                          <img src="@/images/arrow-up.svg" alt="like-btn" />
+                          <ArrowUp :selected="item?.stats?.upIncluded" />
                         </div>
                         <div class="reactions-num">
                           {{ item?.stats?.upvotes.length }}
@@ -112,7 +113,6 @@
                         class="reactions-btn mr-3 d-flex align-items-center dislike-btn"
                       >
                         <div
-                          :class="`${addActiveClass(item.stats.downvotes)}`"
                           @click="
                             () =>
                               reactToPost(
@@ -123,22 +123,13 @@
                               )
                           "
                         >
-                          <img
-                            src="@/images/arrow-down.svg"
-                            alt="dislike-btn"
-                          />
+                          <ArrowDown :selected="item?.stats?.downIncluded" />
                         </div>
                         <div class="reactions-num">
                           {{ item?.stats?.downvotes.length }}
                         </div>
                       </div>
                     </div>
-                    <!-- <div class="d-flex align-items-center">
-                    <span @click="() => reactToPost(item.id)">
-                      <i class="uil uil-heart icon-footer"></i
-                    ></span>
-                    <h5>{{ item?.stats?.totalUpvotes }}</h5>
-                  </div> -->
                   </div>
                 </div>
               </div>
@@ -178,11 +169,17 @@
 </template>
 
 <script>
-import { recommendProfiles, clientId, publicationsQuery } from "../../api";
+import { clientId, exploreQuery, userFeedQuery } from "../../api";
 import { formatIpfdImg, dateFormatter, deepCopy } from "@/util";
 import { defaultProfile } from "../../store";
 import { useAppStore } from "~/store/app";
-import { interactWithPost, whoReactedPub } from "~/services/api";
+import {
+  interactWithPost,
+  whoReactedPub,
+  addPost,
+  getPosts,
+  deletePost,
+} from "~/services/api";
 
 export default {
   layout: "no-sidebar",
@@ -206,10 +203,13 @@ export default {
       },
     });
     const store = useAppStore();
+    const user = store.currentUser;
+
     const userProfile = store.currentUser?.id;
+    console.log(store.currentUser);
     const addActiveClass = (array = []) => {
       const isIncluded = array.some((i) => i.profile.id == userProfile);
-      return isIncluded ? "active-post" : "";
+      return isIncluded;
     };
 
     onMounted(() => {
@@ -217,6 +217,28 @@ export default {
       userQuery();
     });
 
+    const savePost = async (id) => {
+      console.log(id, "id!!!");
+      let isSaved = publications.data.some((i) => i.id == id);
+      const currentIndex = publications.data.findIndex((i) => i.id == id);
+      const prevData = deepCopy(publications.data);
+      const tempData = deepCopy(publications.data);
+      const currentItem = tempData[currentIndex];
+      console.log(currentItem, currentIndex);
+      currentItem.isSaved = isSaved ? false : true;
+
+      tempData[currentIndex] = currentItem;
+      publications.data = tempData;z
+      console.l(tempData[currentIndex], "ceckin");
+
+      try {
+        // const response = await addPost(id);
+        // console.log(response);
+      } catch (e) {
+        publications.data = prevData;
+        console.log(e, "error savin");
+      }
+    };
     const reactToPost = async (
       typeOfReaction,
       publicationId,
@@ -228,118 +250,139 @@ export default {
         publicationId,
         reaction: typeOfReaction,
       };
+      let tempData = deepCopy(publications.data);
+      const prevData = deepCopy(publications.data);
+      const findIndex = tempData.findIndex((i) => i.id == publicationId);
+      let currentItem = tempData[findIndex];
+      console.log(currentItem, "current item");
 
-      const upVotes = deepCopy(upVotesReactions);
-      const downVotes = deepCopy(downVotesReactions);
-
-      const upVotesIncluded = upVotes.some(
-        (i) => i?.profile?.id == userProfile
+      let upIncluded = currentItem.stats.upvotes.some(
+        (i) => i.profile.id == userProfile
       );
 
-      const post = await interactWithPost(data);
-
-      const downVotesIncluded = downVotes.some(
-        (i) => i?.profile?.id == userProfile
+      let downIncluded = currentItem.stats.downvotes.some(
+        (i) => i.profile.id == userProfile
       );
+
+      if (upIncluded && typeOfReaction == "UPVOTE") {
+        return;
+      }
+      if (downIncluded && typeOfReaction == "DOWNVOTE") {
+        return;
+      }
 
       if (typeOfReaction === "UPVOTE") {
-        const mappedData = publications.data.map((i) => {
-          if (i.id == publicationId) {
-            let currentUpVotes = i.stats.totalUpvotes;
-            let currentDownVotes = i.stats.totalDownvotes;
-            return {
-              ...i,
-              stats: {
-                ...i.stats,
-                upvotes: upVotesIncluded
-                  ? i.stats.upvotes
-                  : [...i.stats.upvotes, { profile: store.currentUser }],
-                downvotes: downVotesIncluded
-                  ? i.stats.downvotes.filter((i) => {
-                      return i.profile.id == userProfile;
-                    })
-                  : i.stats.downvotes,
-              },
-            };
-          }
-          return i;
-        });
+        let upvotes = upIncluded
+          ? currentItem.stats.upvotes
+          : [
+              ...currentItem.stats.upvotes,
+              { profile: store.currentUser, reaction: "UPVOTE" },
+            ];
 
-        publications.data = mappedData;
+        let downvotes = downIncluded
+          ? currentItem.stats.downvotes.filter((i) => {
+              return i.profile.id != userProfile;
+            })
+          : currentItem.stats.downvotes;
+        tempData[findIndex] = {
+          ...currentItem,
+          stats: {
+            ...currentItem.stats,
+            upvotes,
+            downvotes,
+            downIncluded: downvotes.some((i) => i.profile.id == userProfile),
+            upIncluded: upvotes.some((i) => i.profile.id == userProfile),
+          },
+        };
+        publications.data = tempData;
       }
 
       if (typeOfReaction === "DOWNVOTE") {
-        const mappedData = publications.data.map((i) => {
-          if (i.id == publicationId) {
-            let currentUpVotes = i.stats.totalUpvotes;
-            let currentDownVotes = i.stats.totalDownvotes;
-            return {
-              ...i,
-              stats: {
-                ...i.stats,
-                upvotes: upVotesIncluded
-                  ? i.stats.upvotes.filter((i) => {
-                      return i.profile.id == userProfile;
-                    })
-                  : i.stats.upvotes,
+        let downvotes = downIncluded
+          ? currentItem.stats.downvotes
+          : [
+              ...currentItem.stats.downvotes,
+              { profile: store.currentUser, reaction: "DOWNVOTE" },
+            ];
 
-                downvotes: downVotesIncluded
-                  ? i.stats.downvotes
-                  : [...i.stats.downvotes, { profile: store.currentUser }],
-              },
-            };
-          }
-          return i;
-        });
+        let upvotes = upIncluded
+          ? currentItem.stats.upvotes.filter((i) => {
+              return i.profile.id != userProfile;
+            })
+          : currentItem.stats.upvotes;
+        tempData[findIndex] = {
+          ...currentItem,
+          stats: {
+            ...currentItem.stats,
+            upvotes,
+            downvotes,
+            downIncluded: downvotes.some((i) => i.profile.id == userProfile),
+            upIncluded: upvotes.some((i) => i.profile.id == userProfile),
+          },
+        };
+        publications.data = tempData;
+      }
 
-        publications.data = mappedData;
+      try {
+        const post = await interactWithPost(data);
+      } catch (e) {
+        publications.data = prevData;
       }
     };
 
     const userQuery = async () => {
       try {
-        const getProfilesId = await clientId.request(recommendProfiles);
-        const ids = getProfilesId?.recommendedProfiles?.map((i) => i?.id);
-        const publicationsPost = await clientId?.request(publicationsQuery, {
-          ids,
-        });
-        const mappedData = publicationsPost?.publications?.items
-          .filter((i) => i.__typename == "Post")
-          ?.map((i) => {
-            const dataMap = i?.metadata?.media?.map((j) => {
-              return { ...j, url: formatIpfdImg(j?.original?.url) };
-            });
-            return {
-              ...i,
-              metadata: dataMap,
-            };
+        const explorer = await clientId.request(exploreQuery);
+        const posts = await getPosts();
+        console.log(posts, "postss");
+        // console.log(userProfile, "user profile");
+        const mappedData = explorer?.explorePublications?.items?.map((i) => {
+          const dataMap = i?.metadata?.media?.map((j) => {
+            return { ...j, url: formatIpfdImg(j?.original?.url) };
           });
+          return {
+            ...i,
+            isSaved: posts.data.some((k) => k.postId == i.id),
+            metadata: dataMap,
+          };
+        });
         publications.data = mappedData ?? publications.data;
         const mappedArr = mappedData.map((i) => i.id);
         const reactionData = await whoReactedPub(mappedArr);
         publications.data = publications.data.map((i, index) => {
+          let upvotes = reactionData[
+            index
+          ]?.whoReactedPublication?.items?.filter(
+            (i) => i.reaction == "UPVOTE"
+          );
+
+          let downvotes = reactionData[
+            index
+          ]?.whoReactedPublication?.items?.filter(
+            (i) => i.reaction == "DOWNVOTE"
+          );
+
+          let downIncluded = addActiveClass(downvotes);
+          let upIncluded = addActiveClass(upvotes);
           return {
             ...i,
             stats: {
               ...i.stats,
-              upvotes: reactionData[
-                index
-              ]?.whoReactedPublication?.items?.filter(
-                (i) => i.reaction == "UPVOTE"
-              ),
-              downvotes: reactionData[
-                index
-              ]?.whoReactedPublication?.items?.filter(
-                (i) => i.reaction == "DOWNVOTE"
-              ),
+              upvotes,
+              downvotes,
+              downIncluded,
+              upIncluded,
             },
           };
         });
 
+        console.log("mapped data", mappedData);
         dataStatus.data.loading = false;
       } catch (error) {
+        dataStatus.data.error = "Error fetching data";
         console.log("error", error);
       }
+      dataStatus.data.loading = false;
     };
 
     const replaceByDefault = (e) => {
@@ -358,6 +401,7 @@ export default {
       reactToPost,
       addActiveClass,
       dataStatus,
+      savePost,
     };
   },
 };

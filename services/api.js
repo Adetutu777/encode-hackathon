@@ -10,6 +10,7 @@ import LENSHUB from "~/config/lens.json";
 import { storeNFT } from "~/upload";
 import { LENS_HUB_CONTRACT_ADDRESS, baseUrl } from "~/config/constant";
 import axios from "axios";
+import { deepCopy } from "~~/util";
 
 export const preparePost = async (file) => {
   const refreshToken = localStorage.getItem("myStoryRefreshToken");
@@ -44,18 +45,25 @@ export const uploadContent = async (data) => {
   const { imageUpload, description, content, tags } = data;
   const jsonData = {
     version: "2.0.0",
-    mainContentFocus: "TEXT_ONLY",
+    mainContentFocus: "ARTICLE",
     metadata_id: uuidv4(),
     description,
     locale: "en-US",
     content,
     external_url: null,
-    image: `ipfs//:${imageUpload ? imageUpload : "0x0"}`,
-    imageMimeType: "text/html",
+    image: `https://${imageUpload ? imageUpload : "0x0"}.ipfs.w3s.link/`,
+    imageMimeType: "image/png",
     name: "Name",
+    media: [
+      {
+        // item: `https://ipfs.io/ipfs/${imageUpload ? imageUpload : "0x0"}`,
+        item: `https://${imageUpload ? imageUpload : "0x0"}.ipfs.w3s.link/`,
+        type: "image/png",
+      },
+    ],
     attributes: [],
     tags,
-    appId: "api_examples_github",
+    appId: "chain_write_article",
   };
 
   try {
@@ -106,7 +114,11 @@ export const interactWithPost = async (data) => {
       ["x-access-token"]: refreshToken,
     });
     return addReaction;
-  } catch (e) {}
+  } catch (e) {
+    const errors = deepCopy(e);
+    console.log("error reaction", errors);
+    throw errors;
+  }
 };
 
 export const whoReactedPub = async (publications = []) => {
@@ -125,12 +137,51 @@ export const whoReactedPub = async (publications = []) => {
   }
 };
 
-export const userApi = async (address, method = "GET") => {
-  const url = `${baseUrl}user/${address}`;
+export const sendTokenRequest = async (url, method = "GET") => {
+  const token = localStorage.getItem("myStoryRefreshToken");
+  const instance = axios.create({
+    // timeout: 1000,
+    headers: { Authorization: "Bearer " + token },
+  });
   try {
-    const response = await axios({ method, url });
-    return response?.data?.status;
+    const response = await instance({ method, url });
+    return response;
   } catch (e) {
     console.log(e, "error!!!");
+    throw e;
+  }
+};
+
+export const userApi = async (address, method = "GET") => {
+  const url = `${baseUrl}user/${address}`;
+  const response = await sendTokenRequest(url, method);
+  return response?.data?.status;
+};
+
+export const addPost = async (id) => {
+  const url = `${baseUrl}post/${id}`;
+  const response = await sendTokenRequest(url, "POST");
+  return response?.data;
+};
+
+export const getPosts = async () => {
+  const url = `${baseUrl}post}`;
+
+  try {
+    const response = await axios.get(baseUrl + "post");
+    return response.data;
+  } catch (e) {
+    throw e;
+  }
+};
+
+export const deletePost = async (id) => {
+  const url = `${baseUrl}post}/${id}`;
+
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (e) {
+    throw e;
   }
 };

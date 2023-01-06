@@ -25,9 +25,9 @@
         </label>
       </div>
     </div>
-    <div class="row align-items-center" v-if="!!file">
+    <div class="row align-items-center" v-show="!!file">
       <div class="col-md-5">
-        <img :src="file" class="img-fluid" />
+        <img ref="preview" class="img-fluid" />
       </div>
       <div class="col-md-7">
         <label for="coverImage" class="border p-2 rounded"> Change </label>
@@ -42,7 +42,14 @@ import { useAppStore } from "../store/app";
 import { convertBase64 } from "~/util";
 const store = useAppStore();
 const coverImageLabel = ref("");
-const file = computed(() => store?.currentCoverImage);
+const preview = ref("");
+
+const file = computed(() => {
+  if (store.currentCoverImage && typeof preview.value == "object") {
+    preview.value.src = URL.createObjectURL(store?.currentCoverImage);
+  }
+  return store?.currentCoverImage;
+});
 
 const emits = defineEmits(["change", "cancel"]);
 
