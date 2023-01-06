@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-4">
+  <div class="container mt-3">
     <profileId />
 
     <b-modal v-model="isCreating" title="Creating Post ">
@@ -29,6 +29,11 @@
         <div class="row">
           <div class="col-md-2"></div>
           <div class="col-sm-8">
+        <div cass="container">
+     <button class="block-btn"  style='border:none' @click.prevent="$router.push('/blogs')">
+      <span class="img-resize">&#128281;</span>    
+         </button>
+    </div>
             <GenerateImg />
             <div class="card pt-3">
               <div class="card-body">
@@ -285,5 +290,15 @@ const tryAgain = async () => {
 .add-title input {
   border: none;
   padding: 1rem 0.5rem;
+}
+
+.img-resize{
+  font-size: 1.5rem;
+}
+
+.block-btn{
+  border: none;
+  background: #ffffff;
+  color: white;
 }
 </style>

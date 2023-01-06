@@ -14,22 +14,11 @@
         <i class="uil uil-search-alt search-icon mt-1"></i>
       </div>
 
-      <!-- <NuxtLink to="/post/create" class="dropdown">
-              <button
-                clss="mt-5 text-light btn-write mx-auto d-flex align-items-center"
-              >
-                Create post
-              </button>
-            </NuxtLink> -->
-      <!-- <div class="">
-            <button>Create post</button>
-            </div> -->
-
       <NuxtLink class="profile" :to="`/profile/${defaultProfile?.ownedBy}`">
         <div class="d-flex align-items-center">
           <JazzIcon />
 
-          <div class="handle">
+          <div class="handles">
             <h5 class="text-muted">
               {{ defaultProfile?.handle }}
             </h5>
@@ -51,19 +40,19 @@ const defaultProfile = JSON.parse(data);
 <style>
 .profile {
   text-decoration: none;
+  margin-right: 1.8rem; 
+ 
 }
-
-.handle {
-  margin-left: 0.5rem;
-}
-.handle h4 {
-  font-size: 1rem;
+.handles h4 {
+  font-size: 0.9rem;
   color: #292d32;
   outline: none;
+   margin-left: 0.3rem;
 }
-.handle h5 {
+.handles h5 {
   font-size: 0.8rem;
   color: #6c6e70;
+  margin-left: 0.3rem;
 }
 
 .icon-input {

@@ -1,30 +1,36 @@
-<!-- ## A Blog Dapp integrated with lens protocol [Lens Protocol](https://www.lens.dev/), 
+## A social media blogging Dapp integrated with lens protocol [Lens Protocol](https://www.lens.dev/), 
 
-### Tech Stack : NuxtJs, VueJs, Ethers, GraphQl, Html, Css, BootstrapVue
+### Tech Stack : NuxtJs, VueJs, Ethers, GraphQl, Html, Css, BootstrapVue, web3.storage
 
 ### Deployed network : Polygon Mumbai
 
 - To create an account please ensure you have a matic testnet token to complete transaction
 
-- Link: https://storybite.netlify.app/
+- Link: https://chainwrite.netlify.app/
 
 #### Available Features
-        * Creating account for new users
-        * Logging in/viewing user profile
-        * Link:Logging in to blog page to read blogs
         * Link:connecting to metamask
+        * signing up to create a profile inorder to login & read post, logging in if you already have an account
+        * Logging in if you already have an account
+        * Viewing recommended post, user profile
+        * Adding Like (👍) & Dislike (👎) reaction to post
+        * Link:Logging in to blog page to read blogs
+        * Link:creating post, saving post to draft, saving post for future readings
 
 ##### Currently working on
         * writing comment on post
+        * writing comment on post
         
 #### Things to work on next
+        * Implement an option for users to uplaod a video as cover while creating post using [Livepeer.js](https://docs.livepeer.org/)
+        * writing comment on post
         * Link: Seaching through blogs
-        * Link:Reaction to post
+       
         
 #### Screenshot of homepage, registration page & blog page shown below
 
-![image](./images/homepage.JPG "Optional Title")
-![image](./images/login-screen.JPG "Optional Title")
+![image](./images/homepage.png "Optional Title")
+<!-- ![image](./images/login-screen.JPG "Optional Title")
 ![image](./images/blogpage.JPG "Optional Title") -->
 
 

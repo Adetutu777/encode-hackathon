@@ -9,14 +9,10 @@
               <div class="head">
                 <div class="user">
                   <JazzIcon :diameter="100" />
-                  <!-- <div class="body-photo">
-                    <img src="images/Ellipse 43.png" />
-                  </div> -->
                   <div class="info">
                     <h3 class="mt-3">
                       {{ userData.data.handle }}
                     </h3>
-                    <!-- <small>@nkem_asake</small> -->
                     <p class="mb-2">
                       {{ userData?.data.stats?.totalFollowers ?? 0 }}
                       followers
@@ -25,37 +21,45 @@
                 </div>
               </div>
 
-              <div>
-                <b-tabs content-clss="mt-3">
-                  <b-tab @click="getValue(0)" title="Post" active></b-tab>
+               <b-tabs 
+    active-nav-item-class="font-weight-bold"
+    style=""
+    content-class="mt-3"
+    align="center"
+    fill >
+
+     <b-tab @click="getValue(0)" title="Post" active></b-tab>
                   <b-tab @click="getValue(1)" title="Following"></b-tab>
                   <b-tab @click="getValue(2)" title="About"></b-tab>
-                </b-tabs>
-              </div>
+  </b-tabs>
             </div>
           </div>
 
           <div class="update mt-3" v-if="currentTab == 0">
             <div class="" v-if="postsData.length == 0">Nothing here...</div>
             <div class="  " v-for="item in postsData" :key="item.id">
-              <div class="post-tab p-2 mt-3">
-                <NuxtLink  :to="`/post/${item?.id}`">
-                <h5 cass="pr-5">
+              <div class="post-tab p-2">
+                <NuxtLink class="user-post name-icon"  :to="`/post/${item?.id}`">
+                <h6 class="content-post">
                   {{ item?.metadata?.content }}
-                  </h5>
+                  </h6>
                 </NuxtLink>
               </div>
             </div>
           </div>
 
           <div clss="photo" v-if="currentTab == 1">
-            <p>{{ userData?.data?.stats?.totalFollowing }} followers</p>
+            <h5>{{ userData?.data?.stats?.totalFollowing }} following</h5>
           </div>
 
           <div clss="photo" v-if="currentTab == 2">
             <p>{{ userData?.data?.bio }}</p>
           </div>
         </div>
+      </template>
+
+      <template v-slot:right>
+      <p>remove me</p>
       </template>
     </Dashboard>
   </div>
@@ -119,10 +123,23 @@ export default {
 }
 
 .post-tab {
-  width: 80%;
-  display: inline-flex;
-  border: 0.8px solid #0c2acb;
+  width: 100%;
+  margin-top: 0.6rem;
+  border: 1px solid #F9F9F9;
+  background: #F9F9F9;
   border-radius: 5px;
   flex-direction: column;
+  
+}
+
+.user-post{
+text-decoration: none;
+}
+.content-post:hover{
+color: #66a7df;
+}
+
+.content-post{
+  font-size: 1.2rem;
 }
 </style>

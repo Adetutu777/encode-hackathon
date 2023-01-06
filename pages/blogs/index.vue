@@ -81,6 +81,13 @@
                           "
                           @error="replaceByDefault"
                         />
+                        <!-- <img
+                          :src="
+                            item?.metadata?.[0]?.url ??
+                            'https://github.com/DrVickie8/Team-Lens-Developers/blob/main/Lens-folder/images/Frame%202.png?raw=true'
+                          "
+                          @error="replaceByDefault"
+                        /> -->
                       </NuxtLink>
                     </div>
                   </div>
@@ -228,7 +235,8 @@ export default {
       currentItem.isSaved = isSaved ? false : true;
 
       tempData[currentIndex] = currentItem;
-      publications.data = tempData;z
+      publications.data = tempData;
+      z;
       console.l(tempData[currentIndex], "ceckin");
 
       try {
@@ -408,14 +416,6 @@ export default {
 </script>
 
 <style>
-.top-icon {
-  text-decoration: none;
-}
-.name-icon,
-.date-icon {
-  color: #2f2f30;
-}
-
 .aa {
   margin-bottom: 1rem;
 }

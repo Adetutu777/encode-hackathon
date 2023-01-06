@@ -1,6 +1,8 @@
 <template>
-  <div class="lens-story">
+
+  <div>
     <!-- navbar -->
+    <div class="lens-story">
     <div class="nav-header px-4 py-4 d-flex justify-content-between">
       <div>
         <img src="@/images/Chain-write.svg" alt="image">
@@ -18,20 +20,14 @@
       <div class="col-md-1"></div>
         <div class="col-md-5 col-one">
           <h2>
-            Lorem ipsum dolor sit amet <br />
-            consectetur, adipisicing elit. <br />
-            Minima, enim.
+            The All-in-One Web3 Blogging Platform!
           </h2>
           <p class="mt-4">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil
-            <br />
-            ipsum voluptatum reiciendis pariatur exercitationem laborum <br />
-            architecto sunt consequuntur quia a?
+          Experience a New Social Media Revolution with chainWrite, This is a perfect platform for anyone looking to express themselves online without worrying about their data being shared or exploited
           </p>
 
           <div class="d-flex mt-5">
             <button class="btn-one"> <b>Get started</b></button>
-            <!-- <button class="btn-two">Publish</button> -->
           </div>
         </div>
         <!-- col-two -->
@@ -43,9 +39,136 @@
           />
         </div>
       </div>
+
+    
+
+  <!-- footer -->
+
+<!-- End of .container -->
+    </div>
+</div>
+
+    <!-- about-us -->
+    <div class="about-us">
+    <div class="container my-5">
+  <div class="row">
+    <div class="col-md-6 text-center">
+      <img src="https://images.pexels.com/photos/3184428/pexels-photo-3184428.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="img-fluid about-img" style="box-shadow: 0 0 15px #eee;" alt="">
+    </div>
+    <div class="col-md-6 pt-3">
+      <small class="text-uppercase about-heading" style="color:  #66a7df;">About us</small>
+      <h1 class="h2 mb-4" style="font-weight: 600;">About Our <span style="color: #66a7df;" class="font-weight-bold">Company</span></h1>
+      <p class="about-text">
+
+        ChainWrite was founded in 2023 by a team of experienced developers and entrepreneurs who wanted to make a difference. We are committed to developing a social media platform that is secure and private, while also being easy to use. We want our users to feel confident that their data is not being shared or sold, or exploited in any way. 
+</p>
+    </div>
+  </div>
+</div>
+</div>
+
+
+    <div class="meet-team bg-light">
+      <div class="d-team">
+   <div class="container">
+
+  <div class="row heading">
+      <h2 class="text-center bottom-line pt-5">Meet Our Team</h2>
+      <p class="subheading text-center pb-3">Creative Nerds</p>
+  </div>
+
+  <div class="row team-row">
+      <div class="col-md-3"></div>
+    <div class="col-md-3 col-sm-6 team-wrap">
+      <div class="team-member text-center">
+        <div class="team-img">
+          <img src="@/images/ken.png" alt="">
+          <div class="overlay">
+            <div class="team-details text-center">
+              <p>
+                Creating software with humans in mind
+              </p>
+              <div class="socials mt-20">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-google-plus"></i></a>
+                <a href="#"><i class="fa fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h6 class="team-title">Oke Kehinde</h6>
+        <span>FullStack Software developer</span>
+      </div>
+    </div>
+    <!-- end team member -->
+
+    <div class="col-md-3 col-sm-6 team-wrap">
+      <div class="team-member text-center">
+        <div class="team-img">
+          <img src="@/images/tut.jpg" alt="">
+          <div class="overlay">
+            <div class="team-details text-center">
+              <p>
+                Bringing your digital dreams to life </p>
+              <div class="socials mt-20">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-google-plus"></i></a>
+                <a href="#"><i class="fa fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h6 class="team-title">Adetutu Gbangbola</h6>
+        <span>Software developer</span>
+      </div>
+    </div>
+    <!-- end team member -->
+
+    <div class="col-md-3 col-sm-6 team-wrap"></div>
+    <!-- end team member -->
+
+  </div>
+</div>
+</div>
+
     </div>
 
-
+    <!-- footer -->
+    <div class=" pt-5 pb-3 chain-footer footer">
+<div class="container">
+  <div class="row">
+    <div class="col-lg-5 col-xs-12 about-company">
+      <img src="@/images/Chain-write.svg" alt="image">
+      <p class="pr-5 text-light mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac ante mollis quam tristique convallis </p>
+      <p><a href="#"><i class="fa fa-facebook-square mr-1"></i></a><a href="#"><i class="fa fa-linkedin-square"></i></a></p>
+    </div>
+    <div class="col-lg-3 col-xs-12 links">
+      <h4 class="mt-lg-0 mt-sm-3">Links</h4>
+        <ul class="m-0 p-0">
+          <li>- <a href="#">Lorem ipsum</a></li>
+          <li>- <a href="#">Nam mauris velit</a></li>
+          <li>- <a href="#">Etiam vitae mauris</a></li>
+          <li>- <a href="#">Fusce scelerisque</a></li>
+          <li>- <a href="#">Sed faucibus</a></li>
+          <li>- <a href="#">Mauris efficitur nulla</a></li>
+        </ul>
+    </div>
+    <div class="col-lg-4 col-xs-12 location">
+      <h4 class="mt-lg-0 mt-sm-4">Location</h4>
+      <p>22, Lorem ipsum dolor, consectetur adipiscing</p>
+      <p class="mb-0"><i class="fa fa-phone mr-3"></i>(+234) 0000 0000</p>
+      <p><i class="fa fa-envelope-o mr-3"></i>info@chainWrite.com</p>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col copyright">
+      <p class=""><small class="text-white-50">© 2023. All Rights Reserved.</small></p>
+    </div>
+  </div>
+</div>
+</div>
   </div>
 </template>
 
@@ -119,10 +242,9 @@ export default {
 }
 .lens-story {
   backgroun: linear-gradient(166.23deg, #2C74B3 1.51%, #329FFE 99.65%);
-  background: linear-gradient(160.1deg, #2C74B3 0.01%, #65B7FF 95.54%);
+  background: linear-gradient(160.1deg, #2471b4 0.01%, #65B7FF 95.54%);
   height: 100vh;
 }
-
 
 .nav-header {
   max-width: 80rem;
@@ -153,4 +275,167 @@ export default {
   background: transparent;
   color: #FFFFFF  ;
 }
+.about-us{
+  background: #f9f3f3;
+ padding: 2.5rem 0 2.5rem 0;
+}
+.about-heading {
+  margin: 0.5rem 0 1rem 0;
+}
+.about-chain{
+  padding: 2rem 0 3rem 0;
+}
+
+.about-text{
+  line-height: 1.8;
+}
+
+/* Our Team
+-------------------------------------------------------*/
+
+.our-team .team-row {
+  margin-left: -40px;
+  margin-right: -40px;
+}
+
+.our-team .team-wrap {
+  padding: 0 40px;
+}
+
+.our-team .container-fluid {
+  padding: 0 50px;
+}
+
+.team-img img {
+  -webkit-transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+  overflow: hidden;
+  width: 100%;
+}
+
+.team-member,
+.team-img {
+  position: relative;
+  overflow: hidden;
+}
+
+.team-title {
+  margin: 30px 0 7px;
+}
+
+.overlay {
+  background-color: rgba(20,20,20,.7);
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  -webkit-transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+
+.team-details {
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  padding: 5%;
+  overflow: hidden;
+  width: 100%;
+  z-index: 2;
+  -webkit-transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+
+.team-details p {
+  color: #fff;
+}
+
+.team-img:hover .team-details {
+  opacity: 1;
+  margin-top: -80px;
+}
+
+.team-img:hover .overlay {
+  opacity: 1;
+}
+
+.socials a {
+  display: inline-block;
+  width: 37px;
+  height: 37px;
+  background-color: transparent;
+  border: 1px solid red;
+}
+
+.socials i {
+  line-height: 37px;
+  color: #616161;
+  font-size: 14px;
+  width: 37px;
+  height: 37px;
+  border-radius: 50%;
+  text-align: center;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+.team-details .socials i {
+	color: #fff;
+}
+
+.socials a:hover i {
+  color: #fff;
+  background-color: #355c7d;
+}
+.footer {
+  background: #2471b4;
+  color: white;
+}
+.footer .links ul {
+  list-style-type: none;
+}
+.footer .links li a {
+  color: white;
+  transition: color 0.2s;
+ 
+}
+.footer .links li a:hover {
+  text-decoration: none;
+  color: #023067;
+}
+.footer .about-company i {
+  font-size: 25px;
+}
+.footer .about-company a {
+  color: white;
+  transition: color 0.2s;
+}
+.footer .about-company a:hover {
+  color: #4180cb;
+}
+.footer .location i {
+  font-size: 18px;
+}
+.footer .copyright p {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.about-img{
+  border-radius: 1rem;
+}
+
+.d-team{
+  padding: 2rem 0 5rem 0;
+}
+
 </style>

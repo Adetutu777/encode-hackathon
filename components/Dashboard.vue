@@ -18,8 +18,8 @@
         <div class="col-md-3">
           <div class="">
             <div class="card-ody">
-              <div class="sidebar">
-                <div class="">
+              <div class="sidebar sidebar-left">
+                <div class="sidebar-inner">
                   <NuxtLink to="/blogs" class="dropdown d-block">
                     <i class="icon-icons uil uil-estate"></i> <span>Home</span>
                   </NuxtLink>
@@ -65,8 +65,8 @@
         <div class="col-md-3">
           <div class="">
             <div class="card-ody">
-              <div>
-                <slot class="right-bar p-4" name="right"></slot>
+              <div class="right-bar p-4">
+                <slot  name="right"></slot>
               </div>
             </div>
           </div>
@@ -105,20 +105,23 @@ export default {
   border: 1px solid #ececec;
   border-radius: 20px;
 }
-.sidebar {
-  padding: 1rem;
+.sidebar, .right-bar {
   padding-bottom: 4rem;
-  background: #ffffff;
+   backgrond: #F9FBFF;
+  background: #fffcfc;
   border: 1px solid #ececec;
   border-radius: 16px;
+  
 }
+
+
 
 .middle-bar {
   border-radius: 7px;
   margin: 0 1rem;
   transform: translateY(1rem);
 }
-.right-bar {
+.right-ba {
   background: #ffffff;
   border-radius: 12px;
 }

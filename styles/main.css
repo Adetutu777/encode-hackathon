@@ -39,5 +39,37 @@ background: #66a7df;
   color: white;
 }
 
+.top-icon {
+  text-decoration: none;
+}
+
+.name-icon,
+.date-icon {
+  color: #2f2f30;
+}
+
+.nav-tabs {
+  background-color: white;
+  position: relative;
+  z-index: 1;
+}
+
+.nav-tabs .nav-link {
+  margin-top: 0.3rem;
+  padding: 1rem 0 1rem 1rem;
+  border: 0px solid transparent;
+  text-align: center;
+  color: #2f2f30 !important;
+}
+
+ .nav-tabs .nav-link.active,
+ .nav-tabs .nav-item.show .nav-link {
+   color: #495057;
+   border-bottom: 2px solid #2C74B3;
+      border-radius: 0 !important;
+   
+ }
+
+
 
 
