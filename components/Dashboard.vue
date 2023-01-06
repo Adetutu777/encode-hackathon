@@ -18,10 +18,10 @@
         <div class="col-md-3">
           <div class="">
             <div class="card-ody">
-              <div class="sidebar sidebar-left">
+              <div class="sidebar ">
                 <div class="sidebar-inner">
                   <NuxtLink to="/blogs" class="dropdown d-block">
-                    <i class="icon-icons uil uil-estate"></i> <span>Home</span>
+                    <i class="icon-icons uil uil-estate sidebar-left"></i> <span>Home</span>
                   </NuxtLink>
                   <!-- <NuxtLink to="/help" class="dropdown d-block">
                     <i class="icon-icons uil uil-envelope-add"></i>
@@ -35,16 +35,16 @@
                     :to="`/profile/${defaultProfile?.ownedBy}`"
                     class="dropdown d-block"
                   >
-                    <i class="icon-icons uil uil-user-circle"></i>
+                    <i class="icon-icons uil uil-user-circle sidebar-left"></i>
                     <span>Profile</span>
                   </NuxtLink>
                   <NuxtLink to="/draft" class="dropdown d-block">
-                    <i class="icon-icons uil uil-question-circle"></i>
+                    <i class="icon-icons uil uil-question-circle sidebar-left"></i>
                     <span>Draft</span>
                   </NuxtLink>
                   <NuxtLink
                     to="/post/createstory"
-                    class="write-dropdown d-block text-center text-light create-post mt-5"
+                    class="write-dropdown d-block text-center text-light create-post mt-5 "
                   >
                     <span class="">Create post</span>
                   </NuxtLink>
@@ -108,8 +108,8 @@ export default {
 .sidebar, .right-bar {
   padding-bottom: 4rem;
    backgrond: #F9FBFF;
-  background: #fffcfc;
-  border: 1px solid #ececec;
+  background: #ffffff;
+  border: 1.5px solid #ececec;
   border-radius: 16px;
   
 }
@@ -219,6 +219,7 @@ a.dropdown:hover {
 .create-post {
   background: #2c74b3;
   border-radius: 2rem;
+  margin: 0 2.5rem;
 }
 
 .top-banner {
@@ -228,5 +229,9 @@ a.dropdown:hover {
 }
 .glass {
   margin-right: 0.8rem;
+}
+
+.sidebar-left{
+  padding-left: 1rem;
 }
 </style>

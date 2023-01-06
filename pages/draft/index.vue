@@ -12,7 +12,7 @@
             </div>
             <div v-for="draft in drafts" :key="draft.id">
             <div class="">
-              <div class="p-2 mt-3 post-tab d-flex justify-content-between">
+              <div class="p-2 mt-3 post-tab">
                 <div class="">
                   <NuxtLink :to="`/post/createstory?id=${draft?.id}`">
                     <h5 cass="pr-5">
