@@ -58,7 +58,9 @@
     <div class="col-md-6 pt-3">
       <small class="text-uppercase about-heading" style="color:  #66a7df;">About us</small>
       <h1 class="h2 mb-4" style="font-weight: 600;">About Our <span style="color: #66a7df;" class="font-weight-bold">Company</span></h1>
-      <p class="about-text">Welcome to chainWrite, the revolutionary web3 social media application! With our Web3 social media application, users can share their thoughts and experiences with the world. By using an Ethereum-based blockchain, we've created a platform where you can trust the content you post will remain secure and private. No more worrying about your data being sold to third-parties or compromised.
+      <p class="about-text">
+
+        ChainWrite was founded in 2023 by a team of experienced developers and entrepreneurs who wanted to make a difference. We are committed to developing a social media platform that is secure and private, while also being easy to use. We want our users to feel confident that their data is not being shared or sold, or exploited in any way. 
 </p>
     </div>
   </div>
@@ -67,6 +69,7 @@
 
 
     <div class="meet-team bg-light">
+      <div class="d-team">
    <div class="container">
 
   <div class="row heading">
@@ -107,8 +110,7 @@
           <div class="overlay">
             <div class="team-details text-center">
               <p>
-                Creating software with humans in mind
-              </p>
+                Bringing your digital dreams to life </p>
               <div class="socials mt-20">
                 <a href="#"><i class="fa fa-facebook"></i></a>
                 <a href="#"><i class="fa fa-twitter"></i></a>
@@ -129,11 +131,12 @@
 
   </div>
 </div>
+</div>
 
     </div>
 
     <!-- footer -->
-    <div class="mt-5 pt-5 pb-5 footer">
+    <div class=" pt-5 pb-3 chain-footer footer">
 <div class="container">
   <div class="row">
     <div class="col-lg-5 col-xs-12 about-company">
@@ -243,7 +246,6 @@ export default {
   height: 100vh;
 }
 
-
 .nav-header {
   max-width: 80rem;
   margin: auto;
@@ -285,11 +287,8 @@ export default {
 }
 
 .about-text{
-  line-height: 2;
+  line-height: 1.8;
 }
-
-
-
 
 /* Our Team
 -------------------------------------------------------*/
@@ -434,4 +433,9 @@ export default {
 .about-img{
   border-radius: 1rem;
 }
+
+.d-team{
+  padding: 2rem 0 5rem 0;
+}
+
 </style>
