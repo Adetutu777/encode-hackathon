@@ -47,21 +47,24 @@
 <!-- End of .container -->
     </div>
 </div>
-<div class="about-us">
-    <div class="container">
-    <div class="row ">
-    <div class="text-center about-chain">
-    <h3 class="about-heading">About Us</h3>
-    <p class="about-text">Welcome to chainWrite, the revolutionary web3 social media application! With our Web3 social media application, users can share their thoughts <br> and experiences with the world. By using an Ethereum-based blockchain, we've created a platform where you can trust the content you post will <br> remain secure and private. No more worrying about your data being sold to third-parties or compromised.
-</p>
 
-<p> For those who want to read the posts of others, our web3 application allows users to browse posts by  categories, tags or even authors. This makes <br> it easy to find posts that are related to your interests and preferences. 
+    <!-- about-us -->
+    <div class="about-us">
+    <div class="container my-5">
+  <div class="row">
+    <div class="col-md-6 text-center">
+      <img src="https://images.pexels.com/photos/3184428/pexels-photo-3184428.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="img-fluid about-img" style="box-shadow: 0 0 15px #eee;" alt="">
+    </div>
+    <div class="col-md-6 pt-3">
+      <small class="text-uppercase about-heading" style="color:  #66a7df;">About us</small>
+      <h1 class="h2 mb-4" style="font-weight: 600;">About Our <span style="color: #66a7df;" class="font-weight-bold">Company</span></h1>
+      <p class="about-text">Welcome to chainWrite, the revolutionary web3 social media application! With our Web3 social media application, users can share their thoughts and experiences with the world. By using an Ethereum-based blockchain, we've created a platform where you can trust the content you post will remain secure and private. No more worrying about your data being sold to third-parties or compromised.
 </p>
+    </div>
+  </div>
 </div>
-      </div>
+</div>
 
-    </div>
-    </div>
 
     <div class="meet-team bg-light">
    <div class="container">
@@ -271,8 +274,8 @@ export default {
   color: #FFFFFF  ;
 }
 .about-us{
-  background: #f7eded;
- padding: 2rem 0 2rem 0;
+  background: #f9f3f3;
+ padding: 2.5rem 0 2.5rem 0;
 }
 .about-heading {
   margin: 0.5rem 0 1rem 0;
@@ -282,7 +285,7 @@ export default {
 }
 
 .about-text{
-  line-height: 1.8;
+  line-height: 2;
 }
 
 
@@ -428,4 +431,7 @@ export default {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.about-img{
+  border-radius: 1rem;
+}
 </style>
