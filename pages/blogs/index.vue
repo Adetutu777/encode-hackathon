@@ -48,7 +48,7 @@
                       </div>
 
                       <NuxtLink
-                        class="top-icon pb-2"
+                        class="top-icon"
                         :to="`/profile/${item?.profile?.ownedBy}`"
                       >
                         <div class="name-icon">
@@ -63,7 +63,7 @@
                     </div>
 
                     <div class="">
-                      <i class="uil uil-book-open"></i> 2mins read
+                      <!-- <i class="uil uil-book-open"></i> 2mins read -->
                     </div>
                   </div>
 
@@ -145,8 +145,8 @@
         </template>
 
         <template v-slot:right>
-          <div class="right-bar p-4">
-            <h4 class="pb-5">Trending</h4>
+          <div clss="right-bar p-4">
+            <h4 class="pb-5">Latest</h4>
             <div class="right-side">
               <div class="">
                 <div>

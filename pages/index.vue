@@ -5,7 +5,7 @@
     <div class="lens-story">
     <div class="nav-header px-4 py-4 d-flex justify-content-between">
       <div>
-        <img src="@/images/Chain-write.svg" alt="image">
+        <img class="w-75" src="@/images/Chain-write.svg" alt="image">
       </div>
 
       <div class="">
@@ -17,16 +17,16 @@
     <!-- body -->
     <div class="container">
   <div class="row algn-items-start">
-      <div class="col-md-1"></div>
-        <div class="col-md-5 col-one">
-          <h2>
-            The All-in-One Web3 Blogging Platform!
+      <!-- <div class="col-md-1"></div> -->
+        <div class="col-md-6 col-one">
+          <h2 class="head-text">
+            The All-in-One Web3 Blogging <br> Platform!
           </h2>
-          <p class="mt-4">
-          Experience a New Social Media Revolution with chainWrite, This is a perfect platform for anyone looking to express themselves online without worrying about their data being shared or exploited
+          <p class="mt-4 hero-text">
+          Experience a New Social Media Revolution with chainWrite, This is a perfect <br> platform for anyone looking to express themselves online without worrying about <br> their data being shared or exploited
           </p>
 
-          <div class="d-flex mt-5">
+          <div class="d-flex mt-4">
             <button class="btn-one"> <b>Get started</b></button>
           </div>
         </div>
@@ -437,5 +437,8 @@ export default {
 .d-team{
   padding: 2rem 0 5rem 0;
 }
-
+.hero-text, .head-text{
+  line-height: 1.5;
+  margin-left: 1.6rem;
+}
 </style>
