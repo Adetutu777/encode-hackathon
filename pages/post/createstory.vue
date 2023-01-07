@@ -29,11 +29,15 @@
         <div class="row">
           <div class="col-md-2"></div>
           <div class="col-sm-8">
-        <div cass="container">
-     <button class="block-btn"  style='border:none' @click.prevent="$router.push('/blogs')">
-      <span class="img-resize">&#128281;</span>    
-         </button>
-    </div>
+            <div cass="container">
+              <button
+                class="block-btn"
+                style="border: none"
+                @click.prevent="$router.push('/blogs')"
+              >
+                <span class="img-resize">&#128281;</span>
+              </button>
+            </div>
             <GenerateImg />
             <div class="card pt-3">
               <div class="card-body">
@@ -179,6 +183,16 @@ const saveDraft = async () => {
 
 let fileCID;
 
+const resetForm = () => {
+  tags.value = [];
+  title.value = "";
+  description.value = "";
+  img.value = "";
+  text.value = "";
+  store.currentCoverImage = "";
+  store.deleteDraft(currentDraftId.value);
+};
+
 const postData = async () => {
   isCreating.value = true;
   creationError.value = false;
@@ -229,22 +243,17 @@ const postData = async () => {
     creatingStatus.value = "Almost done, Please wait";
     await wait(10000);
 
-    // const dataAvailable = await axios.get(`
-    //   https://ipfs.io/ipfs/${fileCID}`);
     const [p1, p2] = await Promise.all([
-      axios.get(`
-      https://ipfs.io/ipfs/${fileCID}`),
+      axios.get(`https://${fileCID}.ipfs.w3s.link/`),
       // axios.get(`
       // https://ipfs.io/ipfs/${img}`),
     ]);
-    // console.log("dataAvailable", p1, p2);
-
     creatingStatus.value = "Creating post";
 
     const res = await createPost(prepare, fileCID);
     isSuccess.value = true;
     creatingStatus.value = "Hurray  Post created 🤗";
-    store.deleteDraft(currentDraftId.value);
+    resetForm();
   } catch (err) {
     creationError.value = true;
     creatingStatus.value = err?.message ?? "Something went wrong";
@@ -292,11 +301,11 @@ const tryAgain = async () => {
   padding: 1rem 0.5rem;
 }
 
-.img-resize{
+.img-resize {
   font-size: 1.5rem;
 }
 
-.block-btn{
+.block-btn {
   border: none;
   background: #ffffff;
   color: white;

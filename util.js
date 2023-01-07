@@ -6,9 +6,11 @@ export const formatIpfdImg = (ipfs) => {
   const getCid = CID
     ? CID.split("").slice(7).join("")
     : "bafkreigfkue3cdeve7pa23vvsmp2lcmj32flksdvlrllt44gpl25bqhp6m";
+  // `https://${getCid}.ipfs.w3s.link/`
   const url =
     CID?.length === (66 || 53)
-      ? "https://ipfs.io/ipfs/" + getCid
+      ? // ? "https://ipfs.io/ipfs/" + getCid
+        `https://${getCid}.ipfs.w3s.link/`
       : !CID?.length
       ? "https://ipfs.io/ipfs/bafkreigfkue3cdeve7pa23vvsmp2lcmj32flksdvlrllt44gpl25bqhp6m"
       : CID;

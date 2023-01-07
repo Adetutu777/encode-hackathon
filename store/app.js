@@ -6,6 +6,8 @@ export const useAppStore = defineStore("app", {
     return {
       count: useStorage("countStore", 0),
       isConnected: false,
+      isConnecting: false,
+      connectError: false,
       currentUser: useStorage("currentUser", {}),
       currentCoverImage: "",
       userAddress: useStorage("userAddress", ""),
