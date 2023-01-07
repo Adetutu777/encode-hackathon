@@ -27,6 +27,9 @@ input[type="text"], textarea {
 .btn-general:hover{
 background: #66a7df;
 }
+.text-header:hover{
+  color: #66a7df;
+}
 
 .btn-draft{
   border: 1px solid #2C74B3;
@@ -41,10 +44,14 @@ background: #66a7df;
 
 .top-icon {
   text-decoration: none;
+    padding-bottom: 0.9rem;
+}
+.img-top{
+  margin-bottom: 0.9rem;
 }
 
 .name-icon,
-.date-icon {
+.date-icon, .text-header {
   color: #2f2f30;
 }
 

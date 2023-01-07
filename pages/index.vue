@@ -1,5 +1,5 @@
 <template>
-  <NuxtLayout name="no-sidebar">
+  <NuxtLayout name="sidebar">
     <div>
       <!-- navbar -->
       <div class="lens-story">

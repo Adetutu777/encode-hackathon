@@ -1,5 +1,5 @@
 <template>
-  <NuxtLayout name="no-sidebar">
+  <NuxtLayout name="sidebar">
     <div>
       <div
         v-if="isPending"
