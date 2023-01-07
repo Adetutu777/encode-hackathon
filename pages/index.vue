@@ -142,7 +142,7 @@
     <div class="col-lg-5 col-xs-12 about-company">
       <img src="@/images/Chain-write.svg" alt="image">
       <p class="pr-5 text-light mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac ante mollis quam tristique convallis </p>
-      <p><a href="#"><i class="fa fa-facebook-square mr-1"></i></a><a href="#"><i class="fa fa-linkedin-square"></i></a></p>
+      <p><a href="#"><i class="fa fa-facebook-square mr-1"></i></a><a href="#"><i class="uil uil-linkedin"></i></a></p>
     </div>
     <div class="col-lg-3 col-xs-12 links">
       <h4 class="mt-lg-0 mt-sm-3">Links</h4>
@@ -241,7 +241,7 @@ export default {
   height: 100vh;
 }
 .lens-story {
-  backgroun: linear-gradient(166.23deg, #2C74B3 1.51%, #329FFE 99.65%);
+  background: linar-gradient(166.23deg, #2C74B3 1.51%, #329FFE 99.65%);
   background: linear-gradient(160.1deg, #2471b4 0.01%, #65B7FF 95.54%);
   height: 100vh;
 }
