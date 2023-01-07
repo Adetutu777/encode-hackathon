@@ -77,7 +77,7 @@
                         <img
                           :src="
                             item?.metadata?.[0]?.url ??
-                            'https://github.com/DrVickie8/Team-Lens-Developers/blob/main/Lens-folder/images/Frame%202.png?raw=true'
+                            '@/images/children.jpg'
                           "
                           @error="replaceByDefault"
                         />

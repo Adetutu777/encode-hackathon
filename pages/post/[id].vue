@@ -5,16 +5,18 @@
         <div class="feeds">
           <div class="feed">
             <div class="head">
-              <div class="user">
+              <div class="use">
+              <div class="d-flex">
                 <div class="profile-photo">
                   <JazzIcon />
-                  <!-- <img src="@/images/Ellipse 44.png" alt="" /> -->
                 </div>
 
+                <div class="">
                 <NuxtLink
                   class="top-icon"
                   :to="`/profile/${viewBlog?.data?.profile?.ownedBy}`"
                 >
+                <div class="icon-jaz">
                   <div class="details name-icon">
                     <h5>{{ viewBlog?.data?.profile?.name }}</h5>
                   </div>
@@ -22,13 +24,16 @@
                     {{ viewBlog?.data?.profile?.handle }} -
                     {{ dateFormatter(viewBlog?.data?.createdAt) }}
                   </div>
-                  <!-- </div> -->
+                  </div>
                 </NuxtLink>
+                </div>
+
+                </div>
               </div>
               <div class="info"></div>
             </div>
             <div class="title">
-              <h5 class="mt-3 pb-1">{{ viewBlog?.data?.metadata?.content }}</h5>
+              <h5 class="mt-3 pb-1" >{{ viewBlog?.data?.metadata?.content }}</h5>
             </div>
 
             <div class="photo">
@@ -41,7 +46,7 @@
                 @error="replaceByDefault"
               />
             </div>
-            <div class="blog">
+            <div class="blog mt-3">
               <p v-html="viewBlog?.data?.metadata?.description"></p>
               <!-- <p class="mt-2">{{ viewBlog?.data?.metadata?.description }}</p> -->
             </div>
@@ -139,8 +144,11 @@ export default {
 .totalPublication {
   margin-left: 1rem;
 }
-
 .right-col {
   padding-right: 1rem;
+}
+
+.icon-jaz{
+margin-left: 0.4rem;
 }
 </style>

@@ -5,13 +5,11 @@
         <NuxtLink to="/blogs">
           <img class="img-logos" src="@/images/chainWriteLogo.svg" alt="image" />
         </NuxtLink>
-        <div class="inp-div aa">
-          <input
-            class="icon-input__text-field px-5 py-1 input-text"
-            type="text"
-          />
-        </div>
-        <i class="uil uil-search-alt search-icon mt-1"></i>
+      
+      <div class="search">
+  <span class="uil uil-search-alt"></span>
+  <input placeholder="Search term">
+</div>
       </div>
 
       <NuxtLink class="profile" :to="`/profile/${defaultProfile?.ownedBy}`">
@@ -59,10 +57,6 @@ const defaultProfile = JSON.parse(data);
   position: relative;
 }
 
-.search-icon {
-  position: absolute;
-  left: 18rem;
-}
 
 .input-text {
   margin-left: 0.8rem;
@@ -70,4 +64,33 @@ const defaultProfile = JSON.parse(data);
 .img-logos {
   width: 2.7vw;
 }
+
+.search {
+  position: relative;
+  color: #aaa;
+  font-size: 16px;
+  margin-left: 1rem;
+  margin-top: 0.3rem;
+}
+
+.search {display: inline-block;}
+
+.search input {
+  width: 250px;
+  height: 32px;
+
+  background: #fcfcfc;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  box-shadow: 0 0 3px #ccc, 0 10px 15px #ebebeb inset;
+}
+
+.search input { text-indent: 32px;}
+.search .uil-search-alt { 
+  position: absolute;
+  top: 5px;
+  left: 10px;
+}
+
+.search .uil-search-alt {left: auto; right: 10px;}
 </style>

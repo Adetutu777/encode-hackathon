@@ -1,8 +1,8 @@
 import { init, useOnboard } from "@web3-onboard/vue";
 import injectedModule from "@web3-onboard/injected-wallets";
-import coinbaseModule from "@web3-onboard/coinbase";
-import gnosisModule from "@web3-onboard/gnosis";
-import portisModule from "@web3-onboard/portis";
+// import coinbaseModule from "@web3-onboard/coinbase";
+// import gnosisModule from "@web3-onboard/gnosis";
+// import portisModule from "@web3-onboard/portis";
 import storyTribe from "../images/GroupWrite.svg";
 import { useModal } from "../store/modal";
 import { ethers } from "ethers";
@@ -27,11 +27,11 @@ import { userApi } from "./api";
 
 const modal = useModal();
 const injected = injectedModule();
-const coinbaseConnect = coinbaseModule();
-const gnosisConnect = gnosisModule();
-const portisConnect = portisModule({
-  apiKey: "6cd12401-bf90-414d-89d1-4f6930dc4c7f",
-});
+// const coinbaseConnect = coinbaseModule();
+// const gnosisConnect = gnosisModule();
+// const portisConnect = portisModule({
+//   apiKey: "6cd12401-bf90-414d-89d1-4f6930dc4c7f",
+// });
 
 const appStore = useAppStore();
 const store = computed(() => appStore);
@@ -71,7 +71,8 @@ init({
     },
   },
 
-  wallets: [injected, portisConnect, coinbaseConnect, gnosisConnect],
+  wallets: [injected, ],
+  // wallets: [injected, portisConnect, coinbaseConnect, gnosisConnect],
   chains: [
     {
       id: "0x13881",

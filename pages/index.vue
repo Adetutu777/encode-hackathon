@@ -55,7 +55,7 @@
     <div class="col-md-6 text-center">
       <img src="https://images.pexels.com/photos/3184428/pexels-photo-3184428.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="img-fluid about-img" style="box-shadow: 0 0 15px #eee;" alt="">
     </div>
-    <div class="col-md-6 pt-3">
+    <div class="col-md-6 pt-4">
       <small class="text-uppercase about-heading" style="color:  #66a7df;">About us</small>
       <h1 class="h2 mb-4" style="font-weight: 600;">About Our <span style="color: #66a7df;" class="font-weight-bold">Company</span></h1>
       <p class="about-text">
@@ -89,10 +89,10 @@
                 Creating software with humans in mind
               </p>
               <div class="socials mt-20">
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-google-plus"></i></a>
-                <a href="#"><i class="fa fa-envelope"></i></a>
+                <a href="https://twitter.com/okekehi"><i class="uil uil-twitter"></i></a>
+                <a href="https://github.com/okeken"><i class="uil uil-github"></i></a>
+                <!-- <a href="okekehinde@gmail.com"><i class="uil uil-envelope-add"></i></a> -->
+                 <a href="https://www.linkedin.com/in/okeken/"><i class="uil uil-linkedin"></i></a>
               </div>
             </div>
           </div>
@@ -112,10 +112,10 @@
               <p>
                 Bringing your digital dreams to life </p>
               <div class="socials mt-20">
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-google-plus"></i></a>
-                <a href="#"><i class="fa fa-envelope"></i></a>
+                <a href="https://twitter.com/adetutu2222"><i class="uil uil-twitter"></i></a>
+                <a href="https://github.com/Adetutu777"><i class="uil uil-github"></i></a>
+                <!-- <a href="adetutugbangbola@gmail.com"><i class="uil uil-envelope-add"></i></a> -->
+                <a href="https://www.linkedin.com/in/adetutu-gbangbola-05a48070/"><i class="uil uil-linkedin"></i></a>
               </div>
             </div>
           </div>
@@ -371,13 +371,12 @@ export default {
   width: 37px;
   height: 37px;
   background-color: transparent;
-  border: 1px solid red;
 }
 
 .socials i {
   line-height: 37px;
   color: #616161;
-  font-size: 14px;
+  font-size: 1.5rem;
   width: 37px;
   height: 37px;
   border-radius: 50%;
@@ -394,8 +393,8 @@ export default {
 }
 
 .socials a:hover i {
-  color: #fff;
-  background-color: #355c7d;
+  color: #66a7df;
+
 }
 .footer {
   background: #2471b4;

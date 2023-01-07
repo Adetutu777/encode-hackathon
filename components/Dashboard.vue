@@ -65,8 +65,8 @@
         <div class="col-md-3">
           <div class="">
             <div class="card-ody">
-              <div class="right-bar p-4">
-                <slot  name="right"></slot>
+              <div class="right-bar p-4" v-if="$slots.right">
+                <slot name="right"></slot>
               </div>
             </div>
           </div>
@@ -107,7 +107,7 @@ export default {
 }
 .sidebar, .right-bar {
   padding-bottom: 4rem;
-   backgrond: #F9FBFF;
+   background: F9FBFF;
   background: #ffffff;
   border: 1.5px solid #ececec;
   border-radius: 16px;
