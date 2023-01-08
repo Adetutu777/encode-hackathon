@@ -1,4 +1,4 @@
-# *OVERVIEW *
+*OVERVIEW *
 
 ## Project Name: chainWrite
 
