@@ -1,38 +1,49 @@
-## A social media blogging Dapp integrated with lens protocol [Lens Protocol](https://www.lens.dev/), 
+## OVERVIEW 
+
+## Project Name: chainWrite
+
+## chainWrite is a social media blogging Dapp integrated with lens protocol & deployed on Polygon Mumbai
+
+- Link: https://www.chainwrite.xyz/
+
+#### LENS PROTOCOL is a composable and decentralized social graph. It lets creators take ownership of their content wherever they go in the digital garden of the decentralized internet, It functions on the polygon Proof Of Stake Blockchain ecosystem. You can read more here [Lens Protocol](https://www.lens.dev/), 
 
 ### Tech Stack : NuxtJs, VueJs, Ethers, GraphQl, Html, Css, BootstrapVue, web3.storage
 
 #### Prerequisites: Javascript, VueJs, knowledge of web3
 
-### Deployed network : Polygon Mumbai
 
 - To create an account please ensure you have a matic testnet token to complete transaction
 
-- Link: https://www.chainwrite.xyz/
-
-#### Available Features
+#### Available Features on chainWrite
         * Link:connecting to metamask
         * signing up to create a profile inorder to login & read post, logging in if you already have an account
         * Logging in if you already have an account
         * Viewing recommended post, user profile
-        * Adding Like (👍) & Dislike (👎) reaction to post
+        * Adding 👍 & Dislike 👎 reaction to post
         * Link:Logging in to blog page to read blogs
         * Link:creating post, saving post to draft, saving post for future readings
 
-#### Things to work on next
-        * Implement an option for users to uplaod a video as cover while creating post using [Livepeer.js](https://docs.livepeer.org/)
+#### future implementation
+        * provide an option for users to uplaod a video as cover while creating post using [Livepeer.js](https://docs.livepeer.org/)
         * writing comment on post
         * Link: Seaching through blogs
        
         
-#### Screenshot of homepage, registration page & blog page shown below
-
+#### Screenshot of landing page
 ![image](./images/homepage.png "Optional Title")
-<!-- ![image](./images/login-screen.JPG "Optional Title")
-![image](./images/blogpage.JPG "Optional Title") -->
+
+#### Screenshot of blog homepage
+![image](./images/blogpage.JPG "Optional Title")
+
+#### Screenshot of user profile-page
+![image](./images/profile.png "Optional Title")
+
+#### Screenshot of create post page
+![image](./images/createPost.png "Optional Title")
 
 
-#### How to run locally
+#### How to run project locally
 
 # Nuxt 3 Minimal Starter
 

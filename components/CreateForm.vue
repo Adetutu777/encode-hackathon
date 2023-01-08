@@ -12,7 +12,7 @@
             v-model="getDetails.data.handleName"
             type="text"
             class="form-control"
-            placeholder="e.g adetutu"
+            placeholder="e.g john246"
             aria-label="Username"
             aria-describedby="basic-addon1"
           />
@@ -150,5 +150,6 @@ export default {
 <style>
 .submit-btn {
   background: #2c74b3;
+  border: 1px solid red;
 }
 </style>

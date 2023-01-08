@@ -11,7 +11,7 @@
       <b-modal
         v-model="modal.createModal"
         id="modal-2"
-        title="Login or Signup to chainWrite"
+        title="Signup to chainWrite"
       >
         <div class="">
           <div class="">
