@@ -14,7 +14,7 @@
 
 #### LENS PROTOCOL: is a composable and decentralized social graph. It lets creators take ownership of their content wherever they go in the digital garden of the decentralized internet, It functions on the polygon Proof Of Stake Blockchain ecosystem. You can read more here [Lens Protocol](https://www.lens.dev/)
 
-### chainWrite Tech Stack : NuxtJs, VueJs, Ethers, GraphQl, Html, Css, BootstrapVue, web3.storage
+### chainWrite Tech Stack : NuxtJs, VueJs, pinia(state mgt.) Ethers, GraphQl, Html, Css, BootstrapVue, web3.storage
 
 #### Prerequisites: Javascript, VueJs, knowledge of web3
 
@@ -25,13 +25,16 @@
         * Read recommended blogpost
         * Viewing of user profile
         * Adding 👍 &  👎 reaction to post
-        * Creating blogpost, saving post to draft
+        * Creating blogpost (user can either generate images base on request on the post creation page , with option to select their preferred from the carousel imags or add their own cover image from their device ) 
+        * Saving post to draft
 
 #### Future implementation
         * Provide an option for users to upload a video as cover while creating post using [Livepeer.js](https://docs.livepeer.org/)
         * Adding comment reaction on blogpost
         *Seaching through blogs
         *Saving post for future readings
+        *Notification modal to alert users of new posts
+        *Settings to edit users profile page
        
         
 #### Screenshot of landing page
@@ -45,6 +48,9 @@
 
 #### Screenshot of create post page
 ![image](./images/createPost.png "post page")
+
+#### You can generate images for your post creation cover photos, its a carousel image with options you can select from.
+![image](./images/generateImg.JPG "post page")
 
 
 #### How to run project locally
