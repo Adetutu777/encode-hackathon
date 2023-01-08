@@ -1,4 +1,4 @@
-*OVERVIEW *
+# *OVERVIEW *
 
 ## Project Name: chainWrite
 
@@ -6,8 +6,9 @@
 
 ## Our Mission: To empower users to own and control their own data and online identity
 
- **To create an account as a new user, please ensure you have matic testnet token to complete transaction**
- **Profile creation for new user takes about 1-2 hrs, while waiting for your profile to get created, you can only login to chainWrite platform to read blogs & once your profile is created successfully you can will have access to all of the available features**
+ - **To create an account as a new user, please ensure you have matic testnet token to complete transaction**
+ 
+ - **Profile creation for new user takes about 1-2 hrs, while waiting for your profile to get created, you can only login to chainWrite platform to read blogs & once your profile is created successfully you can will have access to all of the available features**
 
 - chainWrite Link: https://www.chainwrite.xyz/
 
