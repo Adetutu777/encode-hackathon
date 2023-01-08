@@ -102,7 +102,7 @@
                   <div class="d-flex justify-content-between pt-1">
                     <div class="" @click="() => savePost(item?.id)">
                       <!-- <i class="uil uil-bookmark icon-footer"></i> -->
-                      <BookMark :selected="item.isSaved" />
+                      <!-- <BookMark :selected="item.isSaved" /> -->
                     </div>
                     <div class="d-flex justify-content-between pt-1">
                       <div class="reactions-btn mr-3 d-flex align-items-center">
