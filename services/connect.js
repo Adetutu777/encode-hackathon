@@ -163,13 +163,13 @@ export async function login() {
     appStore.userAddress = address;
     localStorage.setItem("myStoryRefreshToken", accessToken);
     userAccessToken.value = accessToken;
-    const checkUserStatus = await userApi(address);
+    const checkUserStatus = await userApi(address?.toLocaleLowerCase());
 
     await appStore.setStatus(checkUserStatus ?? 0);
 
     if (!currentUser && checkUserStatus == 0) {
       await modal?.toggleCreateModal?.();
-      return;
+      return { userStatus: checkUserStatus };
     }
 
     if (currentUser) {
@@ -185,6 +185,7 @@ export async function login() {
     return {
       accessToken,
       user: currentUser,
+      userStatus: checkUserStatus,
     };
   } catch (err) {
     const error = deepCopy(err);
