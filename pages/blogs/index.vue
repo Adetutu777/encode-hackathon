@@ -76,8 +76,7 @@
                       <NuxtLink :to="'/post/' + item?.id">
                         <img
                           :src="
-                            item?.metadata?.[0]?.url ??
-                            '@/images/children.jpg'
+                            item?.metadata?.[0]?.url ?? '@/images/children.jpg'
                           "
                           @error="replaceByDefault"
                         />
@@ -213,7 +212,7 @@ export default {
     const user = store.currentUser;
 
     const userProfile = store.currentUser?.id;
-    console.log(store.currentUser);
+    // console.log(store.currentUser);
     const addActiveClass = (array = []) => {
       const isIncluded = array.some((i) => i.profile.id == userProfile);
       return isIncluded;
@@ -225,26 +224,22 @@ export default {
     });
 
     const savePost = async (id) => {
-      console.log(id, "id!!!");
       let isSaved = publications.data.some((i) => i.id == id);
       const currentIndex = publications.data.findIndex((i) => i.id == id);
       const prevData = deepCopy(publications.data);
       const tempData = deepCopy(publications.data);
       const currentItem = tempData[currentIndex];
-      console.log(currentItem, currentIndex);
       currentItem.isSaved = isSaved ? false : true;
 
       tempData[currentIndex] = currentItem;
       publications.data = tempData;
-      z;
-      console.l(tempData[currentIndex], "ceckin");
 
       try {
         // const response = await addPost(id);
         // console.log(response);
       } catch (e) {
         publications.data = prevData;
-        console.log(e, "error savin");
+        //console.log(e, "error savin");
       }
     };
     const reactToPost = async (
@@ -342,7 +337,6 @@ export default {
       try {
         const explorer = await clientId.request(exploreQuery);
         const posts = await getPosts();
-        console.log(posts, "postss");
         // console.log(userProfile, "user profile");
         const mappedData = explorer?.explorePublications?.items?.map((i) => {
           const dataMap = i?.metadata?.media?.map((j) => {
@@ -384,7 +378,7 @@ export default {
           };
         });
 
-        console.log("mapped data", mappedData);
+        // console.log("mapped data", mappedData);
         dataStatus.data.loading = false;
       } catch (error) {
         dataStatus.data.error = "Error fetching data";

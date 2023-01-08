@@ -144,6 +144,7 @@ onMounted(() => {
     router.push(`/post/createstory?id=${currentDraftId}`);
   }
 });
+
 const enterTag = () => {
   tag.value = tag.value.trim();
   if (tag.value.length > 0 && tags.value.length < 3) {
@@ -186,12 +187,16 @@ let fileCID;
 const resetForm = () => {
   tags.value = [];
   title.value = "";
-  description.value = "";
-  img.value = "";
   text.value = "";
-  store.currentCoverImage = "";
-  store.deleteDraft(currentDraftId.value);
+  if (creatingStatus.value == "Hurray  Post created 🤗") {
+    store.currentCoverImage = "";
+    store.deleteDraft(currentDraftId.value);
+  }
 };
+
+onUnmounted(() => {
+  resetForm();
+});
 
 const postData = async () => {
   isCreating.value = true;
@@ -253,7 +258,11 @@ const postData = async () => {
     const res = await createPost(prepare, fileCID);
     isSuccess.value = true;
     creatingStatus.value = "Hurray  Post created 🤗";
-    resetForm();
+
+    setTimeout(() => {
+      resetForm();
+      router.push(`/profile/${store.userAddress}`);
+    }, 3000);
   } catch (err) {
     creationError.value = true;
     creatingStatus.value = err?.message ?? "Something went wrong";
