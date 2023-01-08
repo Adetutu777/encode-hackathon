@@ -14,7 +14,12 @@
 
 #### LENS PROTOCOL: is a composable and decentralized social graph. It lets creators take ownership of their content wherever they go in the digital garden of the decentralized internet, It functions on the polygon Proof Of Stake Blockchain ecosystem. You can read more here [Lens Protocol](https://www.lens.dev/)
 
-### chainWrite Tech Stack : NuxtJs, VueJs, pinia(state mgt.) Ethers, GraphQl, Html, Css, BootstrapVue, web3.storage
+### chainWrite Frontend Tech Stack : NuxtJs, VueJs, pinia(state mgt.) Ethers, GraphQl, Html, Css, BootstrapVue, web3.storage
+
+### chainWrite Backend Tech Stack : NodeJs, Express, MongoDb
+### The backend is use to track users that their profile has been created but still pending
+### Backend Github Link: 
+- chainWrite Backend : https://github.com/okeken/chainwrite-backend
 
 #### Prerequisites: Javascript, VueJs, knowledge of web3
 
