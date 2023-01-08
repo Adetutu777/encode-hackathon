@@ -1,10 +1,6 @@
 <template>
   <div class="">
     <div class="">
-      <!-- <span>hello</span>
-    <span>hello</span>
-    <span>hello</span>
-    <span>hello</span> -->
       <button @click="createAccount" :class="`  ${classes} aa`">
         Sign in / Sign Up
       </button>
@@ -54,11 +50,12 @@ const createAccount = async () => {
   try {
     const { accessToken, user, userStatus } = await login();
     const isPending = userStatus == 1;
+    console.log('pender', isPending, 'userStatus', userStatus, 'accessToken', accessToken);
     if (accessToken && user) {
       router.push("/blogs");
     }
 
-    if (isPending && currentUserAdd) {
+    if (isPending) {
       router.push("/blogs");
     }
   } catch (error) {

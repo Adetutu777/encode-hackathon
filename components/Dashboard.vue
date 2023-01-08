@@ -33,7 +33,7 @@
                     <span>Settings</span>
                   </NuxtLink> -->
                   <NuxtLink
-                    :to="`/profile/${appStore.userAddress}`"
+                    :to="`/profile/${appStore?.userAddress}`"
                     class="dropdown d-block">
                     <i class="icon-icons uil uil-user-circle sidebar-left"></i>
                     <span>Profile</span>
@@ -93,7 +93,7 @@ export default {
       //   login();
       // }
     });
-    return { defaultProfile, isPending };
+    return { defaultProfile, isPending,appStore };
   },
 };
 </script>
