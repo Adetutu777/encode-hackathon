@@ -1,6 +1,14 @@
 <template>
   <div class="">
     <!-- Navbar -->
+<b-modal
+      @close="closeModal"
+      v-model="errorStatus"
+      id="reactionError"
+      title="pending profile"
+    >
+      {{ reactionErrorMsg }}
+    </b-modal>
 
     <div class="">
       <Dashboard>
@@ -8,7 +16,7 @@
           <div class="middle-bar">
             <b-skeleton-wrapper :loading="dataStatus.data.loading">
               <template #loading>
-                <div v-for="item in [1, 2, 3, 4, 5]">
+                <div v-for="item in [1, 2, 3, 4, 5]" :key="item">
                   <b-card class="mb-4">
                     <div class="d-flex justify-content-between">
                       <div class="d-flex">
@@ -243,12 +251,33 @@ export default {
         //console.log(e, "error savin");
       }
     };
+
+    const errorStatus = ref(false);
+const reactionErrorMsg = ref("");
+
+const closeModal = () => {
+  reactionErrorMsg.value = "";
+  errorStatus.value = false;
+};
+
     const reactToPost = async (
       typeOfReaction,
       publicationId,
       upVotesReactions,
       downVotesReactions
+      
     ) => {
+       console.log('label', store.currentUserStatus)
+  if (store.currentUserStatus == 1) { 
+    reactionErrorMsg.value = "Pls wait while your pending account get activated on Lens";
+    errorStatus.value = true;
+    return;
+  }
+  if (store.currentUserStatus == 0) {
+    reactionErrorMsg.value = "You  need to create an first";
+    errorStatus.value = true;
+    return;
+  }
       const data = {
         profileId: store.currentUser?.id,
         publicationId,
@@ -404,7 +433,7 @@ export default {
       reactToPost,
       addActiveClass,
       dataStatus,
-      savePost,
+      savePost, errorStatus, reactionErrorMsg, closeModal
     };
   },
 };

@@ -22,7 +22,7 @@
       <!-- <button @click="login">try again</button> -->
     </b-modal>
 
-    <b-modal v-model="isConnected" id="isConnected" title="Signing" centered>
+    <b-modal v-model="isConnected" id="isConnected" title="Signing in" centered>
       <!-- <div>isSigning</div> -->
       <div class="loadingspinner mx-auto"></div>
     </b-modal>
