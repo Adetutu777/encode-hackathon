@@ -19,22 +19,22 @@
 #### Prerequisites: Javascript, VueJs, knowledge of web3
 
 #### Available Features on chainWrite
-        * Connect to your wallet
-        * Creation of profile on Lens for new users
-        * Logging in for returning users who already has an account
-        * Read recommended blogpost
-        * Viewing of user profile
-        * Adding 👍 &  👎 reaction to post
-        * Creating blogpost (user can either generate images base on request on the post creation page , with option to select their preferred from the carousel imags or add their own cover image from their device ) 
-        * Saving post to draft
+        a) Connect to your wallet
+        b) Creation of profile on Lens for new users
+        c) Logging in for returning users who already has an account
+        d) Read recommended blogpost
+        e) Viewing of user profile
+        f) Adding 👍 &  👎 reaction to post
+        g) Creating blogpost (user can either generate images base on request on the post creation page , with option to select their preferred from the carousel imags or add their own cover image from their device ) 
+        h) Saving post to draft
 
 #### Future implementation
-        * Provide an option for users to upload a video as cover while creating post using [Livepeer.js](https://docs.livepeer.org/)
-        * Adding comment reaction on blogpost
-        *Seaching through blogs
-        *Saving post for future readings
-        *Notification modal to alert users of new posts
-        *Settings to edit users profile page
+        a) Provide an option for users to upload a video as cover while creating post using [Livepeer.js]  (https://docs.livepeer.org/)
+        b) Adding comment reaction on blogpost
+        c) Seaching through blogs
+        d) Saving post for future readings
+        e) Notification modal to alert users of new posts
+        f) Settings to edit users profile page
        
         
 #### Screenshot of landing page
