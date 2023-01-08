@@ -81,7 +81,6 @@
 <script>
 import { login } from "../services/connect";
 import { useAppStore } from "../store/app";
-import { checkUseStatus } from "~/util";
 import { computed } from "vue";
 export default {
   setup() {

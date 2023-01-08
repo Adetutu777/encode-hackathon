@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div class="">
-    <!-- <span>hello</span>
+      <!-- <span>hello</span>
     <span>hello</span>
     <span>hello</span>
     <span>hello</span> -->
@@ -29,7 +29,6 @@
 
 <script setup>
 import { userAddress } from "../store";
-import { checkUseStatus } from "~/util";
 import { useAppStore } from "~/store/app";
 import { truncateEthAddress } from "../util";
 import { login } from "../services/connect";
@@ -53,8 +52,8 @@ const currentUserAdd = appStore.userAddress;
 
 const createAccount = async () => {
   try {
-    const { accessToken, user } = await login();
-    const isPending = checkUseStatus(currentUserAdd);
+    const { accessToken, user, userStatus } = await login();
+    const isPending = userStatus == 1;
     if (accessToken && user) {
       router.push("/blogs");
     }
