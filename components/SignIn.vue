@@ -14,7 +14,7 @@
         </div>
 
         <div>
-          <b-button @click="login" class="mx-1" variant="light">
+          <b-button @click="login" class="mx-1 btn-try" variant="light">
             Try Again
           </b-button>
         </div>
@@ -64,5 +64,9 @@ const closeModal = () => {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.btn-try {
+  border: 1px solid #2c74b3;
 }
 </style>
