@@ -233,6 +233,7 @@ export default {
 
       tempData[currentIndex] = currentItem;
       publications.data = tempData;
+      console.log(currentItem, "current item");
 
       try {
         // const response = await addPost(id);

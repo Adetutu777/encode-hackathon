@@ -2,6 +2,15 @@
   <div class="container mt-3">
     <profileId />
 
+    <b-modal
+      @close="closeModal"
+      v-model="errorStatus"
+      id="reactionError"
+      title="Error Occurred"
+    >
+      {{ reactionErrorMsg }}
+    </b-modal>
+
     <b-modal v-model="isCreating" title="Creating Post ">
       <div class="m-auto text-center">
         <div v-if="creationError" class="text-center">
@@ -129,10 +138,6 @@ const currentStoreId = computed(() => store.currentDraftId);
 
 let currentDraftId = editId.value ? +editId.value : +currentStoreId.value + 1;
 
-const isPending = computed(() =>
-  store.isPending.find((i) => (i.address = store.userAddress))
-);
-
 onMounted(() => {
   if (editId.value) {
     const draft = drafts.value.find((item) => item.id == editId.value);
@@ -184,6 +189,16 @@ const saveDraft = async () => {
 
 let fileCID;
 
+const errorStatus = ref(false);
+const reactionErrorMsg = ref("");
+
+// @close="closeModal"
+// v-model="errorStatus"
+const closeModal = () => {
+  reactionErrorMsg.value = "";
+  errorStatus.value = false;
+};
+
 const resetForm = () => {
   tags.value = [];
   title.value = "";
@@ -199,6 +214,17 @@ onUnmounted(() => {
 });
 
 const postData = async () => {
+  if (store.currentUserStatus == 1) {
+    reactionErrorMsg.value = "Your account is still pending";
+    errorStatus.value = true;
+    return;
+  }
+  if (store.currentUserStatus == 0) {
+    reactionErrorMsg.value = "You  need to create an first";
+    errorStatus.value = true;
+    return;
+  }
+  // currentUserStatus
   isCreating.value = true;
   creationError.value = false;
   let img = uploadIm.value;
