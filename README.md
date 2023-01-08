@@ -2,11 +2,13 @@
 
 ### Tech Stack : NuxtJs, VueJs, Ethers, GraphQl, Html, Css, BootstrapVue, web3.storage
 
+#### Prerequisites: Javascript, VueJs, knowledge of web3
+
 ### Deployed network : Polygon Mumbai
 
 - To create an account please ensure you have a matic testnet token to complete transaction
 
-- Link: https://chainwrite.netlify.app/
+- Link: https://www.chainwrite.xyz/
 
 #### Available Features
         * Link:connecting to metamask
@@ -17,10 +19,6 @@
         * Link:Logging in to blog page to read blogs
         * Link:creating post, saving post to draft, saving post for future readings
 
-##### Currently working on
-        * writing comment on post
-        * writing comment on post
-        
 #### Things to work on next
         * Implement an option for users to uplaod a video as cover while creating post using [Livepeer.js](https://docs.livepeer.org/)
         * writing comment on post
