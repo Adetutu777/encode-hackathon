@@ -90,9 +90,9 @@ export default {
     const statusUser = appStore.currentUserStatus;
     const isPending = statusUser == 1;
     onMounted(() => {
-      if (!appStore.isConnected) {
-        login();
-      }
+      // if (!appStore.isConnected) {
+      //   login();
+      // }
     });
     return { defaultProfile, isPending };
   },

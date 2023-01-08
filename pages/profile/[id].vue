@@ -82,7 +82,6 @@ export default {
   layout: "no-sidebar",
   setup() {
     const route = useRoute();
-    console.log("routy", route.params);
     const currentTab = ref(0);
     const userData = reactive({
       data: {},
