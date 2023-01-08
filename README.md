@@ -3,9 +3,12 @@
 ## Project Name: chainWrite
 
 ## chainWrite is a social media blogging Dapp integrated with lens protocol & deployed on Polygon Mumbai
+
+## Our Mission: To empower users to own and control their own data and online identity
+
 - To create an account as a new user, please ensure you have matic testnet token to complete transaction
 
-- Link: https://www.chainwrite.xyz/
+- chainWrite Link: https://www.chainwrite.xyz/
 
 #### LENS PROTOCOL is a composable and decentralized social graph. It lets creators take ownership of their content wherever they go in the digital garden of the decentralized internet, It functions on the polygon Proof Of Stake Blockchain ecosystem. You can read more here [Lens Protocol](https://www.lens.dev/)
 
