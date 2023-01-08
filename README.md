@@ -1,8 +1,9 @@
-## OVERVIEW 
+# OVERVIEW 
 
 ## Project Name: chainWrite
 
 ## chainWrite is a social media blogging Dapp integrated with lens protocol & deployed on Polygon Mumbai
+- To create an account as a new user, please ensure you have matic testnet token to complete transaction
 
 - Link: https://www.chainwrite.xyz/
 
@@ -12,35 +13,32 @@
 
 #### Prerequisites: Javascript, VueJs, knowledge of web3
 
-
-- To create an account please ensure you have a matic testnet token to complete transaction
-
 #### Available Features on chainWrite
         * Link:connecting to metamask
         * signing up to create a profile inorder to login & read post, logging in if you already have an account
         * Logging in if you already have an account
         * Viewing recommended post, user profile
-        * Adding 👍 & Dislike 👎 reaction to post
+        * Adding 👍 &  👎 reaction to post
         * Link:Logging in to blog page to read blogs
         * Link:creating post, saving post to draft, saving post for future readings
 
 #### future implementation
-        * provide an option for users to uplaod a video as cover while creating post using [Livepeer.js](https://docs.livepeer.org/)
+        * provide an option for users to upload a video as cover while creating post using [Livepeer.js](https://docs.livepeer.org/)
         * writing comment on post
         * Link: Seaching through blogs
        
         
 #### Screenshot of landing page
-![image](./images/homepage.png "Optional Title")
+![image](./images/homepage.png "landing page")
 
 #### Screenshot of blog homepage
-![image](./images/blogpage.JPG "Optional Title")
+![image](./images/blogpage.JPG "blog homepage")
 
 #### Screenshot of user profile-page
-![image](./images/profile.png "Optional Title")
+![image](./images/profile.png "profile page")
 
 #### Screenshot of create post page
-![image](./images/createPost.png "Optional Title")
+![image](./images/createPost.png "post page")
 
 
 #### How to run project locally
