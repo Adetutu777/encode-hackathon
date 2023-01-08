@@ -7,7 +7,7 @@
 
 - Link: https://www.chainwrite.xyz/
 
-#### LENS PROTOCOL is a composable and decentralized social graph. It lets creators take ownership of their content wherever they go in the digital garden of the decentralized internet, It functions on the polygon Proof Of Stake Blockchain ecosystem. You can read more here [Lens Protocol](https://www.lens.dev/), 
+#### LENS PROTOCOL is a composable and decentralized social graph. It lets creators take ownership of their content wherever they go in the digital garden of the decentralized internet, It functions on the polygon Proof Of Stake Blockchain ecosystem. You can read more here [Lens Protocol](https://www.lens.dev/)
 
 ### Tech Stack : NuxtJs, VueJs, Ethers, GraphQl, Html, Css, BootstrapVue, web3.storage
 
@@ -15,17 +15,17 @@
 
 #### Available Features on chainWrite
         * Link:connecting to metamask
-        * signing up to create a profile inorder to login & read post, logging in if you already have an account
-        * Logging in if you already have an account
-        * Viewing recommended post, user profile
+        * signing up to create a profile for new users 
+        * Logging in for returning userswho already has ana account
+        * Reading recommended blogpost
+        * Viewing of user profile
         * Adding 👍 &  👎 reaction to post
-        * Link:Logging in to blog page to read blogs
-        * Link:creating post, saving post to draft, saving post for future readings
+        * Creating blogpost, saving post to draft, saving post for future readings
 
-#### future implementation
-        * provide an option for users to upload a video as cover while creating post using [Livepeer.js](https://docs.livepeer.org/)
-        * writing comment on post
-        * Link: Seaching through blogs
+#### Future implementation
+        * Provide an option for users to upload a video as cover while creating post using [Livepeer.js](https://docs.livepeer.org/)
+        * Adding comment reaction on blogpost
+        *Seaching through blogs
        
         
 #### Screenshot of landing page
