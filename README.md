@@ -1,4 +1,4 @@
-# OVERVIEW 
+# *OVERVIEW *
 
 ## Project Name: chainWrite
 
@@ -6,11 +6,12 @@
 
 ## Our Mission: To empower users to own and control their own data and online identity
 
-- To create an account as a new user, please ensure you have matic testnet token to complete transaction
+- **To create an account as a new user, please ensure you have matic testnet token to complete transaction**
+- **Profile creation for new user takes about 1-2 hrs, while waiting for your profile to get created, you can only login to chainWrite platform to read blogs & once your profile is created successfully you can will have access to all of the available features**
 
 - chainWrite Link: https://www.chainwrite.xyz/
 
-#### LENS PROTOCOL is a composable and decentralized social graph. It lets creators take ownership of their content wherever they go in the digital garden of the decentralized internet, It functions on the polygon Proof Of Stake Blockchain ecosystem. You can read more here [Lens Protocol](https://www.lens.dev/)
+#### LENS PROTOCOL is a composable and decentralized social graph. It lets creators take ownership of their content wherever they go in the digital garden of the decentralized internet, It functions on the polygon Proof Of Stake Blockchain ecosystem. You can read more here [Lens Protocol](https://www.lens.dev/) to learn more about thel Lens protocol
 
 ### Tech Stack : NuxtJs, VueJs, Ethers, GraphQl, Html, Css, BootstrapVue, web3.storage
 
