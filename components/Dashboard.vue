@@ -33,9 +33,8 @@
                     <span>Settings</span>
                   </NuxtLink> -->
                   <NuxtLink
-                    :to="`/profile/${defaultProfile?.ownedBy}`"
-                    class="dropdown d-block"
-                  >
+                    :to="`/profile/${appStore.userAddress}`"
+                    class="dropdown d-block">
                     <i class="icon-icons uil uil-user-circle sidebar-left"></i>
                     <span>Profile</span>
                   </NuxtLink>

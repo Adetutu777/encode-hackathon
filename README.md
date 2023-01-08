@@ -1,6 +1,6 @@
 # **OVERVIEW**
 
-## Project Name: chainWrite
+## Project Title: chainWrite
 
 ## chainWrite is a social media blogging Dapp integrated with lens protocol & deployed on Polygon Mumbai
 
