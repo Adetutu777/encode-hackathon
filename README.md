@@ -49,6 +49,9 @@
 #### Screenshot of create post page
 ![image](./images/createPost.png "post page")
 
+#### Screenshot of creating post page
+![image](./images/signingT.JPG "post page")
+
 #### You can generate images for your post creation cover photos, its a carousel image with options you can select from.
 ![image](./images/generateImg.JPG "post page")
 
