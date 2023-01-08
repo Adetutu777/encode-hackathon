@@ -1,17 +1,18 @@
 <template>
-    <div class="wrapper">
-
-    </div>
+  <div>
+    <!-- <Header /> -->
+    dksldksldkslkl
+    <slot />
+    <!-- <Footer /> -->
+  </div>
 </template>
 
 <script>
-    export default {
-        
-    }
+export default {};
 </script>
 
 <style>
 .wrapper {
-    background: red;
+  background: red;
 }
 </style>

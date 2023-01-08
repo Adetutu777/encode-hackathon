@@ -1,20 +1,18 @@
 <template>
-<div class="aa"> 
-<Nuxt />
-   </div>
+  <div>
+    <SignIn />
+    <slot />
+  </div>
 </template>
 
 <script>
 export default {
-  setup () {
-  }
-}
+  setup() {},
+};
 </script>
 
 <style scoped>
-
 /* html {
     font-family: "Aktiv Grotesk";
 } */
-
 </style>

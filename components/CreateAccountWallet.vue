@@ -34,6 +34,7 @@ import { useAppStore } from "~/store/app";
 import { truncateEthAddress } from "../util";
 import { login } from "../services/connect";
 import { useModal } from "../store/modal";
+import { deepCopy } from "~~/util";
 
 const modal = useModal();
 
@@ -53,10 +54,7 @@ const currentUserAdd = appStore.userAddress;
 const createAccount = async () => {
   try {
     const { accessToken, user } = await login();
-    // console.log("accessToken inner", accessToken, user);
-    // await login();
     const isPending = checkUseStatus(currentUserAdd);
-
     if (accessToken && user) {
       router.push("/blogs");
     }
@@ -65,13 +63,12 @@ const createAccount = async () => {
       router.push("/blogs");
     }
   } catch (error) {
-    console.log("error connections", error);
+    throw error;
   }
 };
 </script>
 
 <style>
-
 .btn-signup {
   border: 1px solid #ffffff;
   background: transparent;
@@ -81,7 +78,7 @@ const createAccount = async () => {
   font-weight: bold;
 }
 .aa:hover {
-  background: #2C74B3 ;
+  background: #2c74b3;
   color: #ffffff;
 }
 </style>

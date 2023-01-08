@@ -3,7 +3,7 @@ import injectedModule from "@web3-onboard/injected-wallets";
 // import coinbaseModule from "@web3-onboard/coinbase";
 // import gnosisModule from "@web3-onboard/gnosis";
 // import portisModule from "@web3-onboard/portis";
-import storyTribe from "../images/GroupWrite.svg";
+import chainWrite from "../images/GroupWrite.svg";
 import { useModal } from "../store/modal";
 import { ethers } from "ethers";
 
@@ -24,6 +24,7 @@ import {
 } from "../store";
 import { useAppStore } from "../store/app";
 import { userApi } from "./api";
+import { deepCopy } from "~~/util";
 
 const modal = useModal();
 const injected = injectedModule();
@@ -34,15 +35,14 @@ const injected = injectedModule();
 // });
 
 const appStore = useAppStore();
-const store = computed(() => appStore);
 
 const infuraKey = "ba80361523fe423bb149026a490266f0";
 const rpcUrl = `https://mainnet.infura.io/v3/${infuraKey}`;
 init({
   appMetadata: {
     name: "chainWrite",
-    icon: storyTribe,
-    logo: storyTribe,
+    icon: chainWrite,
+    logo: chainWrite,
     description: "Bringing Communication to web3",
     recommendedInjectedWallets: [
       { name: "Coinbase", url: "https://wallet.coinbase.com/" },
@@ -71,7 +71,7 @@ init({
     },
   },
 
-  wallets: [injected, ],
+  wallets: [injected],
   // wallets: [injected, portisConnect, coinbaseConnect, gnosisConnect],
   chains: [
     {
@@ -86,16 +86,29 @@ init({
   ],
 });
 
-const { connectWallet, wallets, setChain, connectedChain } = useOnboard();
+const {
+  connectWallet,
+  wallets,
+  setChain,
+  connectedChain,
+  disconnectWallet,
+  disconnectConnectedWallet,
+} = useOnboard();
 
 export const connect = async () => {
+  appStore.connectError = null;
   try {
     const con = await connectWallet();
-    appStore.isConnected = true;
+    // appStore.isConnected = true;
+    appStore.isConnecting = true;
     return con;
   } catch (error) {
-    console.log("error connections", error);
+    const err = deepCopy(error);
+    // console.log(err.message, "erro connectin!!!");
+    appStore.connectError = err?.reason ?? "Error connecting wallet";
+    console.log("error connections", err);
   }
+  appStore.isConnecting = false;
 };
 
 export async function getUserProfile(userAddress) {
@@ -115,8 +128,10 @@ export async function getUserProfile(userAddress) {
 }
 
 export async function login() {
+  appStore.connectError = null;
   try {
     await connect();
+    // appStore.isConnecting = true;
     const currentId = parseInt(connectedChain.value.id);
 
     if (currentId !== 80001) {
@@ -124,7 +139,6 @@ export async function login() {
     }
     const address = wallets.value?.[0]?.accounts[0]?.address;
     const currentUser = await getUserProfile(address);
-    console.log(currentUser, "current user!!!");
     userAddress.value = address;
     isConnected.value = true;
 
@@ -166,14 +180,19 @@ export async function login() {
       await appStore.setStatus(updateUser);
     }
 
+    appStore.isConnected = true;
+
     return {
       accessToken,
       user: currentUser,
     };
   } catch (err) {
-    console.log("Error signing in: ", err);
+    const error = deepCopy(err);
+    await disconnectConnectedWallet();
+    appStore.connectError = error?.reason ?? "Error Connecting ";
     throw err;
   } finally {
+    appStore.isConnecting = false;
     isConnecting.value = false;
   }
 }
