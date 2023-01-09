@@ -8,7 +8,7 @@
 
  - *To **create an account as a new user, please ensure you have matic testnet token to complete** transaction*
 
- - *Profile creation for new user takes about 1-2 hrs, **while waiting for your profile to get created, you can only login to chainWrite platform to read blogs & once your profile is created successfully you will have access to all of the available** features*
+ - *Profile creation for new user takes about 1-2 hrs on Lens, **while waiting for your profile to get created, you can only login to chainWrite platform to read blogs, view users profile & once your profile is created successfully you will have access to all of the available features e.g creating your blogpost, adding like & unlike reaction to post, view blogpost &** more*
 
 - chainWrite Link: https://www.chainwrite.xyz/
 
@@ -40,6 +40,7 @@
         d) Saving post for future readings
         e) Notification modal to alert users of new posts
         f) Settings to edit users profile page
+        g) Implement the follow user reaction
        
         
 #### Screenshot of landing page
