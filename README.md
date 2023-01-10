@@ -8,13 +8,18 @@
 
  - *To **create an account as a new user, please ensure you have matic testnet token to complete** transaction*
 
- - *Profile creation for new user takes about 1-2 hrs, **while waiting for your profile to get created, you can only login to chainWrite platform to read blogs & once your profile is created successfully you will have access to all of the available** features*
+ - *Profile creation for new user takes about 1-2 hrs on Lens, **while waiting for your profile to get created, you can only login to chainWrite platform to read blogs, view users profile & once your profile is created successfully you will have access to all of the available features e.g creating your blogpost, adding like & unlike reaction to post, view blogpost &** more*
 
 - chainWrite Link: https://www.chainwrite.xyz/
 
 #### LENS PROTOCOL: is a composable and decentralized social graph. It lets creators take ownership of their content wherever they go in the digital garden of the decentralized internet, It functions on the polygon Proof Of Stake Blockchain ecosystem. You can read more here [Lens Protocol](https://www.lens.dev/)
 
-### chainWrite Tech Stack : NuxtJs, VueJs, pinia(state mgt.) Ethers, GraphQl, Html, Css, BootstrapVue, web3.storage
+### chainWrite Frontend Tech Stack : NuxtJs, VueJs, pinia(state mgt.) Ethers, GraphQl, Html, Css, BootstrapVue, web3.storage
+
+### chainWrite Backend Tech Stack : NodeJs, Express, MongoDb
+### The backend is use to track users that their profile has been created but still pending
+### Backend Github Link: 
+- chainWrite Backend : https://github.com/okeken/chainwrite-backend
 
 #### Prerequisites: Javascript, VueJs, knowledge of web3
 
@@ -35,6 +40,7 @@
         d) Saving post for future readings
         e) Notification modal to alert users of new posts
         f) Settings to edit users profile page
+        g) Implement the follow user reaction
        
         
 #### Screenshot of landing page
@@ -48,6 +54,9 @@
 
 #### Screenshot of create post page
 ![image](./images/createPost.png "post page")
+
+#### Screenshot of creating post page
+![image](./images/signingT.JPG "post page")
 
 #### You can generate images for your post creation cover photos, its a carousel image with options you can select from.
 ![image](./images/generateImg.JPG "post page")

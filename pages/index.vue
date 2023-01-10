@@ -77,12 +77,15 @@
                 >
               </h1>
               <p class="about-text">
-                ChainWrite was founded in 2023 by a team of experienced
+                <!-- ChainWrite was founded in 2023 by a team of experienced
                 developers and entrepreneurs who wanted to make a difference. We
                 are committed to developing a social media platform that is
                 secure and private, while also being easy to use. We want our
                 users to feel confident that their data is not being shared or
-                sold, or exploited in any way.
+                sold, or exploited in any way. -->
+
+ Welcome to our decentralized blogging app! Our platform allows you to share your thoughts, ideas, and musings with a community of like-minded individuals in a secure and censorship-resistant environment. All of your content is stored on a decentralized network, which means that no single entity has control over what you post or share. This ensures that your freedom of expression is protected, and that you remain in control of your online presence. Whether you're a seasoned blogger or new to the world of digital publishing, we invite you to join our growing community and start sharing your voice today.
+
               </p>
             </div>
           </div>
