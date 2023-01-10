@@ -31,7 +31,7 @@
       </div>
       <div class="col-md-7">
         <label for="coverImage" class="border p-2 rounded"> Change </label>
-        <button class="btn" @click="handleCancel">X</button>
+        <button type="button" class="btn" @click="handleCancel">X</button>
       </div>
     </div>
   </div>

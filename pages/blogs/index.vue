@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <!-- Navbar -->
-<b-modal
+    <b-modal
       @close="closeModal"
       v-model="errorStatus"
       id="reactionError"
@@ -13,31 +13,13 @@
     <div class="">
       <Dashboard>
         <template v-slot:middle>
-          <div class="middle-bar">
+          <div v-if="!error" class="middle-bar">
             <b-skeleton-wrapper :loading="dataStatus.data.loading">
               <template #loading>
                 <div v-for="item in [1, 2, 3, 4, 5]" :key="item">
-                  <b-card class="mb-4">
-                    <div class="d-flex justify-content-between">
-                      <div class="d-flex">
-                        <div class="mr-4 pr-2 skeleton-avatar">
-                          <b-skeleton type="avatar"></b-skeleton>
-                        </div>
-                        <div>
-                          <b-skeleton width="2rem"></b-skeleton>
-                          <b-skeleton width="4rem"></b-skeleton>
-                        </div>
-                      </div>
-                      <b-skeleton width="30%"></b-skeleton>
-                    </div>
-                    <div class="mt-2">
-                      <b-skeleton width="100%" height="10rem"></b-skeleton>
-                    </div>
-                    <div class="d-flex mt-2 justify-content-between">
-                      <b-skeleton width="2rem"></b-skeleton>
-                      <b-skeleton width="6rem"></b-skeleton>
-                    </div>
-                  </b-card>
+                  <div>
+                    <BlogLoading />
+                  </div>
                 </div>
               </template>
 
@@ -76,7 +58,7 @@
                   </div>
 
                   <h5 class="mt-3" v-if="item?.mainPost?.metadata?.description">
-                    {{ item?.mainPost }}
+                    <!-- {{ item?.mainPost }} -->
                     {{ item?.mainPost?.metadata?.description?.slice(0, 70) }}...
                   </h5>
                   <div class="crd mx-auto" style="">
@@ -120,7 +102,7 @@
                           <ArrowUp :selected="item?.stats?.upIncluded" />
                         </div>
                         <div class="reactions-num">
-                          {{ item?.stats?.upvotes.length }}
+                          {{ item?.stats?.upvotes?.length }}
                         </div>
                       </div>
                       <div
@@ -140,7 +122,7 @@
                           <ArrowDown :selected="item?.stats?.downIncluded" />
                         </div>
                         <div class="reactions-num">
-                          {{ item?.stats?.downvotes.length }}
+                          {{ item?.stats?.downvotes?.length }}
                         </div>
                       </div>
                     </div>
@@ -148,6 +130,15 @@
                 </div>
               </div>
             </b-skeleton-wrapper>
+          </div>
+          <div
+            v-if="dataStatus.data.error"
+            class="d-flex align-items-center justify-content-center flex-column"
+          >
+            <div class="mb-3">
+              {{ dataStatus.data.errorMsg }}
+            </div>
+            <button class="btn-draft" @click="userQuery">try again</button>
           </div>
         </template>
 
@@ -211,6 +202,7 @@ export default {
     });
     const dataStatus = reactive({
       data: {
+        data: [],
         loading: true,
         error: false,
         errorMsg: "",
@@ -232,6 +224,7 @@ export default {
     });
 
     const savePost = async (id) => {
+      if (id) return;
       let isSaved = publications.data.some((i) => i.id == id);
       const currentIndex = publications.data.findIndex((i) => i.id == id);
       const prevData = deepCopy(publications.data);
@@ -244,7 +237,7 @@ export default {
       console.log(currentItem, "current item");
 
       try {
-        // const response = await addPost(id);
+        const response = await addPost(currentItem.id);
         // console.log(response);
       } catch (e) {
         publications.data = prevData;
@@ -253,31 +246,31 @@ export default {
     };
 
     const errorStatus = ref(false);
-const reactionErrorMsg = ref("");
+    const reactionErrorMsg = ref("");
 
-const closeModal = () => {
-  reactionErrorMsg.value = "";
-  errorStatus.value = false;
-};
+    const closeModal = () => {
+      reactionErrorMsg.value = "";
+      errorStatus.value = false;
+    };
 
     const reactToPost = async (
       typeOfReaction,
       publicationId,
       upVotesReactions,
       downVotesReactions
-      
     ) => {
-       console.log('label', store.currentUserStatus)
-  if (store.currentUserStatus == 1) { 
-    reactionErrorMsg.value = "Pls wait while your pending account get activated on Lens";
-    errorStatus.value = true;
-    return;
-  }
-  if (store.currentUserStatus == 0) {
-    reactionErrorMsg.value = "You  need to create an first";
-    errorStatus.value = true;
-    return;
-  }
+      // console.log("label", store.currentUserStatus);
+      if (store.currentUserStatus == 1) {
+        reactionErrorMsg.value =
+          "Pls wait while your pending account get activated on Lens";
+        errorStatus.value = true;
+        return;
+      }
+      if (store.currentUserStatus == 0) {
+        reactionErrorMsg.value = "You  need to create an first";
+        errorStatus.value = true;
+        return;
+      }
       const data = {
         profileId: store.currentUser?.id,
         publicationId,
@@ -287,7 +280,7 @@ const closeModal = () => {
       const prevData = deepCopy(publications.data);
       const findIndex = tempData.findIndex((i) => i.id == publicationId);
       let currentItem = tempData[findIndex];
-      console.log(currentItem, "current item");
+      // console.log(currentItem, "current item");
 
       let upIncluded = currentItem.stats.upvotes.some(
         (i) => i.profile.id == userProfile
@@ -364,20 +357,25 @@ const closeModal = () => {
     };
 
     const userQuery = async () => {
+      dataStatus.data.error = false;
+      dataStatus.data.errorMsg = "";
+      dataStatus.data.loading = true;
       try {
         const explorer = await clientId.request(exploreQuery);
         const posts = await getPosts();
         // console.log(userProfile, "user profile");
-        const mappedData = explorer?.explorePublications?.items?.map((i) => {
-          const dataMap = i?.metadata?.media?.map((j) => {
-            return { ...j, url: formatIpfdImg(j?.original?.url) };
+        const mappedData = explorer?.explorePublications?.items
+          ?.filter((i) => i.__typename == "Post")
+          .map((i) => {
+            const dataMap = i?.metadata?.media?.map((j) => {
+              return { ...j, url: formatIpfdImg(j?.original?.url) };
+            });
+            return {
+              ...i,
+              isSaved: posts.data.some((k) => k.postId == i.id),
+              metadata: dataMap,
+            };
           });
-          return {
-            ...i,
-            isSaved: posts.data.some((k) => k.postId == i.id),
-            metadata: dataMap,
-          };
-        });
         publications.data = mappedData ?? publications.data;
         const mappedArr = mappedData.map((i) => i.id);
         const reactionData = await whoReactedPub(mappedArr);
@@ -408,12 +406,13 @@ const closeModal = () => {
           };
         });
 
-        // console.log("mapped data", mappedData);
         dataStatus.data.loading = false;
       } catch (error) {
-        dataStatus.data.error = "Error fetching data";
+        dataStatus.data.error = true;
+        dataStatus.data.errorMsg = "Error Fetching Data";
         console.log("error", error);
       }
+
       dataStatus.data.loading = false;
     };
 
@@ -433,7 +432,11 @@ const closeModal = () => {
       reactToPost,
       addActiveClass,
       dataStatus,
-      savePost, errorStatus, reactionErrorMsg, closeModal
+      savePost,
+      errorStatus,
+      reactionErrorMsg,
+      closeModal,
+      userQuery,
     };
   },
 };

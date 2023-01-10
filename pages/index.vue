@@ -32,7 +32,10 @@
               </p>
 
               <div class="d-flex mt-4">
-                <button class="btn-one"><b>Get started</b></button>
+                <CreateAccountWallet
+                  classes="btn-one fw-bold"
+                  actionText="Get started"
+                />
               </div>
             </div>
             <!-- col-two -->

@@ -33,7 +33,6 @@ export const truncateEthAddress = (address) => {
 };
 
 export const convertBase64 = (blob) => {
-  console.log(blob, "blov!!!!");
   if (typeof blob == "string") {
     return blob;
   }

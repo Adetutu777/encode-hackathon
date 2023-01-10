@@ -1404,8 +1404,8 @@ export const exploreQuery = `
 query ExplorePublications {
   explorePublications(request: {
     sortCriteria: TOP_COMMENTED,
-    publicationTypes: [POST, COMMENT, MIRROR],
-    limit: 10
+    publicationTypes: [POST],
+    limit: 30
   }) {
     items {
       __typename 

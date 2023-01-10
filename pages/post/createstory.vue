@@ -246,9 +246,7 @@ const postData = async () => {
     await wait(10000);
 
     const [p1, p2] = await Promise.all([
-      axios.get(`https://${fileCID}.ipfs.w3s.link/`),
-      // axios.get(`
-      // https://ipfs.io/ipfs/${img}`),
+      axios.get(`https://ipfs.io/ipfs/${fileCID}`),
     ]);
     creatingStatus.value = "Creating post";
 
@@ -258,12 +256,14 @@ const postData = async () => {
 
     setTimeout(() => {
       resetForm();
-      router.push(`/profile/${store.userAddress}`);
+      // window.location.href = `/profile/${store.userAddress}`;
+      // router.push(`/profile/${store.userAddress}`);
+      router.push(`/blogs`);
     }, 3000);
   } catch (err) {
     creationError.value = true;
     creatingStatus.value = err?.message ?? "Something went wrong";
-    console.log(err, "error ");
+
     // if (store.isPending) {
     //   creatingStatus.value = "Please Wait, Your Account is still Pending";
     // }

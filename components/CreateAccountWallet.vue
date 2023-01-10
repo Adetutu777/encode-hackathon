@@ -2,7 +2,7 @@
   <div class="">
     <div class="">
       <button @click="createAccount" :class="`  ${classes} aa`">
-        Sign in / Sign Up
+        {{ actionText }}
       </button>
       <b-modal
         v-model="modal.createModal"
@@ -41,6 +41,10 @@ const props = defineProps({
     type: String,
     default: "btn-signup",
   },
+  actionText: {
+    type: String,
+    default: "Sign in / Sign Up",
+  },
 });
 const router = useRouter();
 const appStore = useAppStore();
@@ -50,7 +54,6 @@ const createAccount = async () => {
   try {
     const { accessToken, user, userStatus } = await login();
     const isPending = userStatus == 1;
-    console.log('pender', isPending, 'userStatus', userStatus, 'accessToken', accessToken);
     if (accessToken && user) {
       router.push("/blogs");
     }

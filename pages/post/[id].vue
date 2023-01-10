@@ -2,45 +2,56 @@
   <div class="">
     <Dashboard>
       <template v-slot:middle>
-        <div class="feeds">
+        <div v-if="viewBlog.loading">
+          <BlogLoading />
+        </div>
+        <div
+          v-if="!!viewBlog.error"
+          class="d-flex align-items-center justify-content-center flex-column"
+        >
+          <div class="mb-3">
+            {{ viewBlog.errorMsg }}
+          </div>
+          <button class="btn-draft" @click="getPublication">Try Again</button>
+        </div>
+        <div v-if="!viewBlog.loading" class="feeds">
           <div class="feed">
             <div class="head">
               <div class="use">
-              <div class="d-flex">
-                <div class="profile-photo">
-                  <JazzIcon />
-                </div>
+                <div class="d-flex">
+                  <div class="profile-photo">
+                    <JazzIcon />
+                  </div>
 
-                <div class="">
-                <NuxtLink
-                  class="top-icon"
-                  :to="`/profile/${viewBlog?.data?.profile?.ownedBy}`"
-                >
-                <div class="icon-jaz">
-                  <div class="details name-icon">
-                    <h5>{{ viewBlog?.data?.profile?.name }}</h5>
+                  <div class="">
+                    <NuxtLink
+                      class="top-icon"
+                      :to="`/profile/${viewBlog?.data?.profile?.ownedBy}`"
+                    >
+                      <div class="icon-jaz">
+                        <div class="details name-icon">
+                          <h5>{{ viewBlog?.data?.profile?.name }}</h5>
+                        </div>
+                        <div class="date-icon">
+                          {{ viewBlog?.data?.profile?.handle }} -
+                          {{ dateFormatter(viewBlog?.data?.createdAt) }}
+                        </div>
+                      </div>
+                    </NuxtLink>
                   </div>
-                  <div class="date-icon">
-                    {{ viewBlog?.data?.profile?.handle }} -
-                    {{ dateFormatter(viewBlog?.data?.createdAt) }}
-                  </div>
-                  </div>
-                </NuxtLink>
-                </div>
-
                 </div>
               </div>
               <div class="info"></div>
             </div>
             <div class="title">
-              <h5 class="mt-3 pb-1" >{{ viewBlog?.data?.metadata?.content }}</h5>
+              <h5 class="mt-3 pb-1">{{ viewBlog?.data?.metadata?.content }}</h5>
             </div>
 
             <div class="photo">
               <img
-                class="img-fluid"
+                class="img-fluid w-75"
                 :src="
-                  viewBlog?.data?.metadata?.media[0]?.original?.url ??
+                  viewBlog?.data?.blogUrl ??
                   'https://github.com/DrVickie8/Team-Lens-Developers/blob/main/Lens-folder/images/Frame%202.png?raw=true'
                 "
                 @error="replaceByDefault"
@@ -48,7 +59,6 @@
             </div>
             <div class="blog mt-3">
               <p v-html="viewBlog?.data?.metadata?.description"></p>
-              <!-- <p class="mt-2">{{ viewBlog?.data?.metadata?.description }}</p> -->
             </div>
           </div>
         </div>
@@ -104,6 +114,9 @@ export default {
   setup() {
     const viewBlog = reactive({
       data: {},
+      error: false,
+      loading: true,
+      errorMsg: "",
     });
 
     const route = useRoute();
@@ -115,6 +128,10 @@ export default {
     const id = computed(() => route.params.id);
 
     const getPublication = async () => {
+      viewBlog.loading = true;
+      viewBlog.error = false;
+      viewBlog.errorMsg = "";
+
       try {
         const userPublication = await clientId.request(viewPublicationQuery, {
           id: id.value,
@@ -122,17 +139,22 @@ export default {
         viewBlog.data = userPublication.publication;
 
         const blogPicture = viewBlog?.data?.metadata?.media?.[0]?.original?.url;
-        const blogUrl = blogPicture.startsWith("ipfs")
+        const blogUrl = blogPicture?.startsWith("ipfs")
           ? formatIpfdImg(blogPicture)
           : blogPicture;
         viewBlog.data.blogUrl = blogUrl;
-      } catch (error) {}
+      } catch (error) {
+        viewBlog.error = true;
+        viewBlog.errorMsg = "Error Fetching Data";
+      }
+
+      viewBlog.loading = false;
     };
     const replaceByDefault = (e) => {
       e.target.src =
         "https://github.com/DrVickie8/Team-Lens-Developers/blob/main/Lens-folder/images/Frame%206.png?raw=true";
     };
-    return { viewBlog, id, replaceByDefault, dateFormatter };
+    return { viewBlog, id, replaceByDefault, dateFormatter, getPublication };
   },
 };
 </script>
@@ -148,7 +170,7 @@ export default {
   padding-right: 1rem;
 }
 
-.icon-jaz{
-margin-left: 0.4rem;
+.icon-jaz {
+  margin-left: 0.4rem;
 }
 </style>

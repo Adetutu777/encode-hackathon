@@ -137,14 +137,14 @@ export const whoReactedPub = async (publications = []) => {
   }
 };
 
-export const sendTokenRequest = async (url, method = "GET") => {
+export const sendTokenRequest = async (url, method = "GET", data) => {
   const token = localStorage.getItem("myStoryRefreshToken");
   const instance = axios.create({
     // timeout: 1000,
     headers: { Authorization: "Bearer " + token },
   });
   try {
-    const response = await instance({ method, url });
+    const response = await instance({ method, url, data });
     return response;
   } catch (e) {
     console.log(e, "error!!!");
@@ -161,6 +161,7 @@ export const userApi = async (address, method = "GET") => {
 export const addPost = async (id) => {
   const url = `${baseUrl}post/${id}`;
   const response = await sendTokenRequest(url, "POST");
+  console.log(response);
   return response?.data;
 };
 
