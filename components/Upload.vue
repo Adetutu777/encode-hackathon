@@ -2,30 +2,23 @@
   <div>
     <div class="d-flex align-items-center mr-4">
       <div class="my-0 custom-input" v-show="!!!file">
-        <input @change="handleChange" type="file" id="coverImage" />
+        <input
+          @change="handleChange"
+          type="file"
+          id="coverImage"
+          :class="[isVideo ? 'opacity-0' : '']"
+        />
         <label
           for="coverImage"
           ref="coverImageLabel"
           class="d-flex justify-content-center align-items-center custom-label absolute"
-          >Add Cover
-          <svg
-            class="ml-2"
-            stroke="currentColor"
-            fill="currentColor"
-            stroke-width="0"
-            viewBox="0 0 1024 1024"
-            height="1em"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M864 260H728l-32.4-90.8a32.07 32.07 0 0 0-30.2-21.2H358.6c-13.5 0-25.6 8.5-30.1 21.2L296 260H160c-44.2 0-80 35.8-80 80v456c0 44.2 35.8 80 80 80h704c44.2 0 80-35.8 80-80V340c0-44.2-35.8-80-80-80zM512 716c-88.4 0-160-71.6-160-160s71.6-160 160-160 160 71.6 160 160-71.6 160-160 160zm-96-160a96 96 0 1 0 192 0 96 96 0 1 0-192 0z"
-            ></path>
-          </svg>
+          >{{ labelText }}
+          <span v-html="iconType"> </span>
         </label>
       </div>
     </div>
-    <div class="row align-items-center" v-show="!!file">
+
+    <div class="row align-items-center" v-show="!!file || isVideo">
       <div class="col-md-5">
         <img ref="preview" class="img-fluid" />
       </div>
@@ -39,13 +32,17 @@
 
 <script setup>
 import { useAppStore } from "../store/app";
-import { convertBase64 } from "~/util";
+import { convertBase64, getVideoCover } from "~/util";
 const store = useAppStore();
 const coverImageLabel = ref("");
 const preview = ref("");
+const isVideo = ref(false);
 
 const file = computed(() => {
   if (store.currentCoverImage && typeof preview.value == "object") {
+    if (isVideo.value) {
+      return;
+    }
     preview.value.src = URL.createObjectURL(store?.currentCoverImage);
   }
   return store?.currentCoverImage;
@@ -55,6 +52,12 @@ const emits = defineEmits(["change", "cancel"]);
 
 const handleChange = async (e) => {
   const fileRef = e.target.files[0];
+  isVideo.value = false;
+  if (fileRef.type == "video/mp4") {
+    isVideo.value = true;
+    const imFromVideo = await getVideoCover(fileRef);
+    preview.value.src = await convertBase64(imFromVideo);
+  }
   if (!fileRef) return;
   try {
     emits("change", e);
@@ -66,7 +69,32 @@ const handleChange = async (e) => {
 const handleCancel = () => {
   store.setCoverImage(null);
   coverImageLabel.value.value = "";
+  isVideo.value = false;
 };
+
+const props = defineProps({
+  labelText: {
+    default: "Add Cover",
+    type: String,
+  },
+  iconType: {
+    default: ` <svg
+            class="ml-2"
+            stroke="currentColor"
+            fill="currentColor"
+            stroke-width="0"
+            viewBox="0 0 1024 1024"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M864 260H728l-32.4-90.8a32.07 32.07 0 0 0-30.2-21.2H358.6c-13.5 0-25.6 8.5-30.1 21.2L296 260H160c-44.2 0-80 35.8-80 80v456c0 44.2 35.8 80 80 80h704c44.2 0 80-35.8 80-80V340c0-44.2-35.8-80-80-80zM512 716c-88.4 0-160-71.6-160-160s71.6-160 160-160 160 71.6 160 160-71.6 160-160 160zm-96-160a96 96 0 1 0 192 0 96 96 0 1 0-192 0z"
+            ></path>
+          </svg>`,
+    type: String,
+  },
+});
 </script>
 
 <style>
@@ -109,5 +137,9 @@ const handleCancel = () => {
 .custom-label svg {
   margin-left: 0.5rem;
   transform: scale(1.5);
+}
+
+.opacity-0 {
+  opacity: 0;
 }
 </style>

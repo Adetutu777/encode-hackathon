@@ -19,6 +19,7 @@
     "@pinia/nuxt": "^0.4.6",
     "@pushprotocol/restapi": "^0.2.2",
     "@types/sharp": "^0.31.0",
+    "@videojs-player/vue": "^1.0.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vueuse/core": "^9.9.0",
     "@w3ui/vue-uploader": "^3.0.0",
@@ -38,9 +39,12 @@
     "graphql": "16.6.0",
     "graphql-request": "5.0.0",
     "jquery": "^3.6.1",
+    "nuxt-video-player": "^1.0.17",
     "openai": "^3.1.0",
     "pinia": "^2.0.28",
     "sharp": "^0.31.3",
+    "video.js": "^7.20.3",
+    "vue-core-video-player": "^0.2.0",
     "web3.storage": "^4.4.0",
     "yarn": "^1.22.19"
   }

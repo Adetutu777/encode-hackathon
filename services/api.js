@@ -10,7 +10,7 @@ import LENSHUB from "~/config/lens.json";
 import { storeNFT } from "~/upload";
 import { LENS_HUB_CONTRACT_ADDRESS, baseUrl } from "~/config/constant";
 import axios from "axios";
-import { deepCopy } from "~~/util";
+import { deepCopy, slugify } from "~~/util";
 
 export const preparePost = async (file) => {
   const refreshToken = localStorage.getItem("myStoryRefreshToken");
@@ -41,24 +41,50 @@ export const preparePost = async (file) => {
   }
 };
 
+export const prepareVideo = async (name) => {
+  try {
+    const response = await axios.get(`/api/prepare-video/${slugify(name)}`);
+    return response?.data;
+  } catch (e) {
+    new Error(e);
+  }
+};
+export const uploadVideo = async (url, data) => {
+  console.log(url, data, "before postin data");
+  try {
+    const res = await axios({
+      method: "PUT",
+      url,
+      data,
+    });
+  } catch (e) {
+    console.log(e, "error uploadin");
+    throw new Error(e);
+  }
+};
+
 export const uploadContent = async (data) => {
-  const { imageUpload, description, content, tags } = data;
+  const { assetUrl, description, content, tags, type = "ARTICLE" } = data;
   const jsonData = {
     version: "2.0.0",
-    mainContentFocus: "ARTICLE",
+    mainContentFocus: type,
     metadata_id: uuidv4(),
     description,
     locale: "en-US",
     content,
     external_url: null,
-    image: `https://${imageUpload ? imageUpload : "0x0"}.ipfs.w3s.link/`,
-    imageMimeType: "image/png",
+    ...(type == "ARTICLE" && {
+      image: `https://${assetUrl ? assetUrl : "0x0"}.ipfs.w3s.link/`,
+      imageMimeType: "image/png",
+    }),
     name: "Name",
     media: [
       {
-        // item: `https://ipfs.io/ipfs/${imageUpload ? imageUpload : "0x0"}`,
-        item: `https://${imageUpload ? imageUpload : "0x0"}.ipfs.w3s.link/`,
-        type: "image/png",
+        item:
+          type == "ARTICLE"
+            ? `https://${assetUrl ? assetUrl : "0x0"}.ipfs.w3s.link/`
+            : assetUrl,
+        type: type == "ARTICLE" ? "image/png" : "video/mp4",
       },
     ],
     attributes: [],

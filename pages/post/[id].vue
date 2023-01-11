@@ -46,8 +46,11 @@
             <div class="title">
               <h5 class="mt-3 pb-1">{{ viewBlog?.data?.metadata?.content }}</h5>
             </div>
+            <div v-if="isVideo" class="mb-4 mx-auto">
+              <video-player :options="videoOptions" />
+            </div>
 
-            <div class="photo">
+            <div class="photo" v-if="!isVideo">
               <img
                 class="img-fluid w-75"
                 :src="
@@ -126,6 +129,12 @@ export default {
     });
 
     const id = computed(() => route.params.id);
+    const isVideo = computed(() => {
+      const video =
+        viewBlog?.data?.metadata?.media?.[0]?.original?.mimeType == "video/mp4";
+
+      return video;
+    });
 
     const getPublication = async () => {
       viewBlog.loading = true;
@@ -154,7 +163,29 @@ export default {
       e.target.src =
         "https://github.com/DrVickie8/Team-Lens-Developers/blob/main/Lens-folder/images/Frame%206.png?raw=true";
     };
-    return { viewBlog, id, replaceByDefault, dateFormatter, getPublication };
+    const videoOptions = computed(() => {
+      return {
+        autoplay: true,
+        controls: true,
+        fluid: true,
+        sources: [
+          {
+            src: viewBlog?.data?.metadata?.media?.[0]?.original?.url,
+            // src: "https://lp-playback.com/hls/5401pcadtee2yraw/video",
+            type: "video/mp4",
+          },
+        ],
+      };
+    });
+    return {
+      viewBlog,
+      id,
+      replaceByDefault,
+      dateFormatter,
+      getPublication,
+      videoOptions,
+      isVideo,
+    };
   },
 };
 </script>
