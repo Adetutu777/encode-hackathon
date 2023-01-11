@@ -24,7 +24,28 @@
         </div>
       </div>
     </b-modal>
-    <form @submit.prevent="postData">
+    <div class="mx-auto text-center" v-if="!assetType">
+      <div class="h3 mt-4 mb-4">What type of Content Are you Creating</div>
+      <div class="d-flex justify-content-center mt-3">
+        <div class="border w-25 text-center mx-2">
+          <button
+            @click="() => setAssetType('ARTICLE')"
+            class="w-100 text-center p-2 btn-draft rounded-0"
+          >
+            Article
+          </button>
+        </div>
+        <div class="border w-25 text-center mx-2">
+          <button
+            @click="() => setAssetType('VIDEO')"
+            class="w-100 text-center p-2 btn-draft rounded-0"
+          >
+            Video
+          </button>
+        </div>
+      </div>
+    </div>
+    <form @submit.prevent="postData" v-if="assetType">
       <div class="container">
         <div class="row">
           <div class="col-md-2"></div>
@@ -37,11 +58,25 @@
               >
                 <span class="img-resize">&#128281;</span>
               </button>
+
+              <div class="my-3">
+                <div class="mb-2">Post Type: {{ assetType }}</div>
+                <button @click="resetPostType" class="btn-draft">
+                  Reset Post Type
+                </button>
+              </div>
+              <!-- <video-player :options="videoOptions" /> -->
             </div>
-            <GenerateImg />
+            <div v-if="assetType == 'ARTICLE'">
+              <GenerateImg />
+            </div>
             <div class="card pt-3">
               <div class="card-body">
-                <upload @change="uploadImage" />
+                <upload
+                  @change="uploadImage"
+                  :labelText="labelText"
+                  :iconType="iconType"
+                />
                 <div class="add-title mt-4">
                   <input
                     type="text"
@@ -106,7 +141,14 @@
 <script setup>
 import { useAppStore } from "~/store/app";
 import { convertBase64, wait } from "~/util";
-import { createPost, uploadContent, preparePost } from "~/services/api";
+import {
+  createPost,
+  uploadContent,
+  preparePost,
+  uploadVideo,
+  prepareVideo,
+} from "~/services/api";
+import { truncateEthAddress } from "~/util";
 import { storeNFT } from "~/upload";
 import axios from "axios";
 import { login } from "~/services/connect";
@@ -126,8 +168,21 @@ const route = useRoute();
 const drafts = computed(() => store.drafts);
 const editId = computed(() => route.query.id);
 const currentStoreId = computed(() => store.currentDraftId);
+const currentUser = store.userAddress;
 
 let currentDraftId = editId.value ? +editId.value : +currentStoreId.value + 1;
+
+const videoOptions = {
+  autoplay: true,
+  controls: true,
+  fluid: true,
+  sources: [
+    {
+      src: "https://lp-playback.com/hls/5401pcadtee2yraw/video",
+      type: "video/mp4",
+    },
+  ],
+};
 
 onMounted(() => {
   if (editId.value) {
@@ -141,6 +196,12 @@ onMounted(() => {
   }
 });
 
+const resetPostType = () => {
+  assetType.value = "";
+};
+const setAssetType = (type) => {
+  assetType.value = type;
+};
 const enterTag = () => {
   tag.value = tag.value.trim();
   if (tag.value.length > 0 && tags.value.length < 3) {
@@ -153,6 +214,18 @@ const enterTag = () => {
 const removeTag = (id) => {
   tags.value = tags.value.filter((item) => item.id !== id);
 };
+
+const assetType = ref();
+
+const labelText = computed(() => {
+  return assetType.value == "ARTICLE" ? "Add Cover" : " Video";
+});
+
+const iconType = computed(() => {
+  const image = `<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"></path><path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"></path></svg>`;
+  const video = `<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M6 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"></path><path d="M9 6a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"></path><path d="M9 6h.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 7.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 16H2a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h7z"></path></svg>`;
+  return assetType.value == "ARTICLE" ? image : video;
+});
 
 const uploadImage = async (e) => {
   const file = e.target.files[0];
@@ -217,10 +290,17 @@ const postData = async () => {
     //   return;
     // }
 
-    if (img && !fileCID) {
+    if (img && !fileCID && assetType.value == "ARTICLE") {
       // uploading image to IPFS
       creatingStatus.value = "Uploading image to IPFS";
       img = await storeNFT(img);
+    }
+    if (img && assetType.value == "VIDEO") {
+      // uploading video to livePeer
+      creatingStatus.value = "Uploading Video to LivePeer";
+      const { url, playBackId } = await prepareVideo(img.name);
+      await uploadVideo(url, img);
+      img = `https://lp-playback.com/hls/${playBackId}/video`;
     }
     const tagFull = JSON.parse(JSON.stringify(tags.value));
 
@@ -228,7 +308,8 @@ const postData = async () => {
       content: title.value, // main body of the post
       tags: tagFull.map((item) => item.value),
       description: text.value, // title of te post
-      imageUpload: img,
+      assetUrl: img,
+      type: assetType.value,
     };
 
     if (!fileCID) {
@@ -245,7 +326,7 @@ const postData = async () => {
     creatingStatus.value = "Almost done, Please wait";
     await wait(10000);
 
-    const [p1, p2] = await Promise.all([
+    const [p1] = await Promise.all([
       axios.get(`https://ipfs.io/ipfs/${fileCID}`),
     ]);
     creatingStatus.value = "Creating post";

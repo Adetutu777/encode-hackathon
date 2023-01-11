@@ -36,6 +36,7 @@ background: #66a7df;
   background: transparent;
   border-radius: 2rem;
     padding: 0.5rem 1.5rem;
+    cursor: pointer;
 }
 .btn-draft:hover{
   background: #2C74B3;
