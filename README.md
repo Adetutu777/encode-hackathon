@@ -2,22 +2,26 @@
 
 ## Project Title: chainWrite
 
-## chainWrite is a social media blogging Dapp integrated with lens protocol & deployed on Polygon Mumbai
+## chainWrite is a social media blogging Dapp deployed on Polygon Mumbai & integrated with lens protocol, LivePeer & Push protocol. You can read more about the following framework below
 
-## Our Mission: To empower users to own and control their own data and online identity
+[Lens Protocol](https://www.lens.dev/)
+[Livepeer](https://livepeer.org/)
+[Push Protocol](https://push.org/)
 
- - *To **create an account as a new user, please ensure you have matic testnet token to complete** transaction*
+## chainWrite Mission: To empower users to own and control their own data and online identity
 
- - *Profile creation for new user takes about 1-2 hrs on Lens, **while waiting for your profile to get created, you can only login to chainWrite platform to read blogs, view users profile & once your profile is created successfully you will have access to all of the available features e.g creating your blogpost, adding like & unlike reaction to post, view blogpost &** more*
+ - *To **create a blogpost, please ensure you have matic testnet token to complete** transaction*
 
-- chainWrite Link: https://www.chainwrite.xyz/
+ <!-- - *Profile creation for new user takes about 1-2 hrs on Lens, **while waiting for your profile to get created, you can only login to chainWrite platform to read blogs, view users profile & once your profile is created successfully you will have access to all of the available features e.g creating your blogpost, adding like & unlike reaction to post, view blogpost &** more* -->
 
-#### LENS PROTOCOL: is a composable and decentralized social graph. It lets creators take ownership of their content wherever they go in the digital garden of the decentralized internet, It functions on the polygon Proof Of Stake Blockchain ecosystem. You can read more here [Lens Protocol](https://www.lens.dev/)
+- chainWrite Live-Link: https://www.chainwrite.xyz/
 
-### chainWrite Frontend Tech Stack : NuxtJs, VueJs, pinia(state mgt.) Ethers, GraphQl, Html, Css, BootstrapVue, web3.storage
+<!-- #### LENS PROTOCOL: is a composable and decentralized social graph. It lets creators take ownership of their content wherever they go in the digital garden of the decentralized internet, It functions on the polygon Proof Of Stake Blockchain ecosystem. You can read more here [Lens Protocol](https://www.lens.dev/) -->
+
+### chainWrite Frontend Tech Stack : NuxtJs, VueJs, pinia(state mgt.) Ethers, GraphQl, Html, Css, BootstrapVue, web3.storage.
 
 ### chainWrite Backend Tech Stack : NodeJs, Express, MongoDb
-### The backend is use to track users that their profile has been created but still pending
+<!-- ### The backend is use to track users that their profile has been created but still pending -->
 ### Backend Github Link: 
 - chainWrite Backend : https://github.com/okeken/chainwrite-backend
 
@@ -30,17 +34,18 @@
         d) Read recommended blogpost
         e) Viewing of user profile
         f) Adding 👍 &  👎 reaction to post
-        g) Creating blogpost (user can either generate images base on request on the post creation page , with option to select their preferred from the carousel imags or add their own cover image from their device ) 
-        h) Saving post to draft
+        g) Creating blogpost(Text) (user can either generate images base on request on the post creation page , with option to select their preferred from the carousel imags or add their own cover image from their device )
+        h) Users can upload videos/gif as cover instead of using images. This is achieved through [Livepeer.js 
+        i) Saving post to draft
 
 #### Future implementation
-        a) Provide an option for users to upload a video as cover while creating post using [Livepeer.js]  (https://docs.livepeer.org/)
-        b) Adding comment reaction on blogpost
-        c) Seaching through blogs
-        d) Saving post for future readings
-        e) Notification modal to alert users of new posts
-        f) Settings to edit users profile page
-        g) Implement the follow user reaction
+        a) Adding comment reaction on blogpost
+        b) Seaching through blogs
+        c) Saving post for future readings
+        d) Notification modal to alert users of new posts
+        e) Settings to edit users profile page
+        f) Implement the follow user reaction
+        g) Minting post as NFTs
        
         
 #### Screenshot of landing page
