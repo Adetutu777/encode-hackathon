@@ -29,7 +29,8 @@
 
 <!-- - Connect to your wallet -->
 
-#### Available Features on chainWrite
+ Available Features on chainWrite
+<!-- #### Available Features on chainWrite -->
         - Connect to your wallet
         - Creation of profile on Lens for new users
         - Logging in for returning users who already has an account
@@ -40,7 +41,7 @@
         - Users can upload videos/gif as cover instead of using images. This is achieved through [Livepeer.js 
         - Saving post to draft
 
-#### Future implementation
+ Future implementation
         - Adding comment reaction on blogpost
         - Seaching through blogs
         - Saving post for future readings
