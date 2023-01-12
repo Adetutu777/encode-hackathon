@@ -16,6 +16,7 @@
     "@metamask/jazzicon": "^2.0.0",
     "@nuxt/types": "^2.15.8",
     "@pinia/nuxt": "^0.4.6",
+    "@pushprotocol/restapi": "^0.2.2",
     "@types/sharp": "^0.31.0",
     "@videojs-player/vue": "^1.0.0",
     "@vitejs/plugin-vue": "^4.0.0",

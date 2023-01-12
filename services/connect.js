@@ -12,6 +12,7 @@ import {
   challenge,
   authenticate,
   defaultProfileQuery,
+  getProfileByHandle,
 } from "../api.js";
 
 import {
@@ -23,7 +24,7 @@ import {
   ethereumObj,
 } from "../store";
 import { useAppStore } from "../store/app";
-import { userApi } from "./api";
+import { userApi, optinForNot, optOutForNot } from "./api";
 import { deepCopy } from "~~/util";
 
 const modal = useModal();
@@ -111,17 +112,16 @@ export const connect = async () => {
   appStore.isConnecting = false;
 };
 
-export async function getUserProfile(userAddress) {
+export async function getUserProfile(handle) {
   try {
-    const defaultId = await clientId.request(defaultProfileQuery, {
-      address: userAddress,
+    const defaultId = await clientId.request(getProfileByHandle, {
+      handle: `${handle}.test`,
     });
-    defaultProfile.data = defaultId.defaultProfile;
-    const strnData = JSON.stringify(defaultId.defaultProfile);
-
+    defaultProfile.data = defaultId?.profile;
+    const strnData = JSON.stringify(defaultId?.profile ?? {});
     localStorage.setItem("storyDefaultProfile", strnData);
 
-    return defaultId.defaultProfile;
+    return defaultId?.profile;
   } catch (error) {
     console.log("error >>.", error);
   }
@@ -138,7 +138,6 @@ export async function login() {
       await setChain({ wallet: "MetaMask", chainId: "0x13881" });
     }
     const address = wallets.value?.[0]?.accounts[0]?.address;
-    const currentUser = await getUserProfile(address);
     userAddress.value = address;
     isConnected.value = true;
 
@@ -163,9 +162,11 @@ export async function login() {
     appStore.userAddress = address;
     localStorage.setItem("myStoryRefreshToken", accessToken);
     userAccessToken.value = accessToken;
-    const checkUserStatus = await userApi(address?.toLocaleLowerCase());
+    const currUser = await userApi(address?.toLocaleLowerCase());
+    const checkUserStatus = currUser?.status;
 
     await appStore.setStatus(checkUserStatus ?? 0);
+    const currentUser = await getUserProfile(currUser?.handle);
 
     if (!currentUser && checkUserStatus == 0) {
       await modal?.toggleCreateModal?.();
@@ -178,6 +179,14 @@ export async function login() {
     if (currentUser && checkUserStatus == 1) {
       const updateUser = await userApi(address, "PUT");
       await appStore.setStatus(updateUser);
+    }
+
+    if (currentUser && !currUser.optedIn) {
+      // console.log("not oprf i", address);
+      // await optinForNot(address);
+      // await optOutForNot(address);
+      // const updateUser = await userApi(address, "PUT");
+      // await appStore.setStatus(updateUser);
     }
 
     appStore.isConnected = true;

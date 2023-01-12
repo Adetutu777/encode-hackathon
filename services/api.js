@@ -1,5 +1,6 @@
 import { ethers } from "ethers";
 import { v4 as uuidv4 } from "uuid";
+import * as PushAPI from "@pushprotocol/restapi";
 import {
   publishPost,
   addReactionMutation,
@@ -8,7 +9,11 @@ import {
 } from "~/api.js";
 import LENSHUB from "~/config/lens.json";
 import { storeNFT } from "~/upload";
-import { LENS_HUB_CONTRACT_ADDRESS, baseUrl } from "~/config/constant";
+import {
+  LENS_HUB_CONTRACT_ADDRESS,
+  baseUrl,
+  channelAddress,
+} from "~/config/constant";
 import axios from "axios";
 import { deepCopy, slugify } from "~~/util";
 
@@ -50,9 +55,8 @@ export const prepareVideo = async (name) => {
   }
 };
 export const uploadVideo = async (url, data) => {
-  console.log(url, data, "before postin data");
   try {
-    const res = await axios({
+    await axios({
       method: "PUT",
       url,
       data,
@@ -178,10 +182,10 @@ export const sendTokenRequest = async (url, method = "GET", data) => {
   }
 };
 
-export const userApi = async (address, method = "GET") => {
+export const userApi = async (address, method = "GET", data) => {
   const url = `${baseUrl}user/${address}`;
-  const response = await sendTokenRequest(url, method);
-  return response?.data?.status;
+  const response = await sendTokenRequest(url, method, data);
+  return response?.data;
 };
 
 export const addPost = async (id) => {
@@ -212,3 +216,45 @@ export const deletePost = async (id) => {
     throw e;
   }
 };
+
+export const optinForNot = async (address) => {
+  const _signer = new ethers.providers.Web3Provider(window.ethereum);
+  await PushAPI.channels.subscribe({
+    signer: _signer,
+    channelAddress: `eip155:80001:${channelAddress}`, // channel address in CAIP
+    userAddress: `eip155:80001:${address}`, // user address in CAIP
+    onSuccess: () => {
+      console.log("opt in success");
+    },
+    onError: (e) => {
+      console.error("opt in error", e);
+      console.log(e, "error optin");
+    },
+    env: "staging",
+  });
+};
+export const optOutForNot = async (address) => {
+  const _signer = new ethers.providers.Web3Provider(window.ethereum);
+  console.log(_signer, "siner+++++");
+  const channelData = await PushAPI.channels.getChannel({
+    channel: "eip155:80001:0x1049DCFE27985721FB103D22076266377381EC7D", // channel address in CAIP
+    env: "staging",
+  });
+  console.log(channelData, "data cnalle");
+
+  await PushAPI.channels.unsubscribe({
+    signer: _signer,
+    channelAddress: `eip155:80001:${channelAddress}`, // channel address in CAIP
+    userAddress: `eip155:80001:${address}`, // user address in CAIP
+    onSuccess: () => {
+      console.log("opt out success");
+    },
+    onError: (e) => {
+      console.error("opt out error", e);
+      console.log("opt out error lo", e);
+    },
+    env: "staging",
+  });
+};
+export const sendNofication = () => {};
+export const receiveNotification = () => {};

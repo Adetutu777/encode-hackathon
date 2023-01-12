@@ -8,3 +8,5 @@ export const LENS_HUB_CONTRACT_ADDRESS =
 
 export const baseUrl = "https://write-c.herokuapp.com/";
 // export const baseUrl = "http://localhost:5000/";
+
+export const channelAddress = "0x1049DCFE27985721FB103D22076266377381EC7D";

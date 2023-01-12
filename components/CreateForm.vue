@@ -51,14 +51,16 @@
 </template>
 
 <script>
+import { ethers } from "ethers";
+import axios from "axios";
 import { createProfileAddress } from "../config/constant";
 import profileAbi from "../config/createProfileAbi.json";
-import { ethers } from "ethers";
 // import { userAddress } from "../store";
 import { storeNFT } from "../upload.js";
 import { wait } from "../helpers";
 import { useAppStore } from "../store/app";
 import { userApi } from "~/services/api";
+import { clientId, createProfile } from "~/api";
 export default {
   setup() {
     const signer = ref("");
@@ -89,41 +91,65 @@ export default {
     const uploaded = ref(false);
     const handleChange = async (values, validate) => {
       imageRef.value = values.target.files?.[0];
-      imgValid.value = isValid;
       const isValid = values.target.files?.[0]?.type.includes("png");
+      imgValid.value = isValid;
       uploaded.value = true;
     };
 
     const onSubmit = async () => {
       sendingBtn.value = true;
+      const refreshToken = localStorage.getItem("myStoryRefreshToken");
+
       try {
         let imageCid;
         if (imageRef.value) {
           imageCid = await storeNFT(imageRef.value);
+          await wait(1000);
+          const [p1] = await Promise.all([
+            axios.get(`https://ipfs.io/ipfs/${imageCid}`),
+          ]);
+          console.log(p1, "ima uploaded avaialable");
         }
 
-        const contract = getContract();
-        const data = [
-          userAddress.value,
-          getDetails.data.handleName,
-          imageCid ?? "0x0",
-          "0x0000000000000000000000000000000000000000",
-          "0x",
-          "ipfs://QmbqbUQJkZqt8m1akGMKJBY3FZC94Ec2FMJKsLmp6szMNH",
-        ];
+        const res = await clientId.request(
+          createProfile,
+          {
+            handle: getDetails.data.handleName,
+            // url: `ipfs://${imageCid ? imageCid : "0x0"}`,
+            // url: null,
+          },
+          {
+            ["x-access-token"]: refreshToken,
+          }
+        );
+        console.log(res, "res creaste profile");
+        // res.createProfile.txHash;
 
-        await wait(10000);
-        const txn = await contract.proxyCreateProfile(data, {
-          gasLimit: 500000,
-        });
-        const newTxn = await txn.wait();
+        // const contract = getContract();
+        // const data = [
+        //   userAddress.value,
+        //   getDetails.data.handleName,
+        //   imageCid ?? "0x0",
+        //   "0x0000000000000000000000000000000000000000",
+        //   "0x",
+        //   "ipfs://QmbqbUQJkZqt8m1akGMKJBY3FZC94Ec2FMJKsLmp6szMNH",
+        // ];
 
-        sendingBtn.value = false;
-        if (newTxn.status == 1) {
-          const createUser = await userApi(userAddress.value, "POST");
-          appStore.currentUserStatus = createUser;
+        // await wait(10000);
+        // const txn = await contract.proxyCreateProfile(data, {
+        //   gasLimit: 500000,
+        // });
+        // const newTxn = await txn.wait();
+
+        // sendingBtn.value = false;
+        if (res?.createProfile?.txHash) {
+          const createUser = await userApi(userAddress.value, "POST", {
+            handle: getDetails.data.handleName,
+          });
+          appStore.currentUserStatus = createUser?.status;
           router.push("/blogs");
         }
+        sendingBtn.value = false;
       } catch (error) {
         console.log(error);
         sendingBtn.value = false;
