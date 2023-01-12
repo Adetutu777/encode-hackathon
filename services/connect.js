@@ -173,7 +173,6 @@ export async function login() {
 
     await appStore.setStatus(checkUserStatus ?? 0);
     const currentUser = await getUserProfile(currUser?.handle);
-    console.log(currentUser, "currenr from loin");
     localStorage.setItem("currentProfileId", currentUser?.id ?? 0);
 
     if (!currentUser && checkUserStatus == 0) {

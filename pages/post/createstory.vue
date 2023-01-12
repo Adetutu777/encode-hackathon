@@ -135,8 +135,6 @@
         </div>
       </div>
     </form>
-
-      <FormKit type="form">    <FormKit      type="text"      name="name"      label="Name"    />    <FormKit      type="email"      name="email"      label="Email"    />    <FormKit      type="password"      name="password"      label="New password"    />    <FormKit      type="password"      name="password_confirm"      label="Password confirmation"    />  </FormKit>
   </div>
 </template>
 

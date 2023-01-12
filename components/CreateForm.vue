@@ -90,6 +90,7 @@ export default {
     };
     const imgValid = ref(false);
     const uploaded = ref(false);
+
     const handleChange = async (values, validate) => {
       imageRef.value = values.target.files?.[0];
       const isValid = values.target.files?.[0]?.type.includes("png");
@@ -100,7 +101,6 @@ export default {
     const onSubmit = async () => {
       sendingBtn.value = true;
       const refreshToken = localStorage.getItem("myStoryRefreshToken");
-
       try {
         let imageCid;
         if (imageRef.value) {
@@ -109,7 +109,6 @@ export default {
           const [p1] = await Promise.all([
             axios.get(`https://ipfs.io/ipfs/${imageCid}`),
           ]);
-          console.log(p1, "ima uploaded avaialable");
         }
 
         const res = await clientId.request(
@@ -148,9 +147,10 @@ export default {
             handle: getDetails.data.handleName,
           });
 
-          await getUserProfile(getDetails.data.handleName);
-          // appStore.currentUserStatus = createUser?.status;
+          const user = await getUserProfile(getDetails?.data?.handleName);
+          appStore.currentUserStatus = user;
           appStore.currentUserStatus = 2;
+
           router.push("/blogs");
         }
         sendingBtn.value = false;

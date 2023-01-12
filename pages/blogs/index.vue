@@ -364,6 +364,7 @@ export default {
       try {
         const post = await interactWithPost(data);
       } catch (e) {
+        console.log(e, "error");
         publications.data = prevData;
       }
     };
