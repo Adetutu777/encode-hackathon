@@ -169,6 +169,7 @@ const drafts = computed(() => store.drafts);
 const editId = computed(() => route.query.id);
 const currentStoreId = computed(() => store.currentDraftId);
 const currentUser = store.userAddress;
+console.log(store, "user store");
 
 let currentDraftId = editId.value ? +editId.value : +currentStoreId.value + 1;
 
@@ -198,6 +199,7 @@ onMounted(() => {
 
 const resetPostType = () => {
   assetType.value = "";
+  resetForm();
 };
 const setAssetType = (type) => {
   assetType.value = type;
@@ -257,8 +259,8 @@ const resetForm = () => {
   tags.value = [];
   title.value = "";
   text.value = "";
+  store.currentCoverImage = "";
   if (creatingStatus.value == "Hurray  Post created 🤗") {
-    store.currentCoverImage = "";
     store.deleteDraft(currentDraftId.value);
   }
 };
@@ -324,7 +326,7 @@ const postData = async () => {
 
     // preparing post
     creatingStatus.value = "Preparing post";
-    const prepare = await preparePost(fileCID);
+    const prepare = await preparePost(fileCID, store.currentUser.id);
 
     creatingStatus.value = "Almost done, Please wait";
     await wait(10000);
@@ -346,6 +348,7 @@ const postData = async () => {
     }, 3000);
   } catch (err) {
     creationError.value = true;
+    console.log("seerrorr", err);
     creatingStatus.value = err?.message ?? "Something went wrong";
 
     // if (store.isPending) {

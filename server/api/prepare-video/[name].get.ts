@@ -20,6 +20,7 @@ export default eventHandler(async(event) => {
           playBackId: res.data?.asset?.playbackId,
         };
       } catch (e) {
+        console.log(e, "error from server")
       
         return e
       
