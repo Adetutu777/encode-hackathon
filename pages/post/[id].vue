@@ -15,55 +15,7 @@
           <button class="btn-draft" @click="getPublication">Try Again</button>
         </div>
         <div v-if="!viewBlog.loading" class="feeds">
-          <div class="feed">
-            <div class="head">
-              <div class="use">
-                <div class="d-flex">
-                  <div class="profile-photo">
-                    <JazzIcon />
-                  </div>
-
-                  <div class="">
-                    <NuxtLink
-                      class="top-icon"
-                      :to="`/profile/${viewBlog?.data?.profile?.ownedBy}`"
-                    >
-                      <div class="icon-jaz">
-                        <div class="details name-icon">
-                          <h5>{{ viewBlog?.data?.profile?.name }}</h5>
-                        </div>
-                        <div class="date-icon">
-                          {{ viewBlog?.data?.profile?.handle }} -
-                          {{ dateFormatter(viewBlog?.data?.createdAt) }}
-                        </div>
-                      </div>
-                    </NuxtLink>
-                  </div>
-                </div>
-              </div>
-              <div class="info"></div>
-            </div>
-            <div class="title">
-              <h5 class="mt-3 pb-1">{{ viewBlog?.data?.metadata?.content }}</h5>
-            </div>
-            <div v-if="isVideo" class="mb-4 mx-auto">
-              <video-player :options="videoOptions" />
-            </div>
-
-            <div class="photo" v-if="!isVideo">
-              <img
-                class="img-fluid w-75"
-                :src="
-                  viewBlog?.data?.blogUrl ??
-                  'https://github.com/DrVickie8/Team-Lens-Developers/blob/main/Lens-folder/images/Frame%202.png?raw=true'
-                "
-                @error="replaceByDefault"
-              />
-            </div>
-            <div class="blog mt-3">
-              <p v-html="viewBlog?.data?.metadata?.description"></p>
-            </div>
-          </div>
+          <feed :viewBlog="{ ...viewBlog.data }" />
         </div>
       </template>
 

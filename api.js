@@ -1503,7 +1503,7 @@ query ExplorePublications {
   explorePublications(request: {
     sortCriteria: TOP_COMMENTED,
     publicationTypes: [POST],
-    limit: 30
+    limit: 50
   }) {
     items {
       __typename 

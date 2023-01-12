@@ -58,10 +58,22 @@
                   </div>
 
                   <h5 class="mt-3" v-if="item?.mainPost?.metadata?.description">
-                    <!-- {{ item?.mainPost }} -->
                     {{ item?.mainPost?.metadata?.description?.slice(0, 70) }}...
                   </h5>
-                  <div class="crd mx-auto" style="">
+
+                  <div
+                    v-if="item?.metadata[0]?.original?.mimeType == 'video/mp4'"
+                    class="mb-4 mx-auto"
+                  >
+                    <video-player
+                      :url="formatIpfdImg(item?.metadata[0]?.original?.url)"
+                    />
+                  </div>
+                  <div
+                    v-if="item?.metadata[0]?.original?.mimeType !== 'video/mp4'"
+                    class="crd mx-auto"
+                    style=""
+                  >
                     <div class="card-image">
                       <NuxtLink :to="'/post/' + item?.id">
                         <img
@@ -420,6 +432,28 @@ export default {
       e.target.src =
         "https://github.com/DrVickie8/Team-Lens-Developers/blob/main/Lens-folder/images/Frame%206.png?raw=true";
     };
+
+    const isVideo = (item) => {
+      const video =
+        item.metadata?.media?.[0]?.original?.mimeType == "video/mp4";
+
+      return video;
+    };
+    const videoOptions = (item) => {
+      return {
+        autoplay: true,
+        controls: true,
+        fluid: true,
+        sources: [
+          {
+            src: item.metadata?.media?.[0]?.original?.url,
+            // src: "https://lp-playback.com/hls/5401pcadtee2yraw/video",
+            type: "video/mp4",
+          },
+        ],
+      };
+    };
+
     return {
       loading,
       getProfiles,
@@ -437,6 +471,9 @@ export default {
       reactionErrorMsg,
       closeModal,
       userQuery,
+      isVideo,
+      videoOptions,
+      formatIpfdImg,
     };
   },
 };

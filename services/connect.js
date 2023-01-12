@@ -142,6 +142,7 @@ export async function login() {
     }
     const address = wallets.value?.[0]?.accounts[0]?.address;
     userAddress.value = address;
+    // localStorage.setItem("myStoryRefreshToken", address);
     isConnected.value = true;
     console.log(address, address.toLocaleUpperCase());
 
@@ -159,7 +160,7 @@ export async function login() {
       address,
       signature,
     });
-    
+
     /* if user authentication is successful, you will receive an accessToken and refreshToken */
     const {
       authenticate: { accessToken, refreshToken },
@@ -168,12 +169,12 @@ export async function login() {
     localStorage.setItem("myStoryRefreshToken", accessToken);
     userAccessToken.value = accessToken;
     const currUser = await userApi(address?.toLocaleLowerCase());
-    console.log(currUser, "user current");
     const checkUserStatus = currUser?.status;
 
     await appStore.setStatus(checkUserStatus ?? 0);
     const currentUser = await getUserProfile(currUser?.handle);
     console.log(currentUser, "currenr from loin");
+    localStorage.setItem("currentProfileId", currentUser?.id ?? 0);
 
     if (!currentUser && checkUserStatus == 0) {
       await modal?.toggleCreateModal?.();

@@ -13,8 +13,22 @@ export default {
     options: {
       type: Object,
       default() {
-        return {};
+        return {
+          autoplay: false,
+          controls: true,
+          fluid: true,
+          sources: [
+            {
+              src: "https://lp-playback.com/hls/5401pcadtee2yraw/video",
+              type: "video/mp4",
+            },
+          ],
+        };
       },
+    },
+    url: {
+      type: String,
+      default: "ello",
     },
   },
   data() {
@@ -23,7 +37,12 @@ export default {
     };
   },
   mounted() {
-    this.player = videojs(this.$refs.videoPlayer, this.options, () => {
+    let videoParams = {
+      ...this.options,
+      sources: [...this.options.sources].map((i) => ({ ...i, src: this.url })),
+    };
+
+    this.player = videojs(this.$refs.videoPlayer, videoParams, () => {
       this.player.log("onPlayerReady", this);
     });
   },
@@ -38,6 +57,6 @@ export default {
 <style scoped>
 .video-pl {
   max-width: 12rem;
-  max-height: 20rem;
+  max-height: 30rem;
 }
 </style>
