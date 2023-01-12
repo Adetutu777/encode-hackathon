@@ -27,28 +27,27 @@
 
 #### Prerequisites: Javascript, VueJs, knowledge of web3
 
-- Connect to your wallet
+<!-- - Connect to your wallet -->
 
 #### Available Features on chainWrite
-- Connect to your wallet
-        a) Connect to your wallet
-        b) Creation of profile on Lens for new users
-        c) Logging in for returning users who already has an account
-        d) Read recommended blogpost
-        e) Viewing of user profile
-        f) Adding 👍 &  👎 reaction to post
-        g) Creating blogpost(Text) (user can either generate images base on request on the post creation page , with option to select their preferred from the carousel imags or add their own cover image from their device )
-        h) Users can upload videos/gif as cover instead of using images. This is achieved through [Livepeer.js 
-        i) Saving post to draft
+        - Connect to your wallet
+        - Creation of profile on Lens for new users
+        - Logging in for returning users who already has an account
+        - Read recommended blogpost
+        - Viewing of user profile
+        - Adding 👍 &  👎 reaction to post
+        - Creating blogpost(Text) (user can either generate images base on request on the post creation page , with option to select their preferred from the carousel imags or add their own cover image from their device )
+        - Users can upload videos/gif as cover instead of using images. This is achieved through [Livepeer.js 
+        - Saving post to draft
 
 #### Future implementation
-        a) Adding comment reaction on blogpost
-        b) Seaching through blogs
-        c) Saving post for future readings
-        d) Notification modal to alert users of new posts
-        e) Settings to edit users profile page
-        f) Implement the follow user reaction
-        g) Minting post as NFTs
+        - Adding comment reaction on blogpost
+        - Seaching through blogs
+        - Saving post for future readings
+        - Notification modal to alert users of new posts
+        - Settings to edit users profile page
+        - Implement the follow user reaction
+        - Minting post as NFTs
        
         
 #### Screenshot of landing page
