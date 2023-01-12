@@ -11,7 +11,7 @@
 
 ## chainWrite Mission: To empower users to own and control their own data and online identity
 
-- chainWrite Live-Link: https://www.chainwrite.xyz/
+- **chainWrite Live-Link: https://www.chainwrite.xyz/**
 
  - *To **create a blogpost, please ensure you have matic testnet token to complete** transaction*
 
@@ -33,22 +33,38 @@
  <!-- Available Features on chainWrite -->
 ### Available Features on chainWrite
         - Connect to your wallet
+
         - Creation of profile on Lens for new users
+
         - Logging in for returning users who already has an account
+
         - Read recommended blogpost
+
         - Viewing of user profile
+
         - Adding 👍 &  👎 reaction to post
-        - Creating blogpost(Text) (user can either generate images base on request on the post creation page , with option to select their preferred from the carousel imags or add their own cover image from their device )
-        - Users can upload videos/gif as cover instead of using images. This is achieved through [Livepeer.js 
+
+        - Creating blogpost(Text) (user can either generate images base on request on the post creation 
+         page , with option to select their preferred from the carousel imags or add their own cover image
+         from their device )
+
+        - Users can upload videos/gif as cover instead of using images. This is achieved through *Livepeer.js*
+
         - Saving post to draft
 
  ### Future implementation
         - Adding comment reaction on blogpost
+
         - Seaching through blogs
+
         - Saving post for future readings
+
         - Notification modal to alert users of new posts
+
         - Settings to edit users profile page
+
         - Implement the follow user reaction
+        
         - Minting post as NFTs
        
         
@@ -72,8 +88,6 @@
 
 #### Screenshot of creating a blogpost page
 ![image](./images/signingT.JPG "post page")
-
-
 
 
 # How to run chainWrite locally
