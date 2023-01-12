@@ -122,7 +122,7 @@ export default {
             ["x-access-token"]: refreshToken,
           }
         );
-        console.log(res, "res creaste profile");
+        // console.log(res, "res creaste profile");
         // res.createProfile.txHash;
 
         // const contract = getContract();

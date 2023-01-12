@@ -113,6 +113,7 @@ export const connect = async () => {
 };
 
 export async function getUserProfile(handle) {
+  if (!handle) return;
   try {
     const defaultId = await clientId.request(getProfileByHandle, {
       handle: `${handle}.test`,
