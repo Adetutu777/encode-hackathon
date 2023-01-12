@@ -32,11 +32,11 @@
 
  <!-- Available Features on chainWrite -->
 ### Available Features on chainWrite
-        - Connect to your wallet
+        - Wallet connect :Connect to your wallet
 
-        - Creation of profile on Lens for new users
+        - Creation: of profile on Lens for new users
 
-        - Logging in for returning users who already has an account
+        - Logging: in for returning users who already has an account
 
         - Read recommended blogpost
 
@@ -64,7 +64,7 @@
         - Settings to edit users profile page
 
         - Implement the follow user reaction
-        
+
         - Minting post as NFTs
        
         
