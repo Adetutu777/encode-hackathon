@@ -98,6 +98,7 @@ const {
 
 export const connect = async () => {
   appStore.connectError = null;
+
   try {
     const con = await connectWallet();
     // appStore.isConnected = true;
@@ -118,9 +119,10 @@ export async function getUserProfile(handle) {
     const defaultId = await clientId.request(getProfileByHandle, {
       handle: `${handle}.test`,
     });
-    defaultProfile.data = defaultId?.profile;
-    const strnData = JSON.stringify(defaultId?.profile ?? {});
-    localStorage.setItem("storyDefaultProfile", strnData);
+    // defaultProfile.data = defaultId?.profile;
+    appStore.currentUser = defaultId?.profile ?? {};
+    // const strnData = JSON.stringify(defaultId?.profile ?? {});
+    // localStorage.setItem("storyDefaultProfile", strnData);
 
     return defaultId?.profile;
   } catch (error) {
@@ -141,6 +143,7 @@ export async function login() {
     const address = wallets.value?.[0]?.accounts[0]?.address;
     userAddress.value = address;
     isConnected.value = true;
+    console.log(address, address.toLocaleUpperCase());
 
     /* first request the challenge from the API server */
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -156,6 +159,7 @@ export async function login() {
       address,
       signature,
     });
+    
     /* if user authentication is successful, you will receive an accessToken and refreshToken */
     const {
       authenticate: { accessToken, refreshToken },
@@ -164,19 +168,21 @@ export async function login() {
     localStorage.setItem("myStoryRefreshToken", accessToken);
     userAccessToken.value = accessToken;
     const currUser = await userApi(address?.toLocaleLowerCase());
+    console.log(currUser, "user current");
     const checkUserStatus = currUser?.status;
 
     await appStore.setStatus(checkUserStatus ?? 0);
     const currentUser = await getUserProfile(currUser?.handle);
+    console.log(currentUser, "currenr from loin");
 
     if (!currentUser && checkUserStatus == 0) {
       await modal?.toggleCreateModal?.();
       return { userStatus: checkUserStatus };
     }
 
-    if (currentUser) {
-      appStore.currentUser = currentUser;
-    }
+    // if (currentUser) {
+    //   appStore.currentUser = currentUser;
+    // }
     if (currentUser && checkUserStatus == 1) {
       const updateUser = await userApi(address, "PUT");
       await appStore.setStatus(updateUser);

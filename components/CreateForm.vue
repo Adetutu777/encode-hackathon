@@ -61,6 +61,7 @@ import { wait } from "../helpers";
 import { useAppStore } from "../store/app";
 import { userApi } from "~/services/api";
 import { clientId, createProfile } from "~/api";
+import { getUserProfile } from "~/services/connect";
 export default {
   setup() {
     const signer = ref("");
@@ -146,7 +147,10 @@ export default {
           const createUser = await userApi(userAddress.value, "POST", {
             handle: getDetails.data.handleName,
           });
-          appStore.currentUserStatus = createUser?.status;
+
+          await getUserProfile(getDetails.data.handleName);
+          // appStore.currentUserStatus = createUser?.status;
+          appStore.currentUserStatus = 2;
           router.push("/blogs");
         }
         sendingBtn.value = false;

@@ -17,7 +17,7 @@ import {
 import axios from "axios";
 import { deepCopy, slugify } from "~~/util";
 
-export const preparePost = async (file) => {
+export const preparePost = async (file, id) => {
   const refreshToken = localStorage.getItem("myStoryRefreshToken");
   const data = JSON.parse(localStorage.getItem("storyDefaultProfile"));
   if (!data?.id) {
@@ -27,7 +27,7 @@ export const preparePost = async (file) => {
     const resp = await clientId.request(
       publishPost,
       {
-        id: data.id,
+        id,
         uri: `ipfs://${file}`,
       },
       {
@@ -42,7 +42,7 @@ export const preparePost = async (file) => {
     if (notAuthorized?.[0]?.["message"].includes("not authenticated")) {
       throw new Error("Not Authorized, Please login to create post");
     }
-    throw "Something went wrong";
+    throw res;
   }
 };
 
@@ -131,7 +131,7 @@ export const createPost = async (typedData, file) => {
     if (res.code === "ACTION_REJECTED") {
       throw new Error(res.reason);
     }
-    throw new Error("Something went wrong");
+    throw new Error(res);
   }
 };
 

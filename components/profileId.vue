@@ -3,13 +3,17 @@
     <div class="d-flex py-3">
       <div class="container icon-input mb-3 d-flex">
         <NuxtLink to="/blogs">
-          <img class="img-logos" src="@/images/chainWriteLogo.svg" alt="image" />
+          <img
+            class="img-logos"
+            src="@/images/chainWriteLogo.svg"
+            alt="image"
+          />
         </NuxtLink>
-      
-      <div class="search">
-  <span class="uil uil-search-alt"></span>
-  <input placeholder="Search term">
-</div>
+
+        <div class="search">
+          <span class="uil uil-search-alt"></span>
+          <input placeholder="Search term" />
+        </div>
       </div>
 
       <NuxtLink class="profile" :to="`/profile/${defaultProfile?.ownedBy}`">
@@ -31,21 +35,21 @@
 </template>
 
 <script setup>
-const data = localStorage.storyDefaultProfile;
-const defaultProfile = JSON.parse(data);
+import { useAppStore } from "~/store/app";
+const store = useAppStore();
+const defaultProfile = store.currentUser;
 </script>
 
 <style>
 .profile {
   text-decoration: none;
-  margin-right: 1.8rem; 
- 
+  margin-right: 1.8rem;
 }
 .handles h4 {
   font-size: 0.9rem;
   color: #292d32;
   outline: none;
-   margin-left: 0.3rem;
+  margin-left: 0.3rem;
 }
 .handles h5 {
   font-size: 0.8rem;
@@ -56,7 +60,6 @@ const defaultProfile = JSON.parse(data);
 .icon-input {
   position: relative;
 }
-
 
 .input-text {
   margin-left: 0.8rem;
@@ -73,7 +76,9 @@ const defaultProfile = JSON.parse(data);
   margin-top: 0.3rem;
 }
 
-.search {display: inline-block;}
+.search {
+  display: inline-block;
+}
 
 .search input {
   width: 250px;
@@ -85,12 +90,17 @@ const defaultProfile = JSON.parse(data);
   box-shadow: 0 0 3px #ccc, 0 10px 15px #ebebeb inset;
 }
 
-.search input { text-indent: 32px;}
-.search .uil-search-alt { 
+.search input {
+  text-indent: 32px;
+}
+.search .uil-search-alt {
   position: absolute;
   top: 5px;
   left: 10px;
 }
 
-.search .uil-search-alt {left: auto; right: 10px;}
+.search .uil-search-alt {
+  left: auto;
+  right: 10px;
+}
 </style>

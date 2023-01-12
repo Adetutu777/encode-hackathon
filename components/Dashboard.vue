@@ -34,7 +34,7 @@
                     <span>Settings</span>
                   </NuxtLink> -->
                     <NuxtLink
-                      :to="`/profile/${appStore?.userAddress}`"
+                      :to="`/profile/${appStore?.currentUser?.ownedBy}`"
                       class="dropdown d-block"
                     >
                       <i
@@ -88,9 +88,10 @@ import { useAppStore } from "../store/app";
 import { computed } from "vue";
 export default {
   setup() {
-    const data = localStorage.storyDefaultProfile;
-    const defaultProfile = JSON.parse(data);
     const appStore = useAppStore();
+
+    console.log(appStore.currentUser, "current user!!!");
+
     const statusUser = appStore.currentUserStatus;
     const isPending = statusUser == 1;
     onMounted(() => {
@@ -98,7 +99,7 @@ export default {
       //   login();
       // }
     });
-    return { defaultProfile, isPending, appStore };
+    return { isPending, appStore };
   },
 };
 </script>
