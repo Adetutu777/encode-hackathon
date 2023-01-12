@@ -60,7 +60,7 @@ export default defineNuxtConfig({
         ],
       },
     ],
-    ['@formkit/nuxt']
+    // ['@formkit/nuxt']
   ],
   
 

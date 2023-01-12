@@ -10,22 +10,22 @@
           />
         </NuxtLink>
 
-        <div class="search">
+        <div class="search d-none d-sm-block">
           <span class="uil uil-search-alt"></span>
           <input placeholder="Search term" />
         </div>
       </div>
 
-      <NuxtLink class="profile" :to="`/profile/${defaultProfile?.ownedBy}`">
+      <NuxtLink class="profile" :to="`/profile/${store?.currentUser?.ownedBy}`">
         <div class="d-flex align-items-center">
           <JazzIcon />
 
           <div class="handles">
             <h5 class="text-muted">
-              {{ defaultProfile?.handle }}
+              {{ store?.currentUser?.handle }}
             </h5>
             <h4>
-              {{ defaultProfile?.id }}
+              {{ store?.currentUser?.id }}
             </h4>
           </div>
         </div>
@@ -37,7 +37,6 @@
 <script setup>
 import { useAppStore } from "~/store/app";
 const store = useAppStore();
-const defaultProfile = store.currentUser;
 </script>
 
 <style>
