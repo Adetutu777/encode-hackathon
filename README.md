@@ -4,9 +4,9 @@
 
 ## chainWrite is a social media blogging Dapp deployed on Polygon Mumbai & integrated with lens protocol, LivePeer & Push protocol. You can read more about the following framework below
 
-[Lens Protocol](https://www.lens.dev/)
-[Livepeer](https://livepeer.org/)
-[Push Protocol](https://push.org/)
+ ##### Lens Protocol[Lens Protocol](https://www.lens.dev/)
+##### Livepeer Protocol [Livepeer](https://livepeer.org/)
+##### Push Protocol [Push Protocol](https://push.org/)
 
 ## chainWrite Mission: To empower users to own and control their own data and online identity
 
@@ -27,7 +27,10 @@
 
 #### Prerequisites: Javascript, VueJs, knowledge of web3
 
+- Connect to your wallet
+
 #### Available Features on chainWrite
+- Connect to your wallet
         a) Connect to your wallet
         b) Creation of profile on Lens for new users
         c) Logging in for returning users who already has an account
