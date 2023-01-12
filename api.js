@@ -1086,9 +1086,107 @@ export const authenticate = gql`
 `;
 
 export const createProfile = gql`
-  mutation CreateProfile {
-    createProfile(request: { handle: "adetutu" }) {
+  mutation CreateProfile($handle: CreateHandle!) {
+    createProfile(
+      request: {
+        handle: $handle
+        profilePictureUri: null
+        followNFTURI: null
+        followModule: null
+      }
+    ) {
+      ... on RelayerResult {
+        txHash
+      }
+      ... on RelayError {
+        reason
+      }
       __typename
+    }
+  }
+`;
+
+export const getProfileByHandle = gql`
+  query Profile($handle: Handle!) {
+    profile(request: { handle: $handle }) {
+      id
+      name
+      bio
+      attributes {
+        displayType
+        traitType
+        key
+        value
+      }
+      followNftAddress
+      metadata
+      isDefault
+      picture {
+        ... on NftImage {
+          contractAddress
+          tokenId
+          uri
+          verified
+        }
+        ... on MediaSet {
+          original {
+            url
+            mimeType
+          }
+        }
+        __typename
+      }
+      handle
+      coverPicture {
+        ... on NftImage {
+          contractAddress
+          tokenId
+          uri
+          verified
+        }
+        ... on MediaSet {
+          original {
+            url
+            mimeType
+          }
+        }
+        __typename
+      }
+      ownedBy
+      dispatcher {
+        address
+        canUseRelay
+      }
+      stats {
+        totalFollowers
+        totalFollowing
+        totalPosts
+        totalComments
+        totalMirrors
+        totalPublications
+        totalCollects
+      }
+      followModule {
+        ... on FeeFollowModuleSettings {
+          type
+          amount {
+            asset {
+              symbol
+              name
+              decimals
+              address
+            }
+            value
+          }
+          recipient
+        }
+        ... on ProfileFollowModuleSettings {
+          type
+        }
+        ... on RevertFollowModuleSettings {
+          type
+        }
+      }
     }
   }
 `;

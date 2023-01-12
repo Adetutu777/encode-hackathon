@@ -300,7 +300,10 @@ const postData = async () => {
     if (img && assetType.value == "VIDEO") {
       // uploading video to livePeer
       creatingStatus.value = "Uploading Video to LivePeer";
-      const { url, playBackId } = await prepareVideo(img.name);
+      const { url = "", playBackId = "" } = await prepareVideo(img.name);
+      if (!url || !playBackId) {
+        throw "Unable to upload Video";
+      }
       await uploadVideo(url, img);
       img = `https://lp-playback.com/hls/${playBackId}/video`;
     }

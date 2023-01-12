@@ -15,7 +15,7 @@ export const useAppStore = defineStore("app", {
       drafts: useStorage("draftPosts", []),
       currentDraftId: useStorage("currentDraftId", 0),
       currentUserStatus: useStorage("currentUserStatus", 0),
-      currentUserPending: useStorage("currentUserPending", false),
+      isOptedIn: false,
     };
   },
 
