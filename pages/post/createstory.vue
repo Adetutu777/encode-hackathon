@@ -25,20 +25,20 @@
       </div>
     </b-modal>
     <div class="mx-auto text-center" v-if="!assetType">
-      <div class="h3 mt-4 mb-4">What type of Content Are you Creating</div>
+      <div class="h3 mt-4 mb-4">What type of content do you wish to create?</div>
       <div class="d-flex justify-content-center mt-3">
-        <div class="border w-25 text-center mx-2">
+        <div class=" w-25 text-center mx-2">
           <button
             @click="() => setAssetType('ARTICLE')"
-            class="w-100 text-center p-2 btn-draft rounded-0"
+            class="w-100 text-center p-2 btn-general"
           >
             Article
           </button>
         </div>
-        <div class="border w-25 text-center mx-2">
+        <div class="brder w-25 text-center mx-2">
           <button
             @click="() => setAssetType('VIDEO')"
-            class="w-100 text-center p-2 btn-draft rounded-0"
+            class="w-100 text-center p-2 btn-draft"
           >
             Video
           </button>
@@ -405,4 +405,6 @@ const tryAgain = async () => {
   background: #ffffff;
   color: white;
 }
+
+
 </style>

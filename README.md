@@ -6,7 +6,7 @@
 
  ##### Lens Protocol[Lens Protocol](https://www.lens.dev/)
 ##### Livepeer Protocol [Livepeer](https://livepeer.org/)
-##### Push Protocol [Push Protocol](https://push.org/)
+<!-- ##### Push Protocol [Push Protocol](https://push.org/) -->
 
 ## chainWrite Mission: To empower users to own and control their own data and online identity
 
@@ -18,19 +18,19 @@
 
 <!-- #### LENS PROTOCOL: is a composable and decentralized social graph. It lets creators take ownership of their content wherever they go in the digital garden of the decentralized internet, It functions on the polygon Proof Of Stake Blockchain ecosystem. You can read more here [Lens Protocol](https://www.lens.dev/) -->
 
-### chainWrite Frontend Tech Stack : NuxtJs, VueJs, pinia(state mgt.) Ethers, GraphQl, Html, Css, BootstrapVue, web3.storage.
+## chainWrite Frontend Tech Stack : NuxtJs, VueJs, pinia(state mgt.) Ethers, GraphQl, Html, Css, BootstrapVue, web3.storage.
 
-### chainWrite Backend Tech Stack : NodeJs, Express, MongoDb
+## chainWrite Backend Tech Stack : NodeJs, Express, MongoDb
 <!-- ### The backend is use to track users that their profile has been created but still pending -->
 ### Backend Github Link: 
 - chainWrite Backend : https://github.com/okeken/chainwrite-backend
 
-#### Prerequisites: Javascript, VueJs, knowledge of web3
+### Prerequisites: Javascript, VueJs, knowledge of web3
 
 <!-- - Connect to your wallet -->
 
  <!-- Available Features on chainWrite -->
-#### Available Features on chainWrite
+### Available Features on chainWrite
         - Connect to your wallet
         - Creation of profile on Lens for new users
         - Logging in for returning users who already has an account
@@ -41,7 +41,7 @@
         - Users can upload videos/gif as cover instead of using images. This is achieved through [Livepeer.js 
         - Saving post to draft
 
- #### Future implementation
+ ### Future implementation
         - Adding comment reaction on blogpost
         - Seaching through blogs
         - Saving post for future readings
