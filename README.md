@@ -2,19 +2,20 @@
 
 ## Project Title: chainWrite
 
-## chainWrite is a social media blogging Dapp deployed on Polygon Mumbai & integrated with lens protocol, LivePeer & Push protocol. You can read more about the following framework below
+## chainWrite is a social media blogging Dapp deployed on Polygon Mumbai & integrated with lens protocol, LivePeer & Push protocol. 
+<!-- You can read more about the following framework below -->
 
- ##### Lens Protocol[Lens Protocol](https://www.lens.dev/)
+ <!-- ##### Lens Protocol[Lens Protocol](https://www.lens.dev/)
 ##### Livepeer Protocol [Livepeer](https://livepeer.org/)
-<!-- ##### Push Protocol [Push Protocol](https://push.org/) -->
+##### Push Protocol [Push Protocol](https://push.org/) -->
 
 ## chainWrite Mission: To empower users to own and control their own data and online identity
+
+- chainWrite Live-Link: https://www.chainwrite.xyz/
 
  - *To **create a blogpost, please ensure you have matic testnet token to complete** transaction*
 
  <!-- - *Profile creation for new user takes about 1-2 hrs on Lens, **while waiting for your profile to get created, you can only login to chainWrite platform to read blogs, view users profile & once your profile is created successfully you will have access to all of the available features e.g creating your blogpost, adding like & unlike reaction to post, view blogpost &** more* -->
-
-- chainWrite Live-Link: https://www.chainwrite.xyz/
 
 <!-- #### LENS PROTOCOL: is a composable and decentralized social graph. It lets creators take ownership of their content wherever they go in the digital garden of the decentralized internet, It functions on the polygon Proof Of Stake Blockchain ecosystem. You can read more here [Lens Protocol](https://www.lens.dev/) -->
 
@@ -61,13 +62,18 @@
 ![image](./images/profile.png "profile page")
 
 #### Screenshot of create post page
-![image](./images/createPost.png "post page")
+![image](./images/post-one.png "post page")
 
-#### Screenshot of creating post page
+#### You can generate images for your blogpost creation cover photos, its a carousel image with options you can select from.
+![image](./images/generateImg.JPG "post page")
+
+#### Screenshot of creating a video post page
+![image](./images/post-two.png "post page")
+
+#### Screenshot of creating a blogpost page
 ![image](./images/signingT.JPG "post page")
 
-#### You can generate images for your post creation cover photos, its a carousel image with options you can select from.
-![image](./images/generateImg.JPG "post page")
+
 
 
 # How to run chainWrite locally
