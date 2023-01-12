@@ -143,12 +143,13 @@ export default {
 
         // sendingBtn.value = false;
         if (res?.createProfile?.txHash) {
+          localStorage.setItem("currenUserName", getDetails.data.handleName);
           const createUser = await userApi(userAddress.value, "POST", {
             handle: getDetails.data.handleName,
           });
 
           const user = await getUserProfile(getDetails?.data?.handleName);
-          appStore.currentUserStatus = user;
+          appStore.currentUser = user;
           appStore.currentUserStatus = 2;
 
           router.push("/blogs");

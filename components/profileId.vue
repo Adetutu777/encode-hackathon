@@ -16,16 +16,16 @@
         </div>
       </div>
 
-      <NuxtLink class="profile" :to="`/profile/${store?.currentUser?.ownedBy}`">
+      <NuxtLink class="profile" :to="`/profile/${user?.handle}`">
         <div class="d-flex align-items-center">
           <JazzIcon />
 
           <div class="handles">
             <h5 class="text-muted">
-              {{ store?.currentUser?.handle }}
+              {{ user?.handle }}
             </h5>
             <h4>
-              {{ store?.currentUser?.id }}
+              <!-- {{ user?.id }} -->
             </h4>
           </div>
         </div>
@@ -35,8 +35,17 @@
 </template>
 
 <script setup>
+import { userAddress } from "~/store";
 import { useAppStore } from "~/store/app";
 const store = useAppStore();
+import { getUserProfile } from "~/services/connect";
+const user = computed(() => store.currentUser);
+const userAdd = ref("");
+
+onMounted(async () => {
+  const add = localStorage.getItem("currenUserName");
+  userAdd.value = add;
+});
 </script>
 
 <style>

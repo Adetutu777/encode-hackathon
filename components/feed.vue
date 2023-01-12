@@ -10,7 +10,7 @@
           <div class="">
             <NuxtLink
               class="top-icon"
-              :to="`/profile/${viewBlog?.profile?.ownedBy}`"
+              :to="`/profile/${viewBlog?.profile?.handle}`"
             >
               <div class="icon-jaz">
                 <div class="details name-icon">

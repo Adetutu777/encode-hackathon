@@ -39,7 +39,7 @@
 
                       <NuxtLink
                         class="top-icon"
-                        :to="`/profile/${item?.profile?.ownedBy}`"
+                        :to="`/profile/${item?.profile?.handle}`"
                       >
                         <div class="name-icon">
                           {{ item?.profile?.name }}

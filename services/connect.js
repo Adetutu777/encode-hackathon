@@ -144,7 +144,6 @@ export async function login() {
     userAddress.value = address;
     // localStorage.setItem("myStoryRefreshToken", address);
     isConnected.value = true;
-    console.log(address, address.toLocaleUpperCase());
 
     /* first request the challenge from the API server */
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -174,8 +173,11 @@ export async function login() {
     await appStore.setStatus(checkUserStatus ?? 0);
     const currentUser = await getUserProfile(currUser?.handle);
     localStorage.setItem("currentProfileId", currentUser?.id ?? 0);
+    localStorage.setItem("currenUserWallet", address);
 
+    // let sf = true;
     if (!currentUser && checkUserStatus == 0) {
+      // if (sf) {
       await modal?.toggleCreateModal?.();
       return { userStatus: checkUserStatus };
     }

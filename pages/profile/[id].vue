@@ -11,7 +11,7 @@
                   <JazzIcon :diameter="100" />
                   <div class="info">
                     <h3 class="mt-3">
-                      {{ userData.data.handle }}
+                      {{ $route.params.id }}
                     </h3>
                     <p class="mb-2">
                       {{ userData?.data.stats?.totalFollowers ?? 0 }}
@@ -21,17 +21,17 @@
                 </div>
               </div>
 
-               <b-tabs 
-    active-nav-item-class="font-weight-bold"
-    style=""
-    content-class="mt-3"
-    align="center"
-    fill >
-
-     <b-tab @click="getValue(0)" title="Post" active></b-tab>
-                  <b-tab @click="getValue(1)" title="Following"></b-tab>
-                  <b-tab @click="getValue(2)" title="About"></b-tab>
-  </b-tabs>
+              <b-tabs
+                active-nav-item-class="font-weight-bold"
+                style=""
+                content-class="mt-3"
+                align="center"
+                fill
+              >
+                <b-tab @click="getValue(0)" title="Post" active></b-tab>
+                <b-tab @click="getValue(1)" title="Following"></b-tab>
+                <b-tab @click="getValue(2)" title="About"></b-tab>
+              </b-tabs>
             </div>
           </div>
 
@@ -39,9 +39,9 @@
             <div class="" v-if="postsData.length == 0">Nothing here...</div>
             <div class="  " v-for="item in postsData" :key="item.id">
               <div class="post-tab p-2">
-                <NuxtLink class="user-post name-icon"  :to="`/post/${item?.id}`">
-                <h6 class="content-post">
-                  {{ item?.metadata?.content }}
+                <NuxtLink class="user-post name-icon" :to="`/post/${item?.id}`">
+                  <h6 class="content-post">
+                    {{ item?.metadata?.content }}
                   </h6>
                 </NuxtLink>
               </div>
@@ -57,9 +57,6 @@
           </div>
         </div>
       </template>
-
-    
-
     </Dashboard>
   </div>
 </template>
@@ -70,6 +67,7 @@ import {
   defaultProfileQuery,
   userPublicationsQuery,
 } from "../../api";
+import { getUserProfile } from "~/services/connect";
 
 import { wait } from "../../util";
 
@@ -88,17 +86,15 @@ export default {
     });
     const postsData = ref([]);
     const id = computed(() => route.params.id);
-    console.log("idy", id);
-
     onMounted(async () => {
-      const data = await clientId.request(defaultProfileQuery, {
-        address: id.value,
-      });
+      const name = id.value ? id.value.split(".")?.[0] : "";
+      const userData = await getUserProfile(name);
+
       const posts = await clientId.request(userPublicationsQuery, {
-        id: data.defaultProfile.id,
+        id: userData.id,
       });
 
-      userData.data = data.defaultProfile;
+      userData.data = userData;
       const filtered = posts.publications.items.filter(
         (post) => post.__typename === "Post"
       );
@@ -123,21 +119,20 @@ export default {
 .post-tab {
   width: 100%;
   margin-top: 0.6rem;
-  border: 1px solid #F9F9F9;
-  background: #F9F9F9;
+  border: 1px solid #f9f9f9;
+  background: #f9f9f9;
   border-radius: 5px;
   flex-direction: column;
-  
 }
 
-.user-post{
-text-decoration: none;
+.user-post {
+  text-decoration: none;
 }
-.content-post:hover{
-color: #66a7df;
+.content-post:hover {
+  color: #66a7df;
 }
 
-.content-post{
+.content-post {
   font-size: 1.2rem;
 }
 </style>
