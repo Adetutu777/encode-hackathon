@@ -9,6 +9,7 @@ export const useAppStore = defineStore("app", {
       isConnecting: false,
       connectError: false,
       currentUser: useStorage("currentUser", {}),
+      currentUserName: useStorage("currentUserName", ""),
       currentCoverImage: "",
       userAddress: useStorage("userAddress", ""),
       isPending: useStorage("profilePending0.1", []),
@@ -102,9 +103,11 @@ export const useAppStore = defineStore("app", {
       this.currentUserStatus = currentUser?.isPending ?? false;
       return currentUser?.isPending ?? false;
     },
-
     async setStatus(currentState) {
       this.currentUserStatus = currentState;
+    },
+    async setCurrentUser(currentUser) {
+      this.currentUser = currentUser;
     },
   },
 });

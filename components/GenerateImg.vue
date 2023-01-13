@@ -99,6 +99,7 @@ const getImage = async () => {
     imageUrl.value = info.data;
   } catch (error) {
     isError.value = true;
+    return error;
   }
   isLoading.value = false;
 };

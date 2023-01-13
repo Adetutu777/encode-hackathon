@@ -16,13 +16,13 @@
         </div>
       </div>
 
-      <NuxtLink class="profile" :to="`/profile/${userAdd}`">
+      <NuxtLink class="profile" :to="`/profile/${prettifyUsername(user)}`">
         <div class="d-flex align-items-center">
           <JazzIcon />
 
           <div class="handles">
             <h5 class="text-muted">
-              {{ userAdd }}
+              {{ user }}
             </h5>
             <h4>
               <!-- {{ user?.id }} -->
@@ -37,15 +37,11 @@
 <script setup>
 import { userAddress } from "~/store";
 import { useAppStore } from "~/store/app";
+import { prettifyUsername } from "~/util";
 const store = useAppStore();
 import { getUserProfile } from "~/services/connect";
-const user = computed(() => store.currentUser);
+const user = computed(() => store?.currentUser?.handle);
 const userAdd = ref("");
-
-onMounted(async () => {
-  const add = localStorage.getItem("currenUserName");
-  userAdd.value = add;
-});
 </script>
 
 <style>

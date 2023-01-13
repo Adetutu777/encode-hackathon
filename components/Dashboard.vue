@@ -34,7 +34,7 @@
                     <span>Settings</span>
                   </NuxtLink> -->
                     <NuxtLink
-                      :to="`/profile/${userAdd}`"
+                      :to="`/profile/${userName}`"
                       class="dropdown d-block"
                     >
                       <i
@@ -83,27 +83,24 @@
   </div>
 </template>
 <script>
+import { storeToRefs } from "pinia";
 import { login } from "../services/connect";
 import { useAppStore } from "../store/app";
 import { computed } from "vue";
 export default {
   setup() {
-    const appStore = useAppStore();
+    const store = useAppStore();
+    const appStore = toRefs(store);
     const userAdd = ref("");
-
-    console.log(appStore.currentUser, "current user!!!");
+    const userName = computed(() => store?.currentUser?.handle);
 
     const statusUser = appStore.currentUserStatus;
     const isPending = statusUser == 1;
     onMounted(() => {
       const add = localStorage.getItem("currenUserName");
       userAdd.value = add;
-
-      // if (!appStore.isConnected) {
-      //   login();
-      // }
     });
-    return { isPending, appStore, userAdd };
+    return { isPending, appStore, userAdd, userName };
   },
 };
 </script>

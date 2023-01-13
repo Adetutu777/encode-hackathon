@@ -17,11 +17,10 @@ import {
 import axios from "axios";
 import { deepCopy, slugify } from "~~/util";
 
-export const preparePost = async (file) => {
+export const preparePost = async (file, id) => {
   const refreshToken = localStorage.getItem("myStoryRefreshToken");
-  const id = localStorage.getItem("currentProfileId");
   if (!id) {
-    throw new Error("You must create an account to create post or Login");
+    throw new Error("Kindly Login Again");
   }
   try {
     const resp = await clientId.request(

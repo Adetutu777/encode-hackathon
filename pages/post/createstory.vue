@@ -25,9 +25,11 @@
       </div>
     </b-modal>
     <div class="mx-auto text-center" v-if="!assetType">
-      <div class="h3 mt-4 mb-4">What type of content do you wish to create?</div>
+      <div class="h3 mt-4 mb-4">
+        What type of content do you wish to create?
+      </div>
       <div class="d-flex justify-content-center mt-3">
-        <div class=" w-25 text-center mx-2">
+        <div class="w-25 text-center mx-2">
           <button
             @click="() => setAssetType('ARTICLE')"
             class="w-100 text-center p-2 btn-general"
@@ -271,6 +273,7 @@ onUnmounted(() => {
 
 const postData = async () => {
   // currentUserStatus
+  console.log(store.currentUser, "current User");
   isCreating.value = true;
   creationError.value = false;
   let img = uploadIm.value;
@@ -332,7 +335,11 @@ const postData = async () => {
     await wait(10000);
 
     const [p1] = await Promise.all([
-      axios.get(`https://ipfs.io/ipfs/${fileCID}`),
+      axios.get(`https://ipfs.io/ipfs/${fileCID}`, {
+        headers: {
+          Accept: "text/plain",
+        },
+      }),
     ]);
     creatingStatus.value = "Creating post";
 
@@ -403,6 +410,4 @@ const tryAgain = async () => {
   background: #ffffff;
   color: white;
 }
-
-
 </style>

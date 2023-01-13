@@ -13,6 +13,7 @@ import {
   authenticate,
   defaultProfileQuery,
   getProfileByHandle,
+  createProfile,
 } from "../api.js";
 
 import {
@@ -26,6 +27,7 @@ import {
 import { useAppStore } from "../store/app";
 import { userApi, optinForNot, optOutForNot } from "./api";
 import { deepCopy } from "~~/util";
+import { wait } from "~~/helpers";
 
 const modal = useModal();
 const injected = injectedModule();
@@ -119,16 +121,48 @@ export async function getUserProfile(handle) {
     const defaultId = await clientId.request(getProfileByHandle, {
       handle: `${handle}.test`,
     });
-    // defaultProfile.data = defaultId?.profile;
-    appStore.currentUser = defaultId?.profile ?? {};
-    // const strnData = JSON.stringify(defaultId?.profile ?? {});
-    // localStorage.setItem("storyDefaultProfile", strnData);
-
     return defaultId?.profile;
   } catch (error) {
     console.log("error >>.", error);
   }
 }
+
+export const createUser = async (imageCid, handle, refreshToken) => {
+  try {
+    if (imageCid) {
+      imageCid = await storeNFT(imageRef.value);
+      await wait(1000);
+      const [p1] = await Promise.all([
+        axios.get(`https://ipfs.io/ipfs/${imageCid}`),
+      ]);
+    }
+
+    const res = await clientId.request(
+      createProfile,
+      {
+        handle,
+        // url: `ipfs://${imageCid ? imageCid : "0x0"}`,
+        // url: null,
+      },
+      {
+        ["x-access-token"]: refreshToken,
+      }
+    );
+
+    if (res?.createProfile?.txHash) {
+      const createUser = await userApi(userAddress.value, "POST", {
+        handle,
+      });
+      await wait(5000);
+      const user = await getUserProfile(handle);
+      console.log(user, "user creatred internally");
+      return { user };
+    }
+  } catch (e) {
+    console.log(e, "error ourred");
+    throw e;
+  }
+};
 
 export async function login() {
   appStore.connectError = null;
@@ -164,31 +198,32 @@ export async function login() {
     const {
       authenticate: { accessToken, refreshToken },
     } = authData;
-    appStore.userAddress = address;
+    // appStore.userAddress = address;
     localStorage.setItem("myStoryRefreshToken", accessToken);
-    userAccessToken.value = accessToken;
+    // userAccessToken.value = accessToken;
     const currUser = await userApi(address?.toLocaleLowerCase());
     const checkUserStatus = currUser?.status;
 
     await appStore.setStatus(checkUserStatus ?? 0);
     const currentUser = await getUserProfile(currUser?.handle);
-    localStorage.setItem("currentProfileId", currentUser?.id ?? 0);
-    localStorage.setItem("currenUserWallet", address);
+    //
+    // localStorage.setItem("currentProfileId", currentUser?.id ?? 0);
+    // localStorage.setItem("currenUserWallet", address);
 
     // let sf = true;
-    if (!currentUser && checkUserStatus == 0) {
-      // if (sf) {
-      await modal?.toggleCreateModal?.();
-      return { userStatus: checkUserStatus };
-    }
+    // if (sf) {
+    // if (!currentUser && checkUserStatus == 0) {
+    //   await modal?.toggleCreateModal?.();
+    //   return { userStatus: checkUserStatus };
+    // }
 
     // if (currentUser) {
-    //   appStore.currentUser = currentUser;
+    //   await appStore.setCurrentUser(currentUser);
     // }
-    if (currentUser && checkUserStatus == 1) {
-      const updateUser = await userApi(address, "PUT");
-      await appStore.setStatus(updateUser);
-    }
+    // if (currentUser && checkUserStatus == 1) {
+    //   const updateUser = await userApi(address, "PUT");
+    //   await appStore.setStatus(updateUser);
+    // }
 
     if (currentUser && !currUser.optedIn) {
       // console.log("not oprf i", address);
@@ -198,12 +233,12 @@ export async function login() {
       // await appStore.setStatus(updateUser);
     }
 
-    appStore.isConnected = true;
+    // appStore.isConnected = true;
 
     return {
       accessToken,
       user: currentUser,
-      userStatus: checkUserStatus,
+      // userStatus: checkUserStatus,
     };
   } catch (err) {
     const error = deepCopy(err);

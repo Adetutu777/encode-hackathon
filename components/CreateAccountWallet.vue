@@ -15,7 +15,7 @@
               <h5>Hello 👋 {{ truncateEthAddress(userAddress) }}</h5>
               <h5>Complete your Registration</h5>
             </div>
-            <CreateForm />
+            <CreateForm :isLoading="isLoading" @submit="submitData" />
           </div>
         </div>
       </b-modal>
@@ -27,8 +27,9 @@
 import { userAddress } from "../store";
 import { useAppStore } from "~/store/app";
 import { truncateEthAddress } from "../util";
-import { login } from "../services/connect";
+import { login, createUser } from "../services/connect";
 import { useModal } from "../store/modal";
+
 import { deepCopy } from "~~/util";
 
 const modal = useModal();
@@ -46,21 +47,33 @@ const props = defineProps({
     default: "Sign in / Sign Up",
   },
 });
+
 const router = useRouter();
 const appStore = useAppStore();
 const currentUserAdd = appStore.userAddress;
+const accessTokenRef = ref("");
+const isLoading = ref(false);
+
+const submitData = async (data) => {
+  isLoading.value = true;
+  const token = localStorage.getItem("myStoryRefreshToken");
+  const { user = {} } = await createUser(null, data, token);
+  localStorage.setItem("currenUserName", data);
+  await appStore.setCurrentUser(user);
+  isLoading.value = false;
+  router.push("/blogs");
+};
 
 const createAccount = async () => {
   try {
-    const { accessToken, user, userStatus } = await login();
-    const isPending = userStatus == 1;
+    const { accessToken, user } = await login();
+    accessTokenRef.value = accessToken;
     if (accessToken && user) {
+      await appStore.setCurrentUser(user);
       router.push("/blogs");
+      return;
     }
-
-    if (isPending) {
-      router.push("/blogs");
-    }
+    modal.toggleCreateModal();
   } catch (error) {
     throw error;
   }
