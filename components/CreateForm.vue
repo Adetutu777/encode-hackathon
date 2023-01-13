@@ -161,17 +161,17 @@ export default {
       }
     };
 
-    function getContract(
-      contractAddress = createProfileAddress,
-      abi = profileAbi
-    ) {
-      const signerOrProvider = new ethers.providers.Web3Provider(
-        window.ethereum
-      );
-      const signer = signerOrProvider?.getSigner();
+    // function getContract(
+    //   contractAddress = createProfileAddress,
+    //   abi = profileAbi
+    // ) {
+    //   const signerOrProvider = new ethers.providers.Web3Provider(
+    //     window.ethereum
+    //   );
+    //   const signer = signerOrProvider?.getSigner();
 
-      return new ethers.Contract(contractAddress, abi, signer);
-    }
+    //   return new ethers.Contract(contractAddress, abi, signer);
+    // }
 
     return { getDetails, onSubmit, sendingBtn, imageRef, handleChange };
   },

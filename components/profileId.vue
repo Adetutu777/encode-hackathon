@@ -16,13 +16,13 @@
         </div>
       </div>
 
-      <NuxtLink class="profile" :to="`/profile/${user?.handle}`">
+      <NuxtLink class="profile" :to="`/profile/${userAdd}`">
         <div class="d-flex align-items-center">
           <JazzIcon />
 
           <div class="handles">
             <h5 class="text-muted">
-              {{ user?.handle }}
+              {{ userAdd }}
             </h5>
             <h4>
               <!-- {{ user?.id }} -->
