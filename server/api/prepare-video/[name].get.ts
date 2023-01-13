@@ -1,8 +1,9 @@
 import axios from "axios"
 
 
-const API_TOKEN = process.env.LIVEPEER_API_KEY
+
 export default eventHandler(async(event) => {
+  const API_TOKEN = process.env.LIVEPEER_API_KEY
     const name = event.context?.params?.name
     try {      
         const res = await axios({
