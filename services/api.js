@@ -47,8 +47,9 @@ export const preparePost = async (file) => {
 };
 
 export const prepareVideo = async (name) => {
+  const url = `${baseUrl}prepare-video/${slugify(name)}`;
   try {
-    const response = await axios.get(`/api/prepare-video/${slugify(name)}`);
+    const response = await axios.get(url);
     return response?.data;
   } catch (e) {
     new Error(e);
