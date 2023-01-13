@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div class="">
-      <button @click="createAccount" :class="`  ${classes} aa`">
+      <button @click="createAccount" :class="` aa ${classes}`">
         {{ actionText }}
       </button>
       <b-modal

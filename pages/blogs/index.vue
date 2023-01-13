@@ -5,9 +5,16 @@
       @close="closeModal"
       v-model="errorStatus"
       id="reactionError"
-      title="pending profile"
+      title="Not authenticated"
     >
-      {{ reactionErrorMsg }}
+      <div class="text-center">
+        <div class="mb-3">
+          {{ reactionErrorMsg }}
+        </div>
+        <div @click="closeModal">
+          <CreateAccountWallet classes="border p-2 px-4 btn-draft" />
+        </div>
+      </div>
     </b-modal>
 
     <div class="">
@@ -271,15 +278,8 @@ export default {
       upVotesReactions,
       downVotesReactions
     ) => {
-      // console.log("label", store.currentUserStatus);
-      if (store.currentUserStatus == 1) {
-        reactionErrorMsg.value =
-          "Pls wait while your pending account get activated on Lens";
-        errorStatus.value = true;
-        return;
-      }
-      if (store.currentUserStatus == 0) {
-        reactionErrorMsg.value = "You  need to create an first";
+      if (!store?.currentUser?.id) {
+        reactionErrorMsg.value = "Not authenticated, Please Login ";
         errorStatus.value = true;
         return;
       }
@@ -292,7 +292,6 @@ export default {
       const prevData = deepCopy(publications.data);
       const findIndex = tempData.findIndex((i) => i.id == publicationId);
       let currentItem = tempData[findIndex];
-      // console.log(currentItem, "current item");
 
       let upIncluded = currentItem.stats.upvotes.some(
         (i) => i.profile.id == userProfile
