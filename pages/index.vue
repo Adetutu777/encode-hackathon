@@ -25,9 +25,9 @@
               </h2>
               <p class="mt-4 hero-text">
                 Experience a New Social Media Revolution with chainWrite, This
-                is a perfect <br />
+                is a perfect
                 platform for anyone looking to express themselves online without
-                worrying about <br />
+                worrying about 
                 their data being shared or exploited
               </p>
 
