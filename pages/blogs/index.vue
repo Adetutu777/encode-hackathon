@@ -63,9 +63,8 @@
                       <!-- <i class="uil uil-book-open"></i> 2mins read -->
                     </div>
                   </div>
-
-                  <h5 class="mt-3" v-if="item?.mainPost?.metadata?.description">
-                    {{ item?.mainPost?.metadata?.description?.slice(0, 70) }}...
+                  <h5 class="mt-3" v-if="item?.metadata?.description">
+                    {{ item?.metadata?.description?.slice(0, 70) }}...
                   </h5>
 
                   <div
@@ -114,7 +113,8 @@
                                 'UPVOTE',
                                 item.id,
                                 item?.stats?.upvotes,
-                                item?.stats?.downvotes
+                                item?.stats?.downvotes,
+                                item
                               )
                           "
                         >
@@ -134,7 +134,8 @@
                                 'DOWNVOTE',
                                 item.id,
                                 item?.stats?.upvotes,
-                                item?.stats?.downvotes
+                                item?.stats?.downvotes,
+                                item
                               )
                           "
                         >
@@ -194,7 +195,12 @@
 
 <script>
 import { clientId, exploreQuery, userFeedQuery } from "../../api";
-import { formatIpfdImg, dateFormatter, deepCopy } from "@/util";
+import {
+  formatIpfdImg,
+  dateFormatter,
+  deepCopy,
+  truncateEthAddress,
+} from "@/util";
 import { defaultProfile } from "../../store";
 import { useAppStore } from "~/store/app";
 import {
@@ -203,6 +209,7 @@ import {
   addPost,
   getPosts,
   deletePost,
+  sendNotification,
 } from "~/services/api";
 
 export default {
@@ -276,7 +283,8 @@ export default {
       typeOfReaction,
       publicationId,
       upVotesReactions,
-      downVotesReactions
+      downVotesReactions,
+      post
     ) => {
       if (!store?.currentUser?.id) {
         reactionErrorMsg.value = "Not authenticated, Please Login ";
@@ -361,7 +369,22 @@ export default {
       }
 
       try {
-        const post = await interactWithPost(data);
+        // const post = await interactWithPost(data);
+        const notificationData = {
+          notTitle: `${truncateEthAddress(store.currentUser.ownedBy)} ${
+            typeOfReaction === "DOWNVOTE" ? "dislikes" : "likes"
+          } a post`,
+
+          msgTitle: `${truncateEthAddress(store?.currentUser?.ownedBy)} ${
+            typeOfReaction === "DOWNVOTE" ? "dislikes" : "likes"
+          } a post with the id ${post?.id}`,
+          msgBody: `${post?.metadata?.content}`,
+          receiver: `${post?.profile?.ownedBy}`,
+        };
+        const sendNo = await sendNotification({
+          address: store.currentUser.ownedBy,
+          data: notificationData,
+        });
       } catch (e) {
         console.log(e, "error");
         publications.data = prevData;
@@ -385,7 +408,7 @@ export default {
             return {
               ...i,
               isSaved: posts.data.some((k) => k.postId == i.id),
-              metadata: dataMap,
+              metadata: { ...i.metadata, media: dataMap },
             };
           });
         publications.data = mappedData ?? publications.data;

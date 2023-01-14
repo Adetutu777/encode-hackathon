@@ -16,20 +16,25 @@
         </div>
       </div>
 
-      <NuxtLink class="profile" :to="`/profile/${prettifyUsername(user)}`">
-        <div class="d-flex align-items-center">
-          <JazzIcon />
-
-          <div class="handles">
-            <h5 class="text-muted">
-              {{ user }}
-            </h5>
-            <h4>
-              <!-- {{ user?.id }} -->
-            </h4>
-          </div>
+      <div class="d-flex">
+     
+        <div>
+          <bell :data="note" />
         </div>
-      </NuxtLink>
+        <NuxtLink class="profile" :to="`/profile/${prettifyUsername(user)}`">
+          <div class="d-flex align-items-center">
+            <JazzIcon diameter="30" />
+            <div class="handles">
+              <h5 class="text-muted">
+                {{ user }}
+              </h5>
+              <h4>
+                <!-- {{ user?.id }} -->
+              </h4>
+            </div>
+          </div>
+        </NuxtLink>
+      </div>
     </div>
   </div>
 </template>
@@ -37,11 +42,19 @@
 <script setup>
 import { userAddress } from "~/store";
 import { useAppStore } from "~/store/app";
+import { receiveNotifications } from "~/services/api";
 import { prettifyUsername } from "~/util";
 const store = useAppStore();
 import { getUserProfile } from "~/services/connect";
 const user = computed(() => store?.currentUser?.handle);
 const userAdd = ref("");
+const note = ref([]);
+
+onMounted(async () => {
+  const not = await receiveNotifications(store?.currentUser?.ownedBy);
+  await store.setNotifications(not);
+  note.value = not;
+});
 </script>
 
 <style>

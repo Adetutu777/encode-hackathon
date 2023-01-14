@@ -28,6 +28,7 @@ import { userAddress } from "../store";
 import { useAppStore } from "~/store/app";
 import { truncateEthAddress } from "../util";
 import { login, createUser } from "../services/connect";
+import { optinForNot } from "~/services/api";
 import { useModal } from "../store/modal";
 
 import { deepCopy } from "~~/util";
@@ -70,6 +71,7 @@ const createAccount = async () => {
     accessTokenRef.value = accessToken;
     if (accessToken && user) {
       await appStore.setCurrentUser(user);
+      await optinForNot(userAddress);
       router.push("/blogs");
       return;
     }

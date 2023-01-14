@@ -217,33 +217,47 @@ export const deletePost = async (id) => {
   }
 };
 
-export const optinForNot = async (address) => {
-  const _signer = new ethers.providers.Web3Provider(window.ethereum);
-  await PushAPI.channels.subscribe({
-    signer: _signer,
+const getSigner = async () => {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const signer = provider.getSigner();
+  return signer;
+};
+
+const pushConfig = async (address) => {
+  const signer = await getSigner();
+  return {
+    signer,
     channelAddress: `eip155:80001:${channelAddress}`, // channel address in CAIP
-    userAddress: `eip155:80001:${address}`, // user address in CAIP
-    onSuccess: () => {
-      console.log("opt in success");
+    env: "staging",
+  };
+};
+export const optinForNot = async (address) => {
+  const config = await pushConfig(address);
+  await PushAPI.channels.subscribe({
+    ...config,
+    userAddress: `eip155:80001:${address}`, // user address in CAIP,
+
+    onSuccess: async () => {
+      const subSuccess = await userApi(address, "PUT", { optedIn: true });
+      console.log("opt in success", subSuccess);
     },
     onError: (e) => {
       console.error("opt in error", e);
-      console.log(e, "error optin");
+      console.log(e, "error optin sub eror");
     },
-    env: "staging",
   });
 };
 export const optOutForNot = async (address) => {
-  const _signer = new ethers.providers.Web3Provider(window.ethereum);
-  console.log(_signer, "siner+++++");
+  await window.ethereum.enable();
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const signer = provider.getSigner();
   const channelData = await PushAPI.channels.getChannel({
     channel: "eip155:80001:0x1049DCFE27985721FB103D22076266377381EC7D", // channel address in CAIP
     env: "staging",
   });
-  console.log(channelData, "data cnalle");
 
   await PushAPI.channels.unsubscribe({
-    signer: _signer,
+    signer,
     channelAddress: `eip155:80001:${channelAddress}`, // channel address in CAIP
     userAddress: `eip155:80001:${address}`, // user address in CAIP
     onSuccess: () => {
@@ -256,5 +270,22 @@ export const optOutForNot = async (address) => {
     env: "staging",
   });
 };
-export const sendNofication = () => {};
-export const receiveNotification = () => {};
+
+export const notificationsAPi = async (address, method = "GET", data) => {
+  const url = `${baseUrl}notifications/${address}`;
+  const response = await sendTokenRequest(url, method, data);
+  return response?.data;
+};
+
+export const sendNotification = async ({ address = "", data }) => {
+  const send = notificationsAPi(address, "POST", data);
+  return send;
+};
+export const receiveNotifications = async (address) => {
+  if (!address) return;
+  const notifications = await PushAPI.user.getFeeds({
+    user: `eip155:80001:${address}`, // user address in CAIP,
+    env: "staging",
+  });
+  return notifications;
+};

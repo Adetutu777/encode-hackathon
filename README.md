@@ -2,7 +2,7 @@
 
 ## Project Title: chainWrite
 
-## chainWrite is a social media blogging Dapp deployed on Polygon Mumbai & integrated with lens protocol, LivePeer.
+## chainWrite is a social media blogging Dapp deployed on Polygon Mumbai & integrated with lens protocol, LivePeer and Push protocol.
 
 <!-- You can read more about the following framework below -->
 
@@ -74,8 +74,6 @@
 
         - Minting post as NFTs
 
-
-
 #### Screenshot of landing page
 
 ![image](./images/homepage.png "landing page")
@@ -103,6 +101,10 @@
 #### Screenshot of creating a blogpost page
 
 ![image](./images/signingT.JPG "post page")
+
+#### Screenshot of Notifications alert when a user likes/dislikes a post
+
+![image](./images/reaction.png "post page")
 
 # How to run chainWrite locally
 

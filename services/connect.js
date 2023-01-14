@@ -206,28 +206,10 @@ export async function login() {
 
     await appStore.setStatus(checkUserStatus ?? 0);
     const currentUser = await getUserProfile(currUser?.handle);
-    //
-    // localStorage.setItem("currentProfileId", currentUser?.id ?? 0);
-    // localStorage.setItem("currenUserWallet", address);
-
-    // let sf = true;
-    // if (sf) {
-    // if (!currentUser && checkUserStatus == 0) {
-    //   await modal?.toggleCreateModal?.();
-    //   return { userStatus: checkUserStatus };
-    // }
-
-    // if (currentUser) {
-    //   await appStore.setCurrentUser(currentUser);
-    // }
-    // if (currentUser && checkUserStatus == 1) {
-    //   const updateUser = await userApi(address, "PUT");
-    //   await appStore.setStatus(updateUser);
-    // }
 
     if (currentUser && !currUser.optedIn) {
-      // console.log("not oprf i", address);
-      // await optinForNot(address);
+      const sub = await optinForNot(address);
+
       // await optOutForNot(address);
       // const updateUser = await userApi(address, "PUT");
       // await appStore.setStatus(updateUser);

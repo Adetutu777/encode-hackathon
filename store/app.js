@@ -16,7 +16,7 @@ export const useAppStore = defineStore("app", {
       drafts: useStorage("draftPosts", []),
       currentDraftId: useStorage("currentDraftId", 0),
       currentUserStatus: useStorage("currentUserStatus", 0),
-      isOptedIn: false,
+      notifications: useStorage("notifications", []),
     };
   },
 
@@ -108,6 +108,9 @@ export const useAppStore = defineStore("app", {
     },
     async setCurrentUser(currentUser) {
       this.currentUser = currentUser;
+    },
+    async setNotifications(note) {
+      this.notifications = note;
     },
   },
 });

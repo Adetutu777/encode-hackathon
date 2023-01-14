@@ -75,6 +75,7 @@ export const wait = (milliseconds = 6000) => {
 // }
 
 export const prettifyUsername = (username) => {
+  if (!username) return;
   return username.split(".")?.[0];
 };
 export const deepCopy = (obj = {}) => {

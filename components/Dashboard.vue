@@ -48,6 +48,12 @@
                       ></i>
                       <span>Draft</span>
                     </NuxtLink>
+                    <NuxtLink to="/notifications" class="dropdown d-block">
+                      <i
+                        class="icon-icons uil uil-question-circle sidebar-left"
+                      ></i>
+                      <span>Notifications</span>
+                    </NuxtLink>
                     <NuxtLink
                       to="/post/createstory"
                       class="write-dropdown d-block text-center text-light create-post mt-5"
@@ -85,22 +91,25 @@
 <script>
 import { storeToRefs } from "pinia";
 import { login } from "../services/connect";
+import { receiveNotifications } from "~/services/api";
 import { useAppStore } from "../store/app";
 import { computed } from "vue";
+
 export default {
   setup() {
     const store = useAppStore();
     const appStore = toRefs(store);
-    const userAdd = ref("");
     const userName = computed(() => store?.currentUser?.handle);
 
     const statusUser = appStore.currentUserStatus;
     const isPending = statusUser == 1;
-    onMounted(() => {
-      const add = localStorage.getItem("currenUserName");
-      userAdd.value = add;
+    const note = ref("");
+    onMounted(async () => {
+      const not = await receiveNotifications(store?.currentUser?.ownedBy);
+      await store.setNotifications(not);
+      note.value = not;
     });
-    return { isPending, appStore, userAdd, userName };
+    return { isPending, appStore, userName, note };
   },
 };
 </script>
@@ -149,7 +158,6 @@ a.dropdown:hover {
   background: #f2f9ff;
   border-radius: 15px;
 }
-.router-link-active,
 .router-link-active i,
 .router-link-active span {
   color: #2c74b3 !important;
