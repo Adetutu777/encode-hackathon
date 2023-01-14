@@ -2,13 +2,20 @@
 
 ## Project Title: chainWrite
 
-## chainWrite is a social media blogging Dapp deployed on Polygon Mumbai & integrated with lens protocol, LivePeer.
+## chainWrite is a social media blogging Dapp deployed on Polygon Mumbai & integrated with Lens protocol, LivePeer.
 
+<!-- #### LENS PROTOCOL: is a composable and decentralized social graph. It lets creators take ownership of their content wherever they go in the digital garden of the decentralized internet, It functions on the polygon Proof Of Stake Blockchain ecosystem -->
+
+
+### To learn about this platforms, you can check the links below
 <!-- You can read more about the following framework below -->
 
  <!-- ##### Lens Protocol[Lens Protocol](https://www.lens.dev/)
 ##### Livepeer Protocol [Livepeer](https://livepeer.org/)
 ##### Push Protocol [Push Protocol](https://push.org/) -->
+<a href="https://www.lens.dev/" target="_blank">Lens Protocol</a>
+<a href="Livepeer Protocol" target="_blank">https://livepeer.org/</a>
+<!-- <a href="https://www.lens.dev/" target="_blank">Lens Protocol</a> -->
 
 ## chainWrite Mission: To empower users to own and control their own data and online identity
 
