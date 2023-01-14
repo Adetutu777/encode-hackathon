@@ -13,8 +13,8 @@
  <!-- ##### Lens Protocol[Lens Protocol](https://www.lens.dev/)
 ##### Livepeer Protocol [Livepeer](https://livepeer.org/)
 ##### Push Protocol [Push Protocol](https://push.org/) -->
-<a href="https://www.lens.dev/" target="_blank">Lens Protocol</a>
-<a href="Livepeer Protocol" target="_blank">https://livepeer.org/</a>
+ <p> <a href="https://www.lens.dev/" target="_blank">Lens Protocol</a></p>
+ <p> <a href="https://livepeer.org/" target="_blank">Livepeer Protocol </a></p>
 <!-- <a href="https://www.lens.dev/" target="_blank">Lens Protocol</a> -->
 
 ## chainWrite Mission: To empower users to own and control their own data and online identity
