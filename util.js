@@ -100,7 +100,6 @@ export const slugify = (string) => {
 // };
 
 export function getVideoCover(file, seekTo = 0.5) {
-  console.log("getting video cover for file: ", file);
   return new Promise((resolve, reject) => {
     const videoPlayer = document.createElement("video");
     videoPlayer.setAttribute("src", URL.createObjectURL(file));
@@ -121,7 +120,6 @@ export function getVideoCover(file, seekTo = 0.5) {
       }, 200);
       // extract video thumbnail once seeking is complete
       videoPlayer.addEventListener("seeked", () => {
-        console.log("video is now paused at %ss.", seekTo);
         // define a canvas to have the same dimension as the video
         const canvas = document.createElement("canvas");
         canvas.width = videoPlayer.videoWidth;

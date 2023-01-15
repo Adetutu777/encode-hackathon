@@ -191,7 +191,6 @@ export const userApi = async (address, method = "GET", data) => {
 export const addPost = async (id) => {
   const url = `${baseUrl}post/${id}`;
   const response = await sendTokenRequest(url, "POST");
-  console.log(response);
   return response?.data;
 };
 

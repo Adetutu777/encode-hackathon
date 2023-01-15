@@ -53,7 +53,6 @@ export default {
   setup() {
     const store = useAppStore();
     const drafts = computed(() => store.drafts);
-   // console.log(drafts.value, "draftss");
 
     const deleteDraft = (id) => {
       store.deleteDraft(id);

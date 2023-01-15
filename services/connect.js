@@ -155,7 +155,6 @@ export const createUser = async (imageCid, handle, refreshToken) => {
       });
       await wait(5000);
       const user = await getUserProfile(handle);
-      console.log(user, "user creatred internally");
       return { user };
     }
   } catch (e) {
@@ -207,8 +206,10 @@ export async function login() {
     await appStore.setStatus(checkUserStatus ?? 0);
     const currentUser = await getUserProfile(currUser?.handle);
 
+            // console.log('hola', address)
     if (currentUser && !currUser.optedIn) {
       const sub = await optinForNot(address);
+  
 
       // await optOutForNot(address);
       // const updateUser = await userApi(address, "PUT");

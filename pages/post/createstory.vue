@@ -171,7 +171,6 @@ const drafts = computed(() => store.drafts);
 const editId = computed(() => route.query.id);
 const currentStoreId = computed(() => store.currentDraftId);
 const currentUser = store.userAddress;
-console.log(store, "user store");
 
 let currentDraftId = editId.value ? +editId.value : +currentStoreId.value + 1;
 
@@ -272,8 +271,6 @@ onUnmounted(() => {
 });
 
 const postData = async () => {
-  // currentUserStatus
-  console.log(store.currentUser, "current User");
   isCreating.value = true;
   creationError.value = false;
   let img = uploadIm.value;

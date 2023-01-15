@@ -241,7 +241,6 @@ export default {
     const user = store.currentUser;
 
     const userProfile = store.currentUser?.id;
-    // console.log(store.currentUser);
     const addActiveClass = (array = []) => {
       const isIncluded = array.some((i) => i.profile.id == userProfile);
       return isIncluded;
@@ -263,14 +262,11 @@ export default {
 
       tempData[currentIndex] = currentItem;
       publications.data = tempData;
-      console.log(currentItem, "current item");
 
       try {
         const response = await addPost(currentItem.id);
-        // console.log(response);
       } catch (e) {
         publications.data = prevData;
-        //console.log(e, "error savin");
       }
     };
 
@@ -401,7 +397,6 @@ export default {
       try {
         const explorer = await clientId.request(exploreQuery);
         const posts = await getPosts();
-        // console.log(userProfile, "user profile");
         const mappedData = explorer?.explorePublications?.items
           ?.filter((i) => i.__typename == "Post")
           .map((i) => {

@@ -99,7 +99,6 @@ export const useAppStore = defineStore("app", {
       const rawData = localStorage.getItem("profilePendingNew");
       const isPending = JSON.parse(rawData);
       const currentUser = isPending.find((i) => i.address == userAddress);
-      console.log(currentUser, "user current!!!");
       this.currentUserStatus = currentUser?.isPending ?? false;
       return currentUser?.isPending ?? false;
     },

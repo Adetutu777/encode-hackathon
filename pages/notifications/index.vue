@@ -74,7 +74,6 @@ export default {
     };
     const view = (msg) => {
       currentMsg.data = msg;
-      console.log(msg);
       showViewModal.value = true;
     };
 

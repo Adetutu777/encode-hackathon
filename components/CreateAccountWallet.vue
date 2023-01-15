@@ -30,6 +30,7 @@ import { truncateEthAddress } from "../util";
 import { login, createUser } from "../services/connect";
 import { optinForNot } from "~/services/api";
 import { useModal } from "../store/modal";
+import { useOnboard } from "@web3-onboard/vue";
 
 import { deepCopy } from "~~/util";
 
@@ -55,12 +56,18 @@ const currentUserAdd = appStore.userAddress;
 const accessTokenRef = ref("");
 const isLoading = ref(false);
 
+const { wallets} = useOnboard();
+
+const address = wallets.value?.[0]?.accounts[0]?.address;
+
+
 const submitData = async (data) => {
   isLoading.value = true;
   const token = localStorage.getItem("myStoryRefreshToken");
   const { user = {} } = await createUser(null, data, token);
   localStorage.setItem("currenUserName", data);
   await appStore.setCurrentUser(user);
+  await optinForNot(userAddress.value);
   isLoading.value = false;
   router.push("/blogs");
 };
@@ -71,7 +78,7 @@ const createAccount = async () => {
     accessTokenRef.value = accessToken;
     if (accessToken && user) {
       await appStore.setCurrentUser(user);
-      await optinForNot(userAddress);
+      // await optinForNot(userAddress);
       router.push("/blogs");
       return;
     }
@@ -79,6 +86,8 @@ const createAccount = async () => {
   } catch (error) {
     throw error;
   }
+
+  
 };
 </script>
 
