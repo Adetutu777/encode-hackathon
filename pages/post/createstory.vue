@@ -374,6 +374,11 @@ const tryAgain = async () => {
     await login();
     return postData();
   }
+  if (creatingStatus.value.toLowerCase().includes("kindly login again")) {
+    isCreating.value = false;
+    await login();
+    return postData();
+  }
   postData();
 };
 </script>
