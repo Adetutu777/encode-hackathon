@@ -1,5 +1,6 @@
 <template>
-  <div class="bell-div" @click="showTab">
+<div class="">
+  <button class="bell-div border-0" @click="showTab">
     <div class="number d-flex justify-content-center align-items-center">
       {{ data.length > 3 ? "3+" : data.length }}
     </div>
@@ -34,6 +35,7 @@
         </NuxtLink>
       </div>
     </div>
+  </button>
   </div>
 </template>
 
@@ -69,6 +71,7 @@ const props = defineProps({
   position: relative;
   margin-right: 1rem;
   cursor: pointer;
+  background: transparent;
 }
 .number {
   top: -0.5rem;
