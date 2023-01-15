@@ -368,18 +368,21 @@ export default {
       }
 
       try {
-        const post = await interactWithPost(data);
+         await interactWithPost(data);
         const notificationData = {
           notTitle: `${truncateEthAddress(store.currentUser.ownedBy)} ${
             typeOfReaction === "DOWNVOTE" ? "dislikes" : "likes"
           } a post`,
+          
 
           msgTitle: `${truncateEthAddress(store?.currentUser?.ownedBy)} ${
             typeOfReaction === "DOWNVOTE" ? "dislikes" : "likes"
           } a post with the id ${post?.id}`,
           msgBody: `${post?.metadata?.content}`,
           receiver: `${post?.profile?.ownedBy}`,
+          
         };
+        
         const sendNo = await sendNotification({
           address: store.currentUser.ownedBy,
           data: notificationData,
