@@ -64,7 +64,9 @@
                     </div>
                   </div>
                   <h5 class="mt-3" v-if="item?.metadata?.description">
-                    {{ item?.metadata?.description?.slice(0, 70) }}...
+                    <span v-html="item?.metadata?.description?.slice(0, 70)">
+                    </span>
+                    <!-- {{ item?.metadata?.description?.slice(0, 70) }}... -->
                   </h5>
 
                   <div
@@ -84,7 +86,8 @@
                       <NuxtLink :to="'/post/' + item?.id">
                         <img
                           :src="
-                            item?.metadata?.[0]?.url ?? '@/images/children.jpg'
+                            item?.metadata?.media?.[0]?.url ??
+                            '@/images/children.jpg'
                           "
                           @error="replaceByDefault"
                         />
@@ -369,7 +372,7 @@ export default {
       }
 
       try {
-        // const post = await interactWithPost(data);
+        const post = await interactWithPost(data);
         const notificationData = {
           notTitle: `${truncateEthAddress(store.currentUser.ownedBy)} ${
             typeOfReaction === "DOWNVOTE" ? "dislikes" : "likes"
