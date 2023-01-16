@@ -61,6 +61,9 @@
          from their device )
 
         - Users can upload videos/gif as cover instead of using images. This is achieved through *Livepeer.js*
+        
+        - Notification modal to alert users when their post gets a like or dislike reaction. 
+          This is achieved through *Push notification*
 
         - Saving post to draft
 
@@ -71,8 +74,6 @@
         - Seaching through blogs
 
         - Saving post for future readings
-
-        - Notification modal to alert users of new posts
 
         - Settings to edit users profile page
 
