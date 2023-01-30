@@ -125,7 +125,7 @@
                     </div>
                   </div>
                   <h6 class="team-title">Oke Kehinde</h6>
-                  <span>FullStack Software developer</span>
+                  <span>Software developer</span>
                 </div>
               </div>
               <!-- end team member -->

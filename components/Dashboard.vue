@@ -44,13 +44,13 @@
                     </NuxtLink>
                     <NuxtLink to="/draft" class="dropdown d-block">
                       <i
-                        class="icon-icons uil uil-question-circle sidebar-left"
+                        class="icon-icons uil uil-save sidebar-left"
                       ></i>
                       <span>Draft</span>
                     </NuxtLink>
                     <NuxtLink to="/notifications" class="dropdown d-block">
                       <i
-                        class="icon-icons uil uil-question-circle sidebar-left"
+                        class="icon-icons uil uil-bell sidebar-left"
                       ></i>
                       <span>Notifications</span>
                     </NuxtLink>
